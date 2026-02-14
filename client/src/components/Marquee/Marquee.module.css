@@ -1,0 +1,63 @@
+.marquee {
+  padding: 2rem 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(108, 99, 255, 0.06);
+  border-bottom: 1px solid rgba(108, 99, 255, 0.06);
+  position: relative;
+  user-select: none;
+}
+
+/* Fade edges */
+.marquee::before,
+.marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, #0a0a0a 0%, transparent 100%);
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, #0a0a0a 0%, transparent 100%);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll 35s linear infinite;
+  will-change: transform;
+}
+
+.track:hover {
+  animation-play-state: paused;
+}
+
+.content {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: rgba(108, 99, 255, 0.2);
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.track:hover .content {
+  color: rgba(108, 99, 255, 0.35);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

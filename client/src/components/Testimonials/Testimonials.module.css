@@ -1,0 +1,133 @@
+.section {
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(148, 163, 184, 0.06);
+  border-radius: 16px;
+  padding: 2.5rem 2rem 2rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+}
+
+.visible .card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quoteIcon {
+  font-size: 4.5rem;
+  font-family: Georgia, serif;
+  line-height: 1;
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.15), rgba(167, 139, 250, 0.06));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: absolute;
+  top: 0.75rem;
+  left: 1.5rem;
+  pointer-events: none;
+}
+
+.text {
+  color: #94a3b8;
+  font-size: 1rem;
+  line-height: 1.85;
+  font-style: italic;
+  margin-bottom: 1.75rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  justify-content: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6c63ff, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.name {
+  color: #e2e8f0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.role {
+  font-family: 'JetBrains Mono', monospace;
+  color: #6c63ff;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-align: left;
+  letter-spacing: 0.3px;
+}
+
+.dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.4s;
+}
+
+.visible .dots {
+  opacity: 1;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(148, 163, 184, 0.15);
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 0;
+}
+
+.dot:hover {
+  background: rgba(108, 99, 255, 0.4);
+}
+
+.activeDot {
+  background: #6c63ff;
+  width: 22px;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.4);
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+}

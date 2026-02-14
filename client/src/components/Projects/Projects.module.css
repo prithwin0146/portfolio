@@ -1,0 +1,334 @@
+.section {
+  padding: 6rem 0;
+}
+
+/* ── Featured Project — Hero Card ── */
+.featured {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.visible .featured {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.featuredBorder {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent 10%, rgba(108, 99, 255, 0.6), transparent 30%, rgba(167, 139, 250, 0.4), transparent 50%);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.3;
+  transition: opacity 0.5s;
+  animation: borderMove 6s linear infinite;
+  pointer-events: none;
+}
+
+.featured:hover .featuredBorder {
+  opacity: 1;
+}
+
+.featuredSpotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(400px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(108, 99, 255, 0.08), transparent 50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.featured:hover .featuredSpotlight {
+  opacity: 1;
+}
+
+.featuredInner {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(148, 163, 184, 0.06);
+  border-radius: 20px;
+  padding: 2.5rem;
+  transition: all 0.3s;
+}
+
+.featured:hover .featuredInner {
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.featuredBadge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: #6c63ff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.featuredBadge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6c63ff;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
+}
+
+.featuredTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s;
+}
+
+.featured:hover .featuredTitle {
+  color: #6c63ff;
+}
+
+.featuredDesc {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  max-width: 480px;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
+}
+
+/* ── Cards ── */
+.card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: default;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.visible .card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardBorder {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent 20%, rgba(108, 99, 255, 0.5), transparent 40%, rgba(167, 139, 250, 0.3), transparent 60%);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.15;
+  transition: opacity 0.5s;
+  animation: borderMove 6s linear infinite;
+  pointer-events: none;
+}
+
+.card:hover .cardBorder {
+  opacity: 0.8;
+}
+
+.card:hover {
+  box-shadow: 0 0 60px rgba(108, 99, 255, 0.04), 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Cursor spotlight */
+.cardSpotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(250px circle at var(--card-x, 50%) var(--card-y, 50%), rgba(108, 99, 255, 0.07), transparent 50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.card:hover .cardSpotlight {
+  opacity: 1;
+}
+
+.glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cardInner {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(148, 163, 184, 0.06);
+  border-radius: 14px;
+  padding: 1.75rem;
+  transition: all 0.3s;
+}
+
+.card:hover .cardInner {
+  border-color: transparent;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cardNumber {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(167, 139, 250, 0.03));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s;
+}
+
+.card:hover .cardNumber {
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.3), rgba(167, 139, 250, 0.12));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+}
+
+.card:hover .cardTitle {
+  color: #6c63ff;
+}
+
+.cardDesc {
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(108, 99, 255, 0.08);
+  color: #a78bfa;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s;
+}
+
+.card:hover .tag,
+.featured:hover .tag {
+  background: rgba(108, 99, 255, 0.15);
+}
+
+.cardLinks {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.cardLink {
+  color: #64748b;
+  font-size: 0.82rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.cardLink:hover {
+  color: #6c63ff;
+}
+
+.linkIcon {
+  font-size: 1rem;
+  transition: transform 0.3s;
+}
+
+.cardLink:hover .linkIcon {
+  transform: translate(2px, -2px);
+}
+
+.caseStudyLink {
+  font-family: 'JetBrains Mono', monospace;
+  color: #6c63ff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.caseStudyLink:hover {
+  color: #a78bfa;
+  letter-spacing: 1px;
+}
+
+@keyframes borderMove {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featuredInner {
+    padding: 1.75rem;
+  }
+
+  .featuredTitle {
+    font-size: 1.25rem;
+  }
+}
