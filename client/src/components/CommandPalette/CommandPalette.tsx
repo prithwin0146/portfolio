@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
+import { trackCommandPaletteUse } from '../../services/achievementService';
 import styles from './CommandPalette.module.css';
 
 interface PaletteItem {
@@ -66,7 +67,10 @@ export default function CommandPalette() {
     const onKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        setOpen((prev) => !prev);
+        setOpen((prev) => {
+          if (!prev) trackCommandPaletteUse();
+          return !prev;
+        });
       }
       if (e.key === 'Escape') {
         setOpen(false);

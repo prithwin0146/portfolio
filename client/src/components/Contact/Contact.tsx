@@ -1,6 +1,7 @@
-import { useState, useCallback, type FormEvent } from 'react';
+import { useState, useCallback, useEffect, type FormEvent } from 'react';
 import { api } from '../../services/api';
 import { useInView } from '../../hooks/useInView';
+import { trackSectionVisit } from '../../services/achievementService';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import TextReveal from '../TextReveal/TextReveal';
 import styles from './Contact.module.css';
@@ -10,6 +11,10 @@ export default function Contact() {
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState('');
   const { ref, isInView } = useInView({ threshold: 0.2 });
+
+  useEffect(() => {
+    if (isInView) trackSectionVisit('contact');
+  }, [isInView]);
 
   const handleMagnetic = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     const btn = e.currentTarget;

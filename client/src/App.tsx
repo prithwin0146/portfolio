@@ -8,6 +8,7 @@ import CustomCursor from './components/CustomCursor/CustomCursor';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
 import CommandPalette from './components/CommandPalette/CommandPalette';
 import KonamiEaster from './components/KonamiEaster/KonamiEaster';
+import AchievementToast from './components/AchievementToast/AchievementToast';
 import ParticleBackground from './components/ParticleBackground/ParticleBackground';
 import Navbar from './components/Navbar/Navbar';
 import SidePanel from './components/SidePanel/SidePanel';
@@ -20,6 +21,7 @@ import Testimonials from './components/Testimonials/Testimonials';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import SectionDivider from './components/SectionDivider/SectionDivider';
+import { initializeAchievementSystem } from './services/achievementService';
 
 const SECTIONS = ['about', 'services', 'projects', 'skills', 'contact'];
 
@@ -33,6 +35,11 @@ function App() {
 
   // Scroll velocity skew effect
   useScrollSkew();
+
+  // Initialize achievement system once on mount
+  useEffect(() => {
+    initializeAchievementSystem();
+  }, []);
 
   // Track mouse for spotlight effect via CSS custom properties (perf-friendly)
   useEffect(() => {
@@ -53,6 +60,7 @@ function App() {
       <ScrollProgress />
       <CommandPalette />
       <KonamiEaster />
+      <AchievementToast />
       <div className="appWrapper" ref={wrapperRef}>
         <ParticleBackground />
         {/* Mobile-only top navbar */}

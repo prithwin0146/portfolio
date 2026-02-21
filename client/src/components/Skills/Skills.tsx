@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { useInView } from '../../hooks/useInView';
+import { trackSectionVisit } from '../../services/achievementService';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import type { Skill } from '../../types';
 import styles from './Skills.module.css';
@@ -14,6 +15,10 @@ const levelClass = (n: number) =>
 export default function Skills() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const { ref, isInView } = useInView({ threshold: 0.15 });
+
+  useEffect(() => {
+    if (isInView) trackSectionVisit('skills');
+  }, [isInView]);
 
   useEffect(() => {
     api.getSkills().then(setSkills).catch(console.error);

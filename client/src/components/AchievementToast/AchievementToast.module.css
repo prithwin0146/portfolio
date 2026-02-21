@@ -1,0 +1,198 @@
+.container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10050;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+/* ── Base toast ── */
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1rem 0;
+  width: 320px;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+  animation: slideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Rarity border glow ── */
+.common {
+  border-color: rgba(148, 163, 184, 0.3);
+  box-shadow: 0 0 16px rgba(148, 163, 184, 0.1);
+}
+
+.rare {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.15);
+}
+
+.epic {
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+.legendary {
+  border-color: rgba(234, 179, 8, 0.5);
+  box-shadow: 0 0 24px rgba(234, 179, 8, 0.2);
+}
+
+/* ── Icon ── */
+.iconWrap {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* ── Text content ── */
+.content {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.rarity {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.1em 0.45em;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.rarity_common {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+}
+
+.rarity_rare {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+}
+
+.rarity_epic {
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
+}
+
+.rarity_legendary {
+  background: rgba(234, 179, 8, 0.15);
+  color: #fbbf24;
+}
+
+.title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  font-family: 'Sora', sans-serif;
+  margin: 0 0 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── XP badge ── */
+.xp {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #a3e635;
+  font-family: 'JetBrains Mono', monospace;
+  padding-bottom: 1rem;
+  padding-top: 0.1rem;
+}
+
+/* ── Progress bar ── */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.progress {
+  height: 100%;
+  background: currentColor;
+  animation: shrink 5s linear forwards;
+  transform-origin: left;
+}
+
+.common .progress  { background: #94a3b8; }
+.rare .progress    { background: #60a5fa; }
+.epic .progress    { background: #a78bfa; }
+.legendary .progress { background: #fbbf24; }
+
+@keyframes shrink {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+@media (max-width: 480px) {
+  .container {
+    bottom: 1rem;
+    right: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .toast {
+    width: 100%;
+  }
+}
