@@ -8,6 +8,7 @@ import CustomCursor from './components/CustomCursor/CustomCursor';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
 import CommandPalette from './components/CommandPalette/CommandPalette';
 import KonamiEaster from './components/KonamiEaster/KonamiEaster';
+import LevelUpToast from './components/LevelUpToast/LevelUpToast';
 import ParticleBackground from './components/ParticleBackground/ParticleBackground';
 import Navbar from './components/Navbar/Navbar';
 import SidePanel from './components/SidePanel/SidePanel';
@@ -53,6 +54,7 @@ function App() {
       <ScrollProgress />
       <CommandPalette />
       <KonamiEaster />
+      <LevelUpToast />
       <div className="appWrapper" ref={wrapperRef}>
         <ParticleBackground />
         {/* Mobile-only top navbar */}
