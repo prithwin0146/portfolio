@@ -32,6 +32,14 @@
     padding-right: 5rem;
   }
 
+  .top {
+    flex-shrink: 0;
+  }
+
+  .bottom {
+    flex-shrink: 0;
+  }
+
   /* ── Greeting ── */
   .greeting {
     display: block;
@@ -190,6 +198,20 @@
 
   .navLabel {
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .navSubtitle {
+    font-size: 0.55rem;
+    color: #334155;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    transition: color 0.3s;
+  }
+
+  .navLink:hover .navSubtitle,
+  .active .navSubtitle {
+    color: #64748b;
   }
 
   .navLink:hover .navLabel {

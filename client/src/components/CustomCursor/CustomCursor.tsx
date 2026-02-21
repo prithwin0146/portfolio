@@ -38,9 +38,12 @@ export default function CustomCursor() {
     };
 
     const interactiveSelectors = 'a, button, input, textarea, [data-cursor-hover]';
+    const tracked = new WeakSet<Element>();
 
     const addInteractiveListeners = () => {
       document.querySelectorAll(interactiveSelectors).forEach((el) => {
+        if (tracked.has(el)) return;
+        tracked.add(el);
         el.addEventListener('mouseenter', onOverInteractive);
         el.addEventListener('mouseleave', onOutInteractive);
       });
@@ -51,8 +54,12 @@ export default function CustomCursor() {
     document.addEventListener('mouseleave', onLeave);
     addInteractiveListeners();
 
-    // Re-bind when DOM changes
-    const observer = new MutationObserver(addInteractiveListeners);
+    // Re-bind when DOM changes (debounced)
+    let mutationTimeout: ReturnType<typeof setTimeout>;
+    const observer = new MutationObserver(() => {
+      clearTimeout(mutationTimeout);
+      mutationTimeout = setTimeout(addInteractiveListeners, 100);
+    });
     observer.observe(document.body, { childList: true, subtree: true });
 
     // Smooth ring follow with lerp
@@ -75,6 +82,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseenter', onEnter);
       document.removeEventListener('mouseleave', onLeave);
       observer.disconnect();
+      clearTimeout(mutationTimeout);
       cancelAnimationFrame(raf);
     };
   }, []);

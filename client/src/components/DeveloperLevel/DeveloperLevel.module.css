@@ -1,0 +1,152 @@
+.section {
+  padding: 2rem 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, rgba(108, 99, 255, 0.08), transparent);
+  border-left: 3px solid #6c63ff;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.headerIcon {
+  font-size: 1.1rem;
+}
+
+.headerTitle {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Top area: badge + info */
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background: rgba(15, 15, 26, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 8px;
+}
+
+.badgeWrap {
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+}
+
+.levelTitle {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.25);
+  color: #2ecc71;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2ecc71;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.xpBarWrap {
+  margin-bottom: 1.5rem;
+}
+
+/* XP Sources grid */
+.sourcesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.6rem;
+}
+
+.sourceCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 15, 26, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.06);
+  border-radius: 6px;
+  transition: border-color 0.2s;
+}
+
+.sourceCard:hover {
+  border-color: rgba(108, 99, 255, 0.15);
+}
+
+.sourceLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.sourceLabel {
+  font-size: 0.6rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sourceValue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.sourceXP {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #6c63ff;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .topRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .sourcesGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

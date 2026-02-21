@@ -1,0 +1,167 @@
+/* ═══════════════════════════════════════════════════
+   Achievement Toast — Bottom-left unlock notification
+   Matches reference: green accent, icon, XP, close
+   ═══════════════════════════════════════════════════ */
+
+.container {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 10020;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  width: 340px;
+  background: linear-gradient(180deg, #171a25 0%, #0e1019 100%);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  animation: slideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow:
+    0 0 30px rgba(74, 222, 128, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.45);
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.toast:hover {
+  border-color: rgba(74, 222, 128, 0.45);
+  transform: translateY(-1px);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header strip */
+.toastHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.85rem;
+  background: rgba(74, 222, 128, 0.06);
+  border-bottom: 1px solid rgba(74, 222, 128, 0.1);
+}
+
+.headerLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #4ade80;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.headerXp {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+}
+
+/* Body */
+.toastBody {
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.7rem 0.85rem;
+  align-items: center;
+}
+
+.icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(74, 222, 128, 0.08);
+  border-radius: 50%;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.desc {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  line-height: 1.35;
+}
+
+.closeBtn {
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(148, 163, 184, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 4px;
+  color: #64748b;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  color: #e2e8f0;
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.06);
+}
+
+/* Auto-dismiss progress bar */
+.progressBar {
+  height: 2px;
+  background: rgba(74, 222, 128, 0.06);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #4ade80, #22c55e);
+  width: 100%;
+  animation: shrink 4s linear forwards;
+}
+
+@keyframes shrink {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+@media (max-width: 640px) {
+  .container {
+    left: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .toast {
+    width: 290px;
+  }
+}

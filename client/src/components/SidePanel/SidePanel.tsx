@@ -1,16 +1,17 @@
 import { useMemo } from 'react';
 import { useTypingEffect } from '../../hooks/useTypingEffect';
+import { useLanguage } from '../../contexts/LanguageContext';
 import TextReveal from '../TextReveal/TextReveal';
 import LevelBadge from '../LevelBadge/LevelBadge';
 import XPProgressBar from '../XPProgressBar/XPProgressBar';
 import styles from './SidePanel.module.css';
 
-const navItems = [
-  { id: 'about', label: 'About' },
-  { id: 'services', label: 'Services' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'contact', label: 'Contact' },
+const NAV_IDS = [
+  { id: 'about', tKey: 'nav.profile', subKey: 'nav.profile.sub' },
+  { id: 'services', tKey: 'nav.services', subKey: 'nav.services.sub' },
+  { id: 'projects', tKey: 'nav.projects', subKey: 'nav.projects.sub' },
+  { id: 'skills', tKey: 'nav.skills', subKey: 'nav.skills.sub' },
+  { id: 'contact', tKey: 'nav.contact', subKey: 'nav.contact.sub' },
 ];
 
 function getGreeting(): string {
@@ -28,6 +29,7 @@ interface SidePanelProps {
 }
 
 export default function SidePanel({ activeSection, visible }: SidePanelProps) {
+  const { t } = useLanguage();
   const typedTitle = useTypingEffect(
     ['Freelance Web Designer', 'Full-Stack Developer', 'I Build Websites That Convert', 'Your Next Web Partner'],
     80, 40, 2000
@@ -42,7 +44,7 @@ export default function SidePanel({ activeSection, visible }: SidePanelProps) {
           <span className={styles.greeting} data-mono>{greeting} 👋</span>
           <div className={styles.statusBadge}>
             <span className={styles.statusDot} />
-            <span className={styles.statusText}>Available for work</span>
+            <span className={styles.statusText}>{t('devLevel.status')}</span>
           </div>
           <div className={styles.nameRow}>
             <h1 className={styles.name}>
@@ -59,22 +61,29 @@ export default function SidePanel({ activeSection, visible }: SidePanelProps) {
             </p>
           </div>
           <TextReveal className={styles.bio} delay={600} stagger={50}>
-            I design and build modern websites that help businesses stand out online — from landing pages to full-stack web apps.
+            {t('about.bio')}
           </TextReveal>
         </div>
 
         <nav className={styles.nav}>
-          {navItems.map(({ id, label }) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              className={`${styles.navLink} ${activeSection === id ? styles.active : ''}`}
-              data-cursor-hover
-            >
-              <span className={styles.navLine} />
-              <span className={styles.navLabel}>{label}</span>
-            </a>
-          ))}
+          {NAV_IDS.map(({ id, tKey, subKey }) => {
+            const label = t(tKey);
+            const sub = t(subKey);
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                className={`${styles.navLink} ${activeSection === id ? styles.active : ''}`}
+                data-cursor-hover
+              >
+                <span className={styles.navLine} />
+                <span className={styles.navLabel}>
+                  {label}
+                  {sub && <span className={styles.navSubtitle}> {sub}</span>}
+                </span>
+              </a>
+            );
+          })}
         </nav>
 
         <div className={styles.bottom}>

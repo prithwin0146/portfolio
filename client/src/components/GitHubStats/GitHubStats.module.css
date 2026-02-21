@@ -1,0 +1,151 @@
+.section {
+  padding: 2rem 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, rgba(108, 99, 255, 0.08), transparent);
+  border-left: 3px solid #6c63ff;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.headerIcon {
+  font-size: 1.1rem;
+}
+
+.headerTitle {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Stats summary cards */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.statCard {
+  background: rgba(15, 15, 26, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.2s;
+}
+
+.statCard:hover {
+  border-color: rgba(108, 99, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.statIcon {
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.statValue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.statLabel {
+  font-size: 0.65rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Top Languages */
+.langSection {
+  margin-top: 1.5rem;
+}
+
+.langHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.langTitle {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.langCount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #475569;
+}
+
+.langBar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(15, 15, 26, 0.8);
+  margin-bottom: 0.75rem;
+}
+
+.langSegment {
+  height: 100%;
+  transition: width 1s ease;
+}
+
+.langList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.langItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.langDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.langPercent {
+  font-family: 'JetBrains Mono', monospace;
+  color: #64748b;
+  font-size: 0.7rem;
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

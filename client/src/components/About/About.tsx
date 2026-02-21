@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { useInView } from '../../hooks/useInView';
 import { useCountUp } from '../../hooks/useCountUp';
+import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import TextReveal from '../TextReveal/TextReveal';
 import type { Profile } from '../../types';
@@ -10,6 +11,7 @@ import styles from './About.module.css';
 export default function About() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const { ref, isInView } = useInView({ threshold: 0.2 });
+  const { t } = useLanguage();
 
   useEffect(() => {
     api.getProfile().then(setProfile).catch(console.error);
@@ -25,19 +27,18 @@ export default function About() {
       className={`${styles.section} ${isInView ? styles.visible : ''}`}
       id="about"
     >
-      <SectionHeader number="01" title="About " accent="Me" visible={isInView} />
+      <SectionHeader number="01" title={t('section.about.title')} accent={t('section.about.accent')} subtitle={t('section.about.sub') || undefined} visible={isInView} />
 
       <div className={styles.bento}>
         {/* Main bio card — spans 2 columns */}
         <div className={`${styles.card} ${styles.cardBio}`} style={{ transitionDelay: '0.1s' }}>
           <div className={styles.cardGlow} />
           <TextReveal className={styles.bioText} delay={200} stagger={40}>
-            {profile?.bio ??
-              "I design and build modern websites that help businesses stand out online — from landing pages to full-stack web apps. Let's bring your vision to life."}
+            {t('about.bio')}
           </TextReveal>
           <div className={styles.bioAccent}>
             <span className={styles.accentLine} />
-            <span className={styles.accentLabel}>Based in India · Working globally</span>
+            <span className={styles.accentLabel}>{t('about.location')}</span>
           </div>
         </div>
 

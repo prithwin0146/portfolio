@@ -5,10 +5,11 @@ interface SectionHeaderProps {
   number: string;
   title: string;
   accent: string;
+  subtitle?: string;
   visible: boolean;
 }
 
-export default function SectionHeader({ number, title, accent, visible }: SectionHeaderProps) {
+export default function SectionHeader({ number, title, accent, subtitle, visible }: SectionHeaderProps) {
   return (
     <div className={`${styles.header} ${visible ? styles.visible : ''}`}>
       <div className={styles.numberRow}>
@@ -16,8 +17,13 @@ export default function SectionHeader({ number, title, accent, visible }: Sectio
         <span className={styles.line} />
       </div>
       <h2 className={styles.heading}>
-        <ScrambleText trigger={visible}>{title}</ScrambleText>
+        {title && <ScrambleText trigger={visible}>{title}</ScrambleText>}
         <ScrambleText trigger={visible} className={styles.accent}>{accent}</ScrambleText>
+        {subtitle && (
+          <span className={styles.subtitle}>
+            <ScrambleText trigger={visible}>({subtitle})</ScrambleText>
+          </span>
+        )}
       </h2>
     </div>
   );

@@ -16,6 +16,8 @@ export interface Project {
   liveUrl: string;
   gitHubUrl: string;
   tags: string[];
+  stars: number;
+  forks: number;
 }
 
 export interface Skill {

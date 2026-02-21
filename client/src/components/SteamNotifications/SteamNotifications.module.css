@@ -1,0 +1,136 @@
+.container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  width: 310px;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid var(--accent, rgba(108, 99, 255, 0.2));
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  animation: slideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1), fadeOut 0.5s ease 5.5s forwards;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.toast:hover {
+  border-color: var(--accent, rgba(108, 99, 255, 0.5));
+  transform: translateX(-2px);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(120%) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; transform: translateX(40px); }
+}
+
+.toastHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  background: color-mix(in srgb, var(--accent, #6c63ff) 6%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent, #6c63ff) 10%, transparent);
+}
+
+.steamIcon {
+  font-size: 0.7rem;
+}
+
+.toastLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.53rem;
+  font-weight: 700;
+  color: var(--accent, #6c63ff);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.toastBody {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  align-items: flex-start;
+}
+
+.avatar {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toastContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+}
+
+.friendName {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.friendAction {
+  font-size: 0.65rem;
+  color: #64748b;
+}
+
+.friendDetail {
+  font-size: 0.69rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Auto-dismiss progress bar */
+.progressBar {
+  height: 2px;
+  background: rgba(148, 163, 184, 0.06);
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--accent, #6c63ff);
+  width: 100%;
+  animation: shrink 6s linear forwards;
+  opacity: 0.5;
+}
+
+@keyframes shrink {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+@media (max-width: 640px) {
+  .container {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .toast {
+    width: 270px;
+  }
+}

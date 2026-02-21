@@ -1,11 +1,14 @@
 import { useState, useCallback, type FormEvent } from 'react';
 import { api } from '../../services/api';
 import { useInView } from '../../hooks/useInView';
+import { trackSocialClick } from '../../services/achievementService';
+import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import TextReveal from '../TextReveal/TextReveal';
 import styles from './Contact.module.css';
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState('');
@@ -43,14 +46,14 @@ export default function Contact() {
       className={`${styles.section} ${isInView ? styles.visible : ''}`}
       id="contact"
     >
-      <SectionHeader number="06" title="Let's " accent="Work Together" visible={isInView} />
+      <SectionHeader number="06" title={t('section.contact.title')} accent={t('section.contact.accent')} subtitle={t('section.contact.sub') || undefined} visible={isInView} />
       <TextReveal className={styles.subtitle} delay={100} stagger={30}>
         Have a project in mind? I'd love to hear about it. Drop me a message and I'll get back to you within 24 hours.
       </TextReveal>
       <div className={styles.socials}>
-        <a href="mailto:Prithwin0146@gmail.com" className={styles.socialLink}>📧 Prithwin0146@gmail.com</a>
-        <a href="https://www.linkedin.com/in/prithwin-m" target="_blank" rel="noreferrer" className={styles.socialLink}>💼 LinkedIn</a>
-        <a href="https://github.com/prithwin0146" target="_blank" rel="noreferrer" className={styles.socialLink}>💻 GitHub</a>
+        <a href="mailto:Prithwin0146@gmail.com" className={styles.socialLink} onClick={trackSocialClick}>📧 Prithwin0146@gmail.com</a>
+        <a href="https://www.linkedin.com/in/prithwin-m" target="_blank" rel="noreferrer" className={styles.socialLink} onClick={trackSocialClick}>💼 LinkedIn</a>
+        <a href="https://github.com/prithwin0146" target="_blank" rel="noreferrer" className={styles.socialLink} onClick={trackSocialClick}>💻 GitHub</a>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <input

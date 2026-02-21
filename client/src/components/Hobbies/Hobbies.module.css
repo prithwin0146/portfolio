@@ -1,0 +1,116 @@
+.section {
+  padding: 2rem 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, rgba(108, 99, 255, 0.08), transparent);
+  border-left: 3px solid #6c63ff;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.headerIcon {
+  font-size: 1.1rem;
+}
+
+.headerTitle {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(15, 15, 26, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 8px;
+  transition: border-color 0.3s, transform 0.2s;
+}
+
+.card:hover {
+  border-color: rgba(108, 99, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.cardIcon {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+
+.cardContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.cardTitle {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.activeTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1rem 0.4rem;
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.25);
+  border-radius: 3px;
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: #2ecc71;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.activeDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #2ecc71;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.cardDesc {
+  font-size: 0.75rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
