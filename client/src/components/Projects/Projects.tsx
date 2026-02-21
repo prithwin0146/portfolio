@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { useInView } from '../../hooks/useInView';
 import { useTilt } from '../../hooks/useTilt';
+import { trackSectionVisit, trackProjectView, trackProjectsSection } from '../../services/achievementService';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import ProjectModal from '../ProjectModal/ProjectModal';
 import type { Project } from '../../types';
@@ -12,6 +13,10 @@ export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
   const { ref, isInView } = useInView({ threshold: 0.1 });
   const tilt = useTilt(4);
+
+  useEffect(() => {
+    if (isInView) trackSectionVisit('projects');
+  }, [isInView]);
 
   useEffect(() => {
     api.getProjects().then(setProjects).catch(console.error);
@@ -37,7 +42,11 @@ export default function Projects() {
           onMouseMove={tilt.onMove}
           onMouseLeave={tilt.onLeave}
           onMouseEnter={tilt.onEnter}
-          onClick={() => setSelected(featured)}
+          onClick={() => {
+            setSelected(featured);
+            trackProjectView(String(featured.id));
+            trackProjectsSection(projects.length);
+          }}
           data-cursor-hover
           data-cursor-label="View"
         >
@@ -78,7 +87,11 @@ export default function Projects() {
             onMouseMove={tilt.onMove}
             onMouseLeave={tilt.onLeave}
             onMouseEnter={tilt.onEnter}
-            onClick={() => setSelected(p)}
+            onClick={() => {
+              setSelected(p);
+              trackProjectView(String(p.id));
+              trackProjectsSection(projects.length);
+            }}
             data-cursor-hover
             data-cursor-label="View"
           >
