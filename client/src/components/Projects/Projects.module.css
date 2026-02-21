@@ -1,5 +1,29 @@
 .section {
-  padding: 6rem 0;
+  padding: 2rem 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, rgba(108, 99, 255, 0.08), transparent);
+  border-left: 3px solid #6c63ff;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.headerIcon {
+  font-size: 1.1rem;
+}
+
+.headerTitle {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 /* ── Featured Project — Hero Card ── */
@@ -191,13 +215,60 @@
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(148, 163, 184, 0.06);
   border-radius: 14px;
-  padding: 1.75rem;
+  padding: 0;
   transition: all 0.3s;
+  overflow: hidden;
 }
 
 .card:hover .cardInner {
   border-color: transparent;
   background: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Card Image ── */
+.cardImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardStats {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.15rem 0.45rem;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  border-radius: 4px;
+  font-size: 0.68rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+/* ── Card Text Content ── */
+.cardTextContent {
+  padding: 1.75rem;
 }
 
 .cardNumber {
@@ -226,6 +297,7 @@
   color: #e2e8f0;
   margin-bottom: 0.5rem;
   transition: color 0.3s;
+  padding: 1.25rem 1.75rem 0;
 }
 
 .card:hover .cardTitle {
@@ -237,6 +309,7 @@
   font-size: 0.9rem;
   line-height: 1.7;
   margin-bottom: 1rem;
+  padding: 0 1.75rem;
 }
 
 .tags {
@@ -244,6 +317,7 @@
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-bottom: 1.25rem;
+  padding: 0 1.75rem;
 }
 
 .tag {
@@ -331,4 +405,31 @@
   .featuredTitle {
     font-size: 1.25rem;
   }
+}
+
+/* ── Card Actions (Code / Demo links) ── */
+.cardActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  padding: 0 1.75rem 1.5rem;
+}
+
+.actionLink {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #6c63ff;
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  letter-spacing: 0.03em;
+}
+
+.actionLink:hover {
+  background: rgba(108, 99, 255, 0.1);
+  border-color: rgba(108, 99, 255, 0.4);
+  color: #a78bfa;
 }

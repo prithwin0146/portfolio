@@ -1,0 +1,193 @@
+.section {
+  padding: 2rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, rgba(108, 99, 255, 0.08), transparent);
+  border-left: 3px solid #6c63ff;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.headerIcon { font-size: 1.1rem; }
+
+.headerTitle {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ── Player ── */
+.player {
+  position: relative;
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.06), rgba(15, 15, 26, 0.8));
+  border: 1px solid rgba(108, 99, 255, 0.12);
+  border-radius: 12px;
+  padding: 2.5rem 2rem 1.5rem;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Intro ── */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.introIcon {
+  font-size: 2rem;
+  color: #6c63ff;
+}
+
+.introText {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* ── Slide ── */
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: slideEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes slideEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.slideIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.slideLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.slideValue {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  color: var(--accent, #6c63ff);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 40px color-mix(in srgb, var(--accent, #6c63ff) 30%, transparent);
+}
+
+.slideSubtitle {
+  font-size: 0.82rem;
+  color: #64748b;
+  max-width: 300px;
+}
+
+/* ── Progress ── */
+.dots {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(148, 163, 184, 0.15);
+  transition: all 0.3s;
+}
+
+.dotActive {
+  background: #6c63ff;
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+  transform: scale(1.3);
+}
+
+.dotDone {
+  background: rgba(108, 99, 255, 0.35);
+}
+
+.progressBar {
+  width: 100%;
+  max-width: 200px;
+  height: 3px;
+  background: rgba(148, 163, 184, 0.08);
+  border-radius: 2px;
+  margin-top: 0.75rem;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #6c63ff, #a78bfa);
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.replayBtn {
+  margin-top: 1rem;
+  padding: 0.4rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.replayBtn:hover {
+  color: #6c63ff;
+  border-color: rgba(108, 99, 255, 0.3);
+  background: rgba(108, 99, 255, 0.06);
+}
+
+@media (max-width: 768px) {
+  .player {
+    padding: 2rem 1.25rem 1.25rem;
+    min-height: 240px;
+  }
+}

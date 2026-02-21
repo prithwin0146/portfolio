@@ -51,8 +51,8 @@
   .mainContent {
     flex: 1;
     min-width: 0;
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   /* Remove centred max-width on sections inside the right column */

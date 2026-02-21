@@ -14,30 +14,36 @@ public class ProjectsController : ControllerBase
             Id = 1,
             Title = "JobBuddy — Workforce Platform",
             Description = "Built a production workforce platform handling 1500+ deployments. Implemented SSR for 40% faster load times, employer/candidate enquiry system, admin dashboard with analytics, and an SEO-optimized blog.",
-            ImageUrl = "",
+            ImageUrl = "https://opengraph.githubassets.com/1/prithwin0146/jobbuddy",
             LiveUrl = "https://www.thejobbuddy.in",
             GitHubUrl = "https://github.com/prithwin0146/jobbuddy",
-            Tags = ["Angular", "TypeScript", "ASP.NET Core", "SQL Server", "SSR"]
+            Tags = ["Angular", "TypeScript", "ASP.NET Core", "SQL Server", "SSR"],
+            Stars = 3,
+            Forks = 1
         },
         new()
         {
             Id = 2,
             Title = "Employee Management Dashboard",
             Description = "Developed an internal management tool with RBAC across 3 user roles, server-side pagination handling 500+ records, real-time search, and a polished Angular Material UI.",
-            ImageUrl = "",
+            ImageUrl = "https://opengraph.githubassets.com/1/prithwin0146/Demo",
             LiveUrl = "#",
             GitHubUrl = "https://github.com/prithwin0146/Demo",
-            Tags = ["Angular", "TypeScript", "ASP.NET Core", "SQL Server", "Angular Material"]
+            Tags = ["Angular", "TypeScript", "ASP.NET Core", "SQL Server", "Angular Material"],
+            Stars = 1,
+            Forks = 0
         },
         new()
         {
             Id = 3,
             Title = "JK Travels — Travel Agency Site",
             Description = "Designed a responsive travel site scoring 95+ on Lighthouse performance. Features travel packages showcase, WhatsApp-integrated contact form with instant enquiry flow, and smooth scroll animations.",
-            ImageUrl = "",
+            ImageUrl = "https://opengraph.githubassets.com/1/prithwin0146/JK-Travels-website",
             LiveUrl = "#",
             GitHubUrl = "https://github.com/prithwin0146/JK-Travels-website",
-            Tags = ["React", "JavaScript", "Vite", "CSS"]
+            Tags = ["React", "JavaScript", "Vite", "CSS"],
+            Stars = 1,
+            Forks = 1
         }
     ];
 

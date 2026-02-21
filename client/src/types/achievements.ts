@@ -1,19 +1,14 @@
-export type AchievementRarity = 'common' | 'rare' | 'epic' | 'legendary';
-export type AchievementTrigger = 'auto' | 'scroll' | 'click' | 'time' | 'konami';
-
-export interface VisitorAchievement {
+export interface Achievement {
   id: string;
-  title: string;
+  name: string;
   description: string;
   icon: string;
-  unlocked: boolean;
-  trigger: AchievementTrigger;
-  triggerCondition?: string;
-  rarity: AchievementRarity;
   xp: number;
+  category: string;
 }
 
-export interface AchievementWithStatus extends VisitorAchievement {
+export interface AchievementWithStatus extends Achievement {
+  unlocked: boolean;
   unlockedAt?: string;
 }
 

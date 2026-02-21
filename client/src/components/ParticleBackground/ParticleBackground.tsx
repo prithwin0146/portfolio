@@ -129,18 +129,20 @@ export default function ParticleBackground() {
     createParticles();
     draw();
 
-    window.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseleave', onMouseLeave);
-    window.addEventListener('resize', () => {
+    const onResize = () => {
       resize();
       createParticles();
-    });
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseleave', onMouseLeave);
+    window.addEventListener('resize', onResize);
 
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 

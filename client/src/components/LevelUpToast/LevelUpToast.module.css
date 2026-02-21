@@ -1,0 +1,131 @@
+.wrap {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10010;
+  width: 220px;
+  border: 1px solid;
+  border-radius: 14px;
+  background: rgba(10, 10, 20, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
+  animation: toastIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Burst glow behind content */
+.glow {
+  position: absolute;
+  inset: -40%;
+  border-radius: 50%;
+  opacity: 0.15;
+  filter: blur(30px);
+  animation: glowPulse 1.5s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes glowPulse {
+  from { opacity: 0.1; transform: scale(0.9); }
+  to   { opacity: 0.25; transform: scale(1.1); }
+}
+
+/* Particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  top: -10%;
+  font-size: 0.9rem;
+  animation: particleFall linear forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes particleFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  70%  { opacity: 1; }
+  100% { transform: translateY(130px) rotate(360deg); opacity: 0; }
+}
+
+/* Text content */
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 1rem 1.2rem;
+  text-align: center;
+}
+
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  animation: labelPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+@keyframes labelPop {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.levels {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.oldLevel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #475569;
+  line-height: 1;
+}
+
+.arrow {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.newLevel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  animation: newLevelBounce 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+@keyframes newLevelBounce {
+  from { opacity: 0; transform: scale(0.5); }
+  60%  { transform: scale(1.15); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.tierName {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.9;
+  animation: labelPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}

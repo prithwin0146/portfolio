@@ -1,59 +1,85 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import type { AchievementWithStatus } from '../../types/achievements';
 import styles from './AchievementToast.module.css';
 
 interface ToastItem {
-  achievement: AchievementWithStatus;
   id: number;
+  achievement: AchievementWithStatus;
 }
 
-let toastCounter = 0;
+let toastSeq = 0;
 
 export default function AchievementToast() {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
-
-  const addToast = useCallback((achievement: AchievementWithStatus) => {
-    const id = ++toastCounter;
-    setToasts((prev) => [...prev, { achievement, id }]);
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 5500);
-  }, []);
+  const queueRef = useRef<ToastItem[]>([]);
+  const showingRef = useRef(false);
 
   useEffect(() => {
-    const handler = (e: Event) => {
-      const achievement = (e as CustomEvent<AchievementWithStatus>).detail;
-      addToast(achievement);
+    const processQueue = () => {
+      if (queueRef.current.length === 0) {
+        showingRef.current = false;
+        return;
+      }
+
+      showingRef.current = true;
+      const next = queueRef.current.shift()!;
+      setToasts((prev) => [...prev, next]);
+
+      // Auto-dismiss after 4s
+      setTimeout(() => {
+        setToasts((prev) => prev.filter((t) => t.id !== next.id));
+        processQueue();
+      }, 4000);
     };
-    window.addEventListener('achievement-unlocked', handler);
-    return () => window.removeEventListener('achievement-unlocked', handler);
-  }, [addToast]);
+
+    const onUnlock = (e: Event) => {
+      const detail = (e as CustomEvent).detail as AchievementWithStatus;
+      const item: ToastItem = { id: ++toastSeq, achievement: detail };
+
+      if (showingRef.current) {
+        queueRef.current.push(item);
+      } else {
+        queueRef.current.push(item);
+        processQueue();
+      }
+    };
+
+    window.addEventListener('achievement-unlocked', onUnlock);
+    return () => window.removeEventListener('achievement-unlocked', onUnlock);
+  }, []);
 
   if (toasts.length === 0) return null;
 
   return (
     <div className={styles.container}>
-      {toasts.map(({ achievement, id }) => (
+      {toasts.map((t) => (
         <div
-          key={id}
-          className={`${styles.toast} ${styles[achievement.rarity]}`}
+          key={t.id}
+          className={styles.toast}
+          onClick={() => setToasts((prev) => prev.filter((x) => x.id !== t.id))}
         >
-          <div className={styles.iconWrap}>
-            <span className={styles.icon}>{achievement.icon}</span>
+          <div className={styles.toastHeader}>
+            <span className={styles.headerLabel}>ACHIEVEMENT UNLOCKED!</span>
+            <span className={styles.headerXp}>+{t.achievement.xp} XP</span>
           </div>
-          <div className={styles.content}>
-            <div className={styles.header}>
-              <span className={styles.label}>Achievement Unlocked!</span>
-              <span className={`${styles.rarity} ${styles[`rarity_${achievement.rarity}`]}`}>
-                {achievement.rarity}
-              </span>
+          <div className={styles.toastBody}>
+            <span className={styles.icon}>{t.achievement.icon}</span>
+            <div className={styles.info}>
+              <span className={styles.name}>{t.achievement.name}</span>
+              <span className={styles.desc}>{t.achievement.description}</span>
             </div>
-            <p className={styles.title}>{achievement.title}</p>
-            <p className={styles.description}>{achievement.description}</p>
+            <button
+              className={styles.closeBtn}
+              onClick={(e) => {
+                e.stopPropagation();
+                setToasts((prev) => prev.filter((x) => x.id !== t.id));
+              }}
+            >
+              ×
+            </button>
           </div>
-          <div className={styles.xp}>+{achievement.xp} XP</div>
           <div className={styles.progressBar}>
-            <div className={styles.progress} />
+            <div className={styles.progressFill} />
           </div>
         </div>
       ))}

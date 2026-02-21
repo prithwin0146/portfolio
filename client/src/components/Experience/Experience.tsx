@@ -2,19 +2,16 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { useInView } from '../../hooks/useInView';
 import { useTilt } from '../../hooks/useTilt';
-import { trackSectionVisit } from '../../services/achievementService';
+import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import type { Experience as ExperienceType } from '../../types';
 import styles from './Experience.module.css';
 
 export default function Experience() {
+  const { t } = useLanguage();
   const [items, setItems] = useState<ExperienceType[]>([]);
   const { ref, isInView } = useInView({ threshold: 0.15 });
   const tilt = useTilt(3);
-
-  useEffect(() => {
-    if (isInView) trackSectionVisit('services');
-  }, [isInView]);
 
   useEffect(() => {
     api.getExperience().then(setItems).catch(console.error);
@@ -26,7 +23,7 @@ export default function Experience() {
       className={`${styles.section} ${isInView ? styles.visible : ''}`}
       id="services"
     >
-      <SectionHeader number="02" title="My " accent="Services" visible={isInView} />
+      <SectionHeader number="02" title={t('section.services.title')} accent={t('section.services.accent')} subtitle={t('section.services.sub') || undefined} visible={isInView} />
       <div className={styles.grid}>
         {items.map((exp, i) => (
           <div

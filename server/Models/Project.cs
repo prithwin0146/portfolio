@@ -9,4 +9,6 @@ public class Project
     public string LiveUrl { get; set; } = string.Empty;
     public string GitHubUrl { get; set; } = string.Empty;
     public List<string> Tags { get; set; } = [];
+    public int Stars { get; set; }
+    public int Forks { get; set; }
 }

@@ -1,6 +1,14 @@
 import { useCallback } from 'react';
 import { useInView } from '../../hooks/useInView';
+import { trackSocialClick } from '../../services/achievementService';
 import styles from './Footer.module.css';
+
+const quickLinks = [
+  { label: 'Profile', href: '#home' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+];
 
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/prithwin0146' },
@@ -15,72 +23,68 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const handleMagnetic = useCallback((e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
-    const btn = e.currentTarget;
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-  }, []);
-
-  const handleMagneticLeave = useCallback((e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
-    e.currentTarget.style.transform = '';
-  }, []);
-
   return (
     <footer ref={ref} className={`${styles.footer} ${isInView ? styles.visible : ''}`}>
-      {/* CTA Section */}
-      <div className={styles.cta}>
-        <p className={styles.ctaLabel} data-mono>Got a project?</p>
-        <a
-          href="#contact"
-          className={styles.ctaHeading}
-          data-cursor-hover
-          data-cursor-label="Let's go"
-          onMouseMove={handleMagnetic}
-          onMouseLeave={handleMagneticLeave}
-        >
-          Let's work together
-          <span className={styles.ctaArrow}>↗</span>
-        </a>
-        <div className={styles.ctaGlow} />
+      <div className={styles.dividerTop} />
+
+      <div className={styles.columns}>
+        <div className={styles.col}>
+          <h4 className={styles.colTitle}>Quick Links</h4>
+          <ul className={styles.colList}>
+            {quickLinks.map((link) => (
+              <li key={link.label}>
+                <a href={link.href} className={styles.colLink} data-cursor-hover>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={styles.col}>
+          <h4 className={styles.colTitle}>Connect With Me</h4>
+          <ul className={styles.colList}>
+            {socialLinks.map((s) => (
+              <li key={s.label}>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.colLink}
+                  data-cursor-hover
+                  onClick={trackSocialClick}
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={styles.col}>
+          <h4 className={styles.colTitle}>About</h4>
+          <p className={styles.aboutText}>
+            Steam-inspired portfolio showcasing projects and achievements
+          </p>
+        </div>
       </div>
 
-      <div className={styles.divider} />
+      <div className={styles.dividerBottom} />
 
-      <div className={styles.content}>
-        <div className={styles.left}>
-          <p className={styles.credit}>
-            Designed & Built by <span className={styles.name}>Prithwin</span>
-          </p>
-          <p className={styles.year} data-mono>© {new Date().getFullYear()}</p>
-        </div>
-
-        <div className={styles.links}>
-          {socialLinks.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noreferrer"
-              className={styles.link}
-              data-cursor-hover
-            >
-              {s.label}
-            </a>
-          ))}
-        </div>
-
+      <div className={styles.bottom}>
+        <p className={styles.copyright}>
+          © {new Date().getFullYear()} Prithwin M. All rights reserved.
+        </p>
+        <p className={styles.madeWith}>
+          Made with Steam profile inspiration 🎮
+        </p>
         <button
           className={styles.backToTop}
           onClick={scrollToTop}
           data-cursor-hover
           aria-label="Back to top"
-          onMouseMove={handleMagnetic}
-          onMouseLeave={handleMagneticLeave}
         >
-          <span className={styles.backToTopArrow}>↑</span>
-          <span className={styles.backToTopLabel} data-mono>Top</span>
+          ↑ Top
         </button>
       </div>
     </footer>

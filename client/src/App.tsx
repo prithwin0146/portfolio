@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { useLenis } from './hooks/useLenis';
 import { useActiveSection } from './hooks/useActiveSection';
 import { useScrollSkew } from './hooks/useScrollSkew';
@@ -8,25 +9,37 @@ import CustomCursor from './components/CustomCursor/CustomCursor';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
 import CommandPalette from './components/CommandPalette/CommandPalette';
 import KonamiEaster from './components/KonamiEaster/KonamiEaster';
+import LevelUpToast from './components/LevelUpToast/LevelUpToast';
 import AchievementToast from './components/AchievementToast/AchievementToast';
 import ParticleBackground from './components/ParticleBackground/ParticleBackground';
+import SteamHeader from './components/SteamHeader/SteamHeader';
+import SteamNotifications from './components/SteamNotifications/SteamNotifications';
+import AchievementModal from './components/AchievementModal/AchievementModal';
+import InfoModal from './components/InfoModal/InfoModal';
 import Navbar from './components/Navbar/Navbar';
 import SidePanel from './components/SidePanel/SidePanel';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
-import Projects from './components/Projects/Projects';
-import Skills from './components/Skills/Skills';
+import DeveloperLevel from './components/DeveloperLevel/DeveloperLevel';
 import Experience from './components/Experience/Experience';
-import Testimonials from './components/Testimonials/Testimonials';
+import AchievementShowcase from './components/AchievementShowcase/AchievementShowcase';
+import Projects from './components/Projects/Projects';
+import GitHubReplay from './components/GitHubReplay/GitHubReplay';
+import Skills from './components/Skills/Skills';
+import ResumeViewer from './components/ResumeViewer/ResumeViewer';
+import GitHubStats from './components/GitHubStats/GitHubStats';
+import RecentActivity from './components/RecentActivity/RecentActivity';
+import Hobbies from './components/Hobbies/Hobbies';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import SectionDivider from './components/SectionDivider/SectionDivider';
-import { initializeAchievementSystem } from './services/achievementService';
 
 const SECTIONS = ['about', 'services', 'projects', 'skills', 'contact'];
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const [achievementModalOpen, setAchievementModalOpen] = useState(false);
+  const [infoModalOpen, setInfoModalOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const activeSection = useActiveSection(SECTIONS);
 
@@ -35,11 +48,6 @@ function App() {
 
   // Scroll velocity skew effect
   useScrollSkew();
-
-  // Initialize achievement system once on mount
-  useEffect(() => {
-    initializeAchievementSystem();
-  }, []);
 
   // Track mouse for spotlight effect via CSS custom properties (perf-friendly)
   useEffect(() => {
@@ -54,15 +62,26 @@ function App() {
   }, []);
 
   return (
-    <>
+    <LanguageProvider>
       {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
       <CustomCursor />
       <ScrollProgress />
       <CommandPalette />
       <KonamiEaster />
+      <LevelUpToast />
       <AchievementToast />
+      <SteamNotifications />
+      <AchievementModal open={achievementModalOpen} onClose={() => setAchievementModalOpen(false)} />
+      <InfoModal open={infoModalOpen} onClose={() => setInfoModalOpen(false)} />
       <div className="appWrapper" ref={wrapperRef}>
         <ParticleBackground />
+        {/* Steam-style sticky header */}
+        <SteamHeader
+          username="Prithwin M"
+          activeSection={activeSection}
+          onOpenAchievements={() => setAchievementModalOpen(true)}
+          onOpenInfo={() => setInfoModalOpen(true)}
+        />
         {/* Mobile-only top navbar */}
         <Navbar />
         {/* Mobile-only hero section */}
@@ -73,20 +92,32 @@ function App() {
           <main className="mainContent">
             <About />
             <SectionDivider />
+            <DeveloperLevel />
+            <SectionDivider />
             <Experience />
+            <SectionDivider />
+            <AchievementShowcase />
             <SectionDivider />
             <Projects />
             <SectionDivider />
+            <GitHubReplay />
+            <SectionDivider />
             <Skills />
             <SectionDivider />
-            <Testimonials />
+            <ResumeViewer />
+            <SectionDivider />
+            <GitHubStats />
+            <SectionDivider />
+            <RecentActivity />
+            <SectionDivider />
+            <Hobbies />
             <SectionDivider />
             <Contact />
             <Footer />
           </main>
         </div>
       </div>
-    </>
+    </LanguageProvider>
   );
 }
 

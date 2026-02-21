@@ -32,6 +32,14 @@
     padding-right: 5rem;
   }
 
+  .top {
+    flex-shrink: 0;
+  }
+
+  .bottom {
+    flex-shrink: 0;
+  }
+
   /* ── Greeting ── */
   .greeting {
     display: block;
@@ -79,12 +87,19 @@
   }
 
   /* ── Top: Name, title, bio ── */
+  .nameRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
   .name {
     font-size: 3.2rem;
     font-weight: 800;
     letter-spacing: -2.5px;
     line-height: 1.05;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
   }
 
   .nameLink {
@@ -185,6 +200,20 @@
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  .navSubtitle {
+    font-size: 0.55rem;
+    color: #334155;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    transition: color 0.3s;
+  }
+
+  .navLink:hover .navSubtitle,
+  .active .navSubtitle {
+    color: #64748b;
+  }
+
   .navLink:hover .navLabel {
     transform: translateX(4px);
   }
@@ -247,6 +276,13 @@
 
   .cmdHint:hover .cmdLabel {
     color: #475569;
+  }
+
+  /* ── XP Progress Bar ── */
+  .xpBar {
+    margin-top: 0.85rem;
+    opacity: 0;
+    animation: greetFade 0.6s 2.2s ease forwards;
   }
 }
 

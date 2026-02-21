@@ -19,6 +19,7 @@ let visitedSections = new Set<string>();
 let viewedProjects = new Set<string>();
 let konamiProgress = 0;
 let pageLoadTime = Date.now();
+let totalScrollPixels = 0;
 
 const MAIN_SECTIONS = ['about', 'services', 'projects', 'skills', 'contact'];
 
@@ -145,6 +146,45 @@ export function trackCommandPaletteUse(): void {
   }
 }
 
+/** New trackers for expanded achievements */
+
+export function trackStatsView(): void {
+  if (!isUnlocked('stats-enthusiast')) {
+    unlockAchievement('stats-enthusiast');
+  }
+}
+
+export function trackHobbiesView(): void {
+  if (!isUnlocked('hobby-explorer')) {
+    unlockAchievement('hobby-explorer');
+  }
+}
+
+export function trackResumeView(): void {
+  if (!isUnlocked('resume-reviewer')) {
+    unlockAchievement('resume-reviewer');
+  }
+}
+
+export function trackReplayWatch(): void {
+  if (!isUnlocked('replay-watcher')) {
+    unlockAchievement('replay-watcher');
+  }
+}
+
+export function trackSocialClick(): void {
+  if (!isUnlocked('social-butterfly')) {
+    unlockAchievement('social-butterfly');
+  }
+}
+
+export function trackScroll(deltaPixels: number): void {
+  totalScrollPixels += Math.abs(deltaPixels);
+  if (totalScrollPixels >= 10000 && !isUnlocked('scroll-master')) {
+    unlockAchievement('scroll-master');
+  }
+}
+
 export function onAchievementUnlock(callback: UnlockListener): () => void {
   listeners.push(callback);
   return () => {
@@ -157,6 +197,7 @@ export function initializeAchievementSystem(): void {
   visitedSections = new Set();
   viewedProjects = new Set();
   konamiProgress = 0;
+  totalScrollPixels = 0;
 
   // Auto-unlock first-steps
   if (!isUnlocked('first-steps')) {
@@ -169,6 +210,11 @@ export function initializeAchievementSystem(): void {
     unlockAchievement('night-owl');
   }
 
+  // Early bird — visit between 5 AM and 8 AM
+  if (hour >= 5 && hour < 8 && !isUnlocked('early-bird')) {
+    unlockAchievement('early-bird');
+  }
+
   // Committed visitor — 2 minutes timer
   const committedTimer = setTimeout(() => {
     if (!isUnlocked('committed-visitor')) {
@@ -176,6 +222,18 @@ export function initializeAchievementSystem(): void {
     }
   }, 120000);
 
+  // Scroll tracking
+  let lastScrollY = window.scrollY;
+  const onScroll = () => {
+    const delta = Math.abs(window.scrollY - lastScrollY);
+    lastScrollY = window.scrollY;
+    trackScroll(delta);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+
   // Clean up timer if page unloads before firing
-  window.addEventListener('beforeunload', () => clearTimeout(committedTimer), { once: true });
+  window.addEventListener('beforeunload', () => {
+    clearTimeout(committedTimer);
+    window.removeEventListener('scroll', onScroll);
+  }, { once: true });
 }

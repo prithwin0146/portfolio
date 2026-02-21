@@ -2,28 +2,22 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { useInView } from '../../hooks/useInView';
 import { useTilt } from '../../hooks/useTilt';
-import { trackSectionVisit, trackProjectView, trackProjectsSection } from '../../services/achievementService';
+import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import ProjectModal from '../ProjectModal/ProjectModal';
 import type { Project } from '../../types';
 import styles from './Projects.module.css';
 
 export default function Projects() {
+  const { t } = useLanguage();
   const [projects, setProjects] = useState<Project[]>([]);
   const [selected, setSelected] = useState<Project | null>(null);
   const { ref, isInView } = useInView({ threshold: 0.1 });
   const tilt = useTilt(4);
 
   useEffect(() => {
-    if (isInView) trackSectionVisit('projects');
-  }, [isInView]);
-
-  useEffect(() => {
     api.getProjects().then(setProjects).catch(console.error);
   }, []);
-
-  const featured = projects[0];
-  const rest = projects.slice(1);
 
   return (
     <section
@@ -31,75 +25,34 @@ export default function Projects() {
       className={`${styles.section} ${isInView ? styles.visible : ''}`}
       id="projects"
     >
-      <SectionHeader number="03" title="My " accent="Projects" visible={isInView} />
+      <SectionHeader number="03" title={t('section.projects.title')} accent={t('section.projects.accent')} subtitle={t('section.projects.sub') || undefined} visible={isInView} />
 
-      {/* Featured project — big hero card */}
-      {featured && (
-        <div
-          className={styles.featured}
-          data-card
-          style={{ transitionDelay: '0.1s' }}
-          onMouseMove={tilt.onMove}
-          onMouseLeave={tilt.onLeave}
-          onMouseEnter={tilt.onEnter}
-          onClick={() => {
-            setSelected(featured);
-            trackProjectView(String(featured.id));
-            trackProjectsSection(projects.length);
-          }}
-          data-cursor-hover
-          data-cursor-label="View"
-        >
-          <div className={styles.featuredSpotlight} />
-          <div className={styles.glare} data-glare />
-          <div className={styles.featuredBorder} />
-          <div className={styles.featuredInner}>
-            <div className={styles.featuredBadge}>Featured Project</div>
-            <h3 className={styles.featuredTitle}>{featured.title}</h3>
-            <p className={styles.featuredDesc}>{featured.description}</p>
-            <div className={styles.tags}>
-              {featured.tags.map((tag) => (
-                <span key={tag} className={styles.tag}>{tag}</span>
-              ))}
-            </div>
-            <div className={styles.cardLinks}>
-              <span className={styles.caseStudyLink} data-cursor-hover>
-                View Case Study →
-              </span>
-              {featured.liveUrl && featured.liveUrl !== '#' && (
-                <a href={featured.liveUrl} target="_blank" rel="noreferrer" className={styles.cardLink} data-cursor-hover onClick={(e) => e.stopPropagation()}>
-                  <span className={styles.linkIcon}>↗</span> Live Demo
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Other projects grid */}
       <div className={styles.grid}>
-        {rest.map((p, i) => (
+        {projects.map((p, i) => (
           <div
             key={p.id}
             className={styles.card}
             data-card
-            style={{ transitionDelay: `${(i + 1) * 0.12}s` }}
+            style={{ transitionDelay: `${i * 0.1}s` }}
             onMouseMove={tilt.onMove}
             onMouseLeave={tilt.onLeave}
             onMouseEnter={tilt.onEnter}
-            onClick={() => {
-              setSelected(p);
-              trackProjectView(String(p.id));
-              trackProjectsSection(projects.length);
-            }}
+            onClick={() => setSelected(p)}
             data-cursor-hover
             data-cursor-label="View"
           >
             <div className={styles.cardSpotlight} />
-            <div className={styles.glare} data-glare />
             <div className={styles.cardBorder} />
             <div className={styles.cardInner}>
-              <div className={styles.cardNumber}>0{i + 2}</div>
+              {p.imageUrl && (
+                <div className={styles.cardImageWrap}>
+                  <img src={p.imageUrl} alt={p.title} className={styles.cardImage} loading="lazy" />
+                  <div className={styles.cardStats}>
+                    {p.stars > 0 && <span className={styles.stat}>⭐{p.stars}</span>}
+                    {p.forks > 0 && <span className={styles.stat}>🍴{p.forks}</span>}
+                  </div>
+                </div>
+              )}
               <h3 className={styles.cardTitle}>{p.title}</h3>
               <p className={styles.cardDesc}>{p.description}</p>
               <div className={styles.tags}>
@@ -107,17 +60,37 @@ export default function Projects() {
                   <span key={tag} className={styles.tag}>{tag}</span>
                 ))}
               </div>
-              <div className={styles.cardLinks}>
-                <span className={styles.caseStudyLink} data-cursor-hover>
-                  View Details →
-                </span>
+              <div className={styles.cardActions}>
+                {p.gitHubUrl && p.gitHubUrl !== '#' && (
+                  <a
+                    href={p.gitHubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.actionLink}
+                    data-cursor-hover
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Code
+                  </a>
+                )}
+                {p.liveUrl && p.liveUrl !== '#' && (
+                  <a
+                    href={p.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.actionLink}
+                    data-cursor-hover
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Demo ↗
+                  </a>
+                )}
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Project detail modal */}
       <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </section>
   );

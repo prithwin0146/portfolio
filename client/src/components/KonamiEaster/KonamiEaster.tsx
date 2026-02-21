@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { unlockAchievement } from '../../services/achievementService';
+import { trackKonamiKey } from '../../services/achievementService';
 import styles from './KonamiEaster.module.css';
 
 const KONAMI = [
@@ -14,12 +14,14 @@ export default function KonamiEaster() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      // Bridge to achievement service so "konami-master" unlocks
+      trackKonamiKey(e.key);
+
       if (e.key === KONAMI[pos]) {
         const next = pos + 1;
         if (next === KONAMI.length) {
           setTriggered(true);
           setPos(0);
-          unlockAchievement('konami-master');
         } else {
           setPos(next);
         }
