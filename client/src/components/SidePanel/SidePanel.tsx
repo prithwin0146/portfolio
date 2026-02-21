@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { useTypingEffect } from '../../hooks/useTypingEffect';
 import TextReveal from '../TextReveal/TextReveal';
+import LevelBadge from '../LevelBadge/LevelBadge';
+import XPProgressBar from '../XPProgressBar/XPProgressBar';
 import styles from './SidePanel.module.css';
 
 const navItems = [
@@ -42,11 +44,14 @@ export default function SidePanel({ activeSection, visible }: SidePanelProps) {
             <span className={styles.statusDot} />
             <span className={styles.statusText}>Available for work</span>
           </div>
-          <h1 className={styles.name}>
-            <a href="#home" className={styles.nameLink} data-cursor-hover>
-              Prithwin M
-            </a>
-          </h1>
+          <div className={styles.nameRow}>
+            <h1 className={styles.name}>
+              <a href="#home" className={styles.nameLink} data-cursor-hover>
+                Prithwin M
+              </a>
+            </h1>
+            <LevelBadge size="small" />
+          </div>
           <div className={styles.titleWrap}>
             <span className={styles.titleLine} />
             <p className={styles.title}>
@@ -115,6 +120,9 @@ export default function SidePanel({ activeSection, visible }: SidePanelProps) {
           <div className={styles.cmdHint} data-cursor-hover>
             <kbd className={styles.cmdKbd}>⌘K</kbd>
             <span className={styles.cmdLabel}>Command palette</span>
+          </div>
+          <div className={styles.xpBar}>
+            <XPProgressBar compact />
           </div>
         </div>
       </div>
