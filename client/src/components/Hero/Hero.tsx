@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { api } from '../../services/api';
 import { useTypingEffect } from '../../hooks/useTypingEffect';
+import Avatar from '../Avatar/Avatar';
 import type { Profile } from '../../types';
 import styles from './Hero.module.css';
 
@@ -50,6 +51,10 @@ export default function Hero() {
     <section className={styles.hero} id="home">
       <div className={styles.glowOrb} />
       <div className={styles.glowOrb2} />
+
+      <div className={`${styles.avatarWrap} ${loaded ? styles.animateIn : ''}`}>
+        <Avatar size="lg" showRing showStatus />
+      </div>
 
       <p className={`${styles.greeting} ${loaded ? styles.animateIn : ''}`}>Hello, I'm</p>
 

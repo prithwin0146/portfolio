@@ -21,57 +21,75 @@ function toBinary(text: string): string {
 // ── Emoji map ──
 const EMOJI_MAP: Record<string, string> = {
   // Nav & sections
-  'nav.profile': '👤',
-  'nav.projects': '⭐ 📦',
-  'nav.contact': '📧',
-  'nav.skills': '💻',
-  'nav.services': '⚙️',
+  'nav.profile': '👤 Profile',
+  'nav.projects': '📦 Projects',
+  'nav.contact': '📧 Contact',
+  'nav.skills': '🧠 Skills',
+  'nav.services': '⚙️ Services',
+  'nav.profile.sub': '',
+  'nav.projects.sub': '',
+  'nav.contact.sub': '',
+  'nav.skills.sub': '',
+  'nav.services.sub': '',
   // Logo
-  'logo': '🔥 PRITHWIN 🚀',
+  'logo': '🎮 PRITHWIN',
   // Section headers
-  'section.about.title': '👤',
-  'section.about.accent': '📋',
-  'section.services.title': '⚙️',
-  'section.services.accent': '🛠️',
-  'section.projects.title': '⭐',
-  'section.projects.accent': '📦',
-  'section.skills.title': '💻',
-  'section.skills.accent': '🧠',
-  'section.testimonials.title': '💬',
-  'section.testimonials.accent': '👥',
-  'section.contact.title': '📧',
-  'section.contact.accent': '🤝',
-  'section.devLevel.title': '🎮',
-  'section.devLevel.accent': '📊',
-  'section.achievements.title': '🏆',
-  'section.achievements.accent': '🎖️',
-  'section.githubStats.title': '📊',
-  'section.githubStats.accent': '📈',
-  'section.githubReplay.title': '📈',
-  'section.githubReplay.accent': '🎬',
-  'section.recentActivity.title': '📋',
-  'section.recentActivity.accent': '⏱️',
-  'section.resume.title': '📄',
-  'section.resume.accent': '📝',
-  'section.hobbies.title': '✨',
-  'section.hobbies.accent': '🎯',
+  'section.about.title': '👤 About ',
+  'section.about.accent': 'Me',
+  'section.about.sub': '🔎 The human behind the pixels',
+  'section.services.title': '⚙️ What I ',
+  'section.services.accent': 'Build',
+  'section.services.sub': '🛠️ Turning ☕ into 💻',
+  'section.projects.title': '📦 My ',
+  'section.projects.accent': 'Work',
+  'section.projects.sub': '⭐ Ship it!',
+  'section.skills.title': '🧠 Tech ',
+  'section.skills.accent': 'Stack',
+  'section.skills.sub': '💪 Tools of the trade',
+  'section.testimonials.title': '💬 What People ',
+  'section.testimonials.accent': 'Say',
+  'section.testimonials.sub': '🗣️ Word on the street',
+  'section.contact.title': '📧 Say ',
+  'section.contact.accent': 'Hello',
+  'section.contact.sub': '🤝 Let\'s connect!',
+  'section.devLevel.title': '🎮 Developer ',
+  'section.devLevel.accent': 'Level',
+  'section.devLevel.sub': '📊 XP grinding since 2024',
+  'section.achievements.title': '🏆 Achievement ',
+  'section.achievements.accent': 'Showcase',
+  'section.achievements.sub': '🎖️ Badges unlocked',
+  'section.githubStats.title': '📊 GitHub ',
+  'section.githubStats.accent': 'Stats',
+  'section.githubStats.sub': '📈 Commit = Life',
+  'section.githubReplay.title': '🎬 GitHub ',
+  'section.githubReplay.accent': 'Replay',
+  'section.githubReplay.sub': '📈 Rewind the code',
+  'section.recentActivity.title': '⏱️ Recent ',
+  'section.recentActivity.accent': 'Activity',
+  'section.recentActivity.sub': '📋 Latest moves',
+  'section.resume.title': '📄 ',
+  'section.resume.accent': 'Resume',
+  'section.resume.sub': '📝 The receipts',
+  'section.hobbies.title': '✨ Hobbies & ',
+  'section.hobbies.accent': 'Interests',
+  'section.hobbies.sub': '🎯 Off-duty mode',
   // Stats
-  'stats.repos': '📁',
-  'stats.followers': '👥',
-  'stats.stars': '⭐',
-  'stats.experience': '⏰ 📅',
-  'stats.achievements': '🏆',
+  'stats.repos': '📁 REPOS',
+  'stats.followers': '👥 SQUAD',
+  'stats.stars': '⭐ STARS',
+  'stats.experience': '⏰ YEARS',
+  'stats.achievements': '🏆 BADGES',
   // Dev level
-  'devLevel.title': '🎮 📊',
-  'devLevel.status': '🟢 💼',
+  'devLevel.title': '🎮 Level {level} Developer',
+  'devLevel.status': '🟢 Ready to 🤝',
   // Info
-  'header.info': '🔍',
+  'header.info': 'ℹ️',
   // Bio
-  'about.bio': '👨‍💻 🌐 ✨ 🚀 💼 🎯 ...',
-  'about.location': '📍 🇮🇳 · 🌍',
-  'about.statProjects': '📦',
-  'about.statSatisfaction': '😊',
-  'about.statResponse': '⚡',
+  'about.bio': '👨‍💻 Building 🌐 with ☕ and ✨ — from landing pages 📄 to full-stack apps 🚀. Let\'s make something amazing 💫 together!',
+  'about.location': '📍 India 🇮🇳 · 🌍 Working everywhere',
+  'about.statProjects': '📦\nShipped',
+  'about.statSatisfaction': '😊\nHappy',
+  'about.statResponse': '⚡\nFast',
 };
 
 // ── Lorem Ipsum pool ──
@@ -89,34 +107,52 @@ const STUNNAH_MAP: Record<string, string> = {
   'nav.contact': 'Holla At Me',
   'nav.skills': 'The Sauce',
   'nav.services': 'The Grind',
+  'nav.profile.sub': '',
+  'nav.projects.sub': '',
+  'nav.contact.sub': '',
+  'nav.skills.sub': '',
+  'nav.services.sub': '',
   'header.info': 'THE TEA',
   // Section headers
   'section.about.title': "Who's ",
   'section.about.accent': 'This Guy',
+  'section.about.sub': 'The origin story, no cap',
   'section.services.title': 'The ',
   'section.services.accent': 'Grind',
+  'section.services.sub': 'What I bring to the table frfr',
   'section.projects.title': 'The ',
   'section.projects.accent': 'Drops',
+  'section.projects.sub': 'Certified bangers only',
   'section.skills.title': "What's the ",
   'section.skills.accent': 'Sauce',
+  'section.skills.sub': 'The full toolkit, bussin',
   'section.testimonials.title': 'Real Ones ',
   'section.testimonials.accent': 'Speaking',
+  'section.testimonials.sub': 'Straight fax no printer',
   'section.contact.title': 'Holla ',
   'section.contact.accent': 'At Me',
+  'section.contact.sub': "Slide into my inbox, let's cook",
   'section.devLevel.title': 'Gamer ',
   'section.devLevel.accent': 'Stats',
+  'section.devLevel.sub': 'XP grind never stops',
   'section.achievements.title': 'The ',
   'section.achievements.accent': 'Flex',
+  'section.achievements.sub': 'Trophies go brrrr',
   'section.githubStats.title': 'Git ',
   'section.githubStats.accent': 'Clout',
+  'section.githubStats.sub': 'The numbers speak, fam',
   'section.githubReplay.title': 'The ',
   'section.githubReplay.accent': 'Highlights',
+  'section.githubReplay.sub': 'Season recap, sheesh',
   'section.recentActivity.title': 'Recent ',
   'section.recentActivity.accent': 'Moves',
+  'section.recentActivity.sub': "Peep what I've been up to",
   'section.resume.title': 'The ',
   'section.resume.accent': 'Receipt',
+  'section.resume.sub': 'Proof of the grind',
   'section.hobbies.title': 'Off the ',
   'section.hobbies.accent': 'Clock',
+  'section.hobbies.sub': 'Touch grass mode activated',
   // Stats
   'stats.repos': 'CODE DROPS',
   'stats.followers': 'THE SQUAD',
@@ -127,10 +163,10 @@ const STUNNAH_MAP: Record<string, string> = {
   'devLevel.title': 'Lvl {level} Goat',
   'devLevel.status': 'Ready to collab frfr',
   // Bio
-  'about.bio': "Yo, I build fire websites that make businesses pop off online — landing pages, full-stack apps, the whole nine. Let's cook something crazy.",
+  'about.bio': "Yo, I build fire websites that make businesses pop off online — landing pages, full-stack apps, the whole nine. Clean code, sick designs, deployed and bussin. Let's cook something crazy together, no cap.",
   'about.location': 'Based in India · shipping worldwide no cap',
   'about.statProjects': 'Projects\nShipped',
-  'about.statSatisfaction': "They're\nHappy",
+  'about.statSatisfaction': "They're\nVibing",
   'about.statResponse': 'Reply\nSpeed',
 };
 
@@ -281,30 +317,51 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const t = useCallback(
     (key: string): string => {
-      // Special modes: binary, emoji, lorem, stunnah
+      const english = TRANSLATIONS.english[key] ?? key;
+
+      // Only section headings get transformed — everything else stays English
+      const isSectionKey =
+        key.startsWith('section.') &&
+        (key.endsWith('.title') || key.endsWith('.accent') || key.endsWith('.sub'));
+
+      if (language === 'english') return english;
+
+      // For non-heading keys, always return English so nav/logo/stats stay readable
+      if (!isSectionKey) {
+        // Sarcasm gets full translation for non-heading keys too (they're still readable)
+        if (language === 'sarcasm') {
+          const table = TRANSLATIONS.sarcasm;
+          return table[key] ?? english;
+        }
+        return english;
+      }
+
+      // — Section headings only below —
+
       if (language === 'binary') {
-        const english = TRANSLATIONS.english[key];
-        if (!english) return key;
+        if (key.endsWith('.sub')) return '';
         return toBinary(english.replace(/\n/g, ' ').trim());
       }
 
       if (language === 'emoji') {
-        return EMOJI_MAP[key] ?? TRANSLATIONS.english[key] ?? key;
+        return EMOJI_MAP[key] ?? english;
       }
 
       if (language === 'lorem') {
-        // For sub keys return empty
         if (key.endsWith('.sub')) return '';
         return loremShort();
       }
 
       if (language === 'stunnah') {
-        return STUNNAH_MAP[key] ?? TRANSLATIONS.english[key] ?? key;
+        return STUNNAH_MAP[key] ?? english;
       }
 
-      // English or sarcasm — look up in table
-      const table = TRANSLATIONS[language] ?? TRANSLATIONS.english;
-      return table[key] ?? TRANSLATIONS.english[key] ?? key;
+      if (language === 'sarcasm') {
+        const table = TRANSLATIONS.sarcasm;
+        return table[key] ?? english;
+      }
+
+      return english;
     },
     [language],
   );

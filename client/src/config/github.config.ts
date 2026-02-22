@@ -8,32 +8,48 @@ export interface GitHubStatsData {
   topLanguages: { name: string; percent: number; color: string }[];
 }
 
-/** Static GitHub stats — update periodically or fetch from GitHub API */
-export const GITHUB_STATS: GitHubStatsData = {
-  totalRepos: 10,
-  totalStars: 5,
-  totalForks: 2,
-  activePercent: 80,
-  followers: 3,
-  yearsOfExperience: 2,
-  topLanguages: [
-    { name: 'TypeScript', percent: 42, color: '#3178c6' },
-    { name: 'C#', percent: 28, color: '#68217a' },
-    { name: 'JavaScript', percent: 18, color: '#f7df1e' },
-    { name: 'HTML/CSS', percent: 12, color: '#e34c26' },
-  ],
+/** Years of professional experience (update as needed). */
+export const YEARS_OF_EXPERIENCE = 2;
+
+/** Fallback values used before the GitHub API responds. */
+export const DEFAULT_GITHUB_STATS: GitHubStatsData = {
+  totalRepos: 0,
+  totalStars: 0,
+  totalForks: 0,
+  activePercent: 0,
+  followers: 0,
+  yearsOfExperience: YEARS_OF_EXPERIENCE,
+  topLanguages: [],
 };
 
-export interface XPSource {
-  label: string;
-  value: string;
-  xpLabel: string;
-}
+/** Well-known language colours for the top-languages bar. */
+export const LANG_COLORS: Record<string, string> = {
+  TypeScript: '#3178c6',
+  JavaScript: '#f7df1e',
+  'C#': '#68217a',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  Python: '#3572A5',
+  Java: '#b07219',
+  Go: '#00ADD8',
+  Rust: '#dea584',
+  Shell: '#89e051',
+  Dockerfile: '#384d54',
+};
 
-export const XP_SOURCES: XPSource[] = [
-  { label: 'REPOSITORIES', value: `${GITHUB_STATS.totalRepos}+`, xpLabel: `${GITHUB_STATS.totalRepos * 100} XP` },
-  { label: 'FOLLOWERS', value: `${GITHUB_STATS.followers}+`, xpLabel: `${GITHUB_STATS.followers * 50} XP` },
-  { label: 'TOTAL STARS', value: `${GITHUB_STATS.totalStars}+`, xpLabel: `${GITHUB_STATS.totalStars * 40} XP` },
-  { label: 'YEARS OF EXPERIENCE', value: `${GITHUB_STATS.yearsOfExperience}+`, xpLabel: `+${GITHUB_STATS.yearsOfExperience * 500} XP` },
-  { label: 'ACHIEVEMENTS', value: '1/12', xpLabel: '+10 XP' },
-];
+/** Derive top languages (sorted, percentage) from a bytes-per-language map. */
+export function deriveTopLanguages(
+  langBytes: Record<string, number>,
+): GitHubStatsData['topLanguages'] {
+  const total = Object.values(langBytes).reduce((s, v) => s + v, 0);
+  if (total === 0) return [];
+
+  return Object.entries(langBytes)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([name, bytes]) => ({
+      name,
+      percent: Math.round((bytes / total) * 100),
+      color: LANG_COLORS[name] ?? '#8b8b8b',
+    }));
+}

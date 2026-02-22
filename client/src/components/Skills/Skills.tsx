@@ -7,10 +7,11 @@ import type { Skill } from '../../types';
 import styles from './Skills.module.css';
 
 const CATEGORY_ICONS: Record<string, string> = {
-  Frontend: '🎨',
-  Backend: '⚙️',
-  Design: '✏️',
-  Tools: '🛠️',
+  'Languages & Frameworks': '💻',
+  'Front-end & UI': '🎨',
+  'Database': '🗄️',
+  'Tools & Platforms': '🛠️',
+  'Practices': '📋',
 };
 
 export default function Skills() {

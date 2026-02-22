@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useInView } from '../../hooks/useInView';
-import { GITHUB_STATS } from '../../config/github.config';
+import { useGitHubXP } from '../../hooks/useGitHubXP';
 import { trackStatsView } from '../../services/achievementService';
 import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeader from '../SectionHeader/SectionHeader';
@@ -9,16 +9,17 @@ import styles from './GitHubStats.module.css';
 export default function GitHubStats() {
   const { t } = useLanguage();
   const { ref, isInView: visible } = useInView({ threshold: 0.1 });
+  const gh = useGitHubXP();
 
   useEffect(() => {
     if (visible) trackStatsView();
   }, [visible]);
 
   const stats = [
-    { icon: '📁', value: GITHUB_STATS.totalRepos, label: 'Total Projects' },
-    { icon: '⭐', value: GITHUB_STATS.totalStars, label: 'Total Stars' },
-    { icon: '🍴', value: GITHUB_STATS.totalForks, label: 'Total Forks' },
-    { icon: '🔥', value: `${GITHUB_STATS.activePercent}%`, label: 'Active Projects' },
+    { icon: '📁', value: gh.loading ? '...' : gh.repos, label: 'Total Projects' },
+    { icon: '⭐', value: gh.loading ? '...' : gh.stars, label: 'Total Stars' },
+    { icon: '🍴', value: gh.loading ? '...' : gh.forks, label: 'Total Forks' },
+    { icon: '🔥', value: gh.loading ? '...' : `${gh.activePercent}%`, label: 'Active Projects' },
   ];
 
   return (
@@ -43,41 +44,43 @@ export default function GitHubStats() {
         ))}
       </div>
 
-      <div
-        className={styles.langSection}
-        style={{
-          opacity: visible ? 1 : 0,
-          transition: 'opacity 0.5s 0.4s',
-        }}
-      >
-        <div className={styles.langHeader}>
-          <span className={styles.langTitle}>Top Languages</span>
-          <span className={styles.langCount}>
-            {GITHUB_STATS.topLanguages.length} languages
-          </span>
+      {gh.topLanguages.length > 0 && (
+        <div
+          className={styles.langSection}
+          style={{
+            opacity: visible ? 1 : 0,
+            transition: 'opacity 0.5s 0.4s',
+          }}
+        >
+          <div className={styles.langHeader}>
+            <span className={styles.langTitle}>Top Languages</span>
+            <span className={styles.langCount}>
+              {gh.topLanguages.length} languages
+            </span>
+          </div>
+          <div className={styles.langBar}>
+            {gh.topLanguages.map((lang) => (
+              <div
+                key={lang.name}
+                className={styles.langSegment}
+                style={{
+                  width: visible ? `${lang.percent}%` : '0%',
+                  backgroundColor: lang.color,
+                }}
+              />
+            ))}
+          </div>
+          <div className={styles.langList}>
+            {gh.topLanguages.map((lang) => (
+              <div key={lang.name} className={styles.langItem}>
+                <span className={styles.langDot} style={{ backgroundColor: lang.color }} />
+                <span>{lang.name}</span>
+                <span className={styles.langPercent}>{lang.percent}%</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className={styles.langBar}>
-          {GITHUB_STATS.topLanguages.map((lang) => (
-            <div
-              key={lang.name}
-              className={styles.langSegment}
-              style={{
-                width: visible ? `${lang.percent}%` : '0%',
-                backgroundColor: lang.color,
-              }}
-            />
-          ))}
-        </div>
-        <div className={styles.langList}>
-          {GITHUB_STATS.topLanguages.map((lang) => (
-            <div key={lang.name} className={styles.langItem}>
-              <span className={styles.langDot} style={{ backgroundColor: lang.color }} />
-              <span>{lang.name}</span>
-              <span className={styles.langPercent}>{lang.percent}%</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      )}
     </section>
   );
 }

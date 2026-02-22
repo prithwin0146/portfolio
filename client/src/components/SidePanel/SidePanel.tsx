@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useTypingEffect } from '../../hooks/useTypingEffect';
 import { useLanguage } from '../../contexts/LanguageContext';
+import Avatar from '../Avatar/Avatar';
 import TextReveal from '../TextReveal/TextReveal';
 import LevelBadge from '../LevelBadge/LevelBadge';
 import XPProgressBar from '../XPProgressBar/XPProgressBar';
@@ -45,6 +46,9 @@ export default function SidePanel({ activeSection, visible }: SidePanelProps) {
           <div className={styles.statusBadge}>
             <span className={styles.statusDot} />
             <span className={styles.statusText}>{t('devLevel.status')}</span>
+          </div>
+          <div className={styles.avatarRow}>
+            <Avatar size="md" showRing showStatus />
           </div>
           <div className={styles.nameRow}>
             <h1 className={styles.name}>

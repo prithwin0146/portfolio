@@ -129,3 +129,23 @@
   opacity: 0.9;
   animation: labelPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
+
+@media (max-width: 640px) {
+  .wrap {
+    bottom: 1rem;
+    right: 1rem;
+    width: 190px;
+  }
+
+  .content {
+    padding: 0.75rem 1rem;
+  }
+
+  .newLevel {
+    font-size: 1.6rem;
+  }
+
+  .oldLevel {
+    font-size: 1.3rem;
+  }
+}

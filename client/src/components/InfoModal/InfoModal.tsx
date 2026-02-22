@@ -16,29 +16,33 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 const LEVEL_TIERS = [
-  { tier: 'Novice', range: '0 – 4', color: '#94a3b8', desc: 'Just getting started' },
-  { tier: 'Apprentice', range: '5 – 9', color: '#60a5fa', desc: 'Exploring the portfolio' },
-  { tier: 'Adept', range: '10 – 19', color: '#a78bfa', desc: 'Making good progress' },
-  { tier: 'Expert', range: '20 – 34', color: '#f472b6', desc: 'Serious dedication' },
-  { tier: 'Master', range: '35 – 49', color: '#fb923c', desc: 'Almost legendary' },
-  { tier: 'Legendary', range: '50+', color: '#facc15', desc: 'Maximum prestige' },
+  { tier: 'Novice', range: '1 – 4', color: '#8B8B8B', desc: 'Just getting started' },
+  { tier: 'Apprentice', range: '5 – 9', color: '#4A90E2', desc: 'Exploring the craft' },
+  { tier: 'Intermediate', range: '10 – 14', color: '#5BC0DE', desc: 'Building momentum' },
+  { tier: 'Experienced', range: '15 – 19', color: '#5CB85C', desc: 'Solid foundations' },
+  { tier: 'Proficient', range: '20 – 24', color: '#A4D007', desc: 'Real skills showing' },
+  { tier: 'Advanced', range: '25 – 29', color: '#F39C12', desc: 'Glow effect unlocked' },
+  { tier: 'Expert', range: '30 – 34', color: '#E74C3C', desc: 'Serious dedication' },
+  { tier: 'Elite', range: '35 – 39', color: '#9B59B6', desc: 'Top percentile' },
+  { tier: 'Master', range: '40 – 44', color: '#E91E63', desc: 'Near legendary' },
+  { tier: 'Grandmaster', range: '45 – 49', color: '#FFD700', desc: 'Almost the summit' },
+  { tier: 'Platinum', range: '50 – 74', color: '#E5E4E2', desc: 'Shimmer effect' },
+  { tier: 'Diamond', range: '75 – 99', color: '#00D4FF', desc: 'Brilliant shine' },
+  { tier: 'Legendary', range: '100+', color: '#ffd700', desc: 'Rainbow prestige' },
 ];
 
 const XP_SOURCES = [
-  { source: 'Visit sections', xp: '10 XP each', desc: 'About, Skills, Projects, etc.' },
-  { source: 'View all projects', xp: '15 XP', desc: 'Browse through every featured project' },
-  { source: 'Use Command Palette', xp: '10 XP', desc: 'Press Ctrl+K / ⌘K' },
-  { source: 'Stay 2+ minutes', xp: '10 XP', desc: 'Show some commitment' },
-  { source: 'Konami Code', xp: '25 XP', desc: '↑↑↓↓←→←→BA — the classic' },
-  { source: 'Scroll 10,000+ px', xp: '15 XP', desc: 'Really explore the content' },
-  { source: 'Night Owl / Early Bird', xp: '10 XP each', desc: 'Visit at unusual hours' },
-  { source: 'Meta achievements', xp: '25–50 XP', desc: 'Unlock 10+ or all achievements' },
+  { source: 'Repositories', xp: '+100 XP each', desc: 'Every public GitHub repo' },
+  { source: 'Followers', xp: '+50 XP each', desc: 'GitHub community engagement' },
+  { source: 'Stars', xp: '+10 XP each', desc: 'Recognition across repos' },
+  { source: 'Years of Experience', xp: '+500 XP / year', desc: 'Time in the field' },
+  { source: 'Achievements', xp: '10 – 200 XP', desc: 'Visitor achievements (variable by rarity)' },
 ];
 
 const ACHIEVEMENT_INFO = [
   { label: '19 Total', desc: 'Achievements to discover' },
-  { label: '265 Max XP', desc: 'If you unlock them all' },
-  { label: '5 Categories', desc: 'Exploration, Special, Secret, Meta, and more' },
+  { label: '490 Max XP', desc: 'If you unlock them all' },
+  { label: '5 Rarities', desc: 'Common, Uncommon, Rare, Epic, Legendary' },
   { label: 'localStorage', desc: 'Progress saved in your browser' },
 ];
 
@@ -63,17 +67,29 @@ export default function InfoModal({ open, onClose }: InfoModalProps) {
 
   useEffect(() => {
     if (!open) return;
+    window.dispatchEvent(new Event('lenis:stop'));
+    document.body.style.overflow = 'hidden';
     const onEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', onEsc);
-    return () => window.removeEventListener('keydown', onEsc);
+    return () => {
+      window.removeEventListener('keydown', onEsc);
+      document.body.style.overflow = '';
+      window.dispatchEvent(new Event('lenis:start'));
+    };
   }, [open, onClose]);
 
   if (!open) return null;
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
+    <div
+      className={styles.overlay}
+      onClick={onClose}
+      data-lenis-prevent
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+    >
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         {/* Header */}
         <div className={styles.header}>
@@ -128,7 +144,8 @@ export default function InfoModal({ open, onClose }: InfoModalProps) {
           {activeTab === 'xp' && (
             <div className={styles.tabPanel}>
               <p className={styles.panelDesc}>
-                Every interaction earns XP. Here&apos;s how the XP system works — 50 XP per level.
+                XP is earned from GitHub activity &amp; visitor achievements. Levelling uses bracket
+                scaling — levels 1–10 need 100 XP each, 11–20 need 200 XP each, and so on.
               </p>
               <div className={styles.xpTable}>
                 {XP_SOURCES.map((s) => (

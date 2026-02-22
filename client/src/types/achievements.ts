@@ -1,3 +1,5 @@
+export type AchievementRarity = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+
 export interface Achievement {
   id: string;
   name: string;
@@ -5,6 +7,7 @@ export interface Achievement {
   icon: string;
   xp: number;
   category: string;
+  rarity: AchievementRarity;
 }
 
 export interface AchievementWithStatus extends Achievement {

@@ -1,0 +1,217 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0a0e17 0%, #111827 50%, #0a0e17 100%);
+  color: #c7d5e0;
+  font-family: inherit;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle grid background */
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(108, 99, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108, 99, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 420px;
+  width: 100%;
+  padding: 3rem 2.5rem;
+  background: rgba(22, 27, 45, 0.85);
+  border: 1px solid rgba(108, 99, 255, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 0 60px rgba(108, 99, 255, 0.06),
+    0 20px 40px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.doorIcon {
+  font-size: 3.5rem;
+  line-height: 1;
+  animation: swing 2s ease-in-out infinite;
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(8deg); }
+  75% { transform: rotate(-8deg); }
+}
+
+.heading {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #8b949e;
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Circular countdown timer */
+.timerWrap {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0.5rem 0;
+}
+
+.timerSvg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timerTrack {
+  fill: none;
+  stroke: rgba(108, 99, 255, 0.12);
+  stroke-width: 4;
+}
+
+.timerProgress {
+  fill: none;
+  stroke: #6c63ff;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+  filter: drop-shadow(0 0 6px rgba(108, 99, 255, 0.5));
+}
+
+.timerNumber {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.redirectText {
+  font-size: 0.85rem;
+  color: #6c63ff;
+  margin: 0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.goBackBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 2rem;
+  background: linear-gradient(135deg, #6c63ff, #5a52d5);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.goBackBtn:hover {
+  background: linear-gradient(135deg, #7c74ff, #6c63ff);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(108, 99, 255, 0.35);
+}
+
+.goBackBtn:active {
+  transform: translateY(0);
+}
+
+.proTip {
+  font-size: 0.75rem;
+  color: #4a5568;
+  text-align: center;
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(108, 99, 255, 0.08);
+  width: 100%;
+}
+
+/* Floating particles decoration */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(108, 99, 255, 0.25);
+  border-radius: 50%;
+  animation: float linear infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .heading {
+    font-size: 1.4rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+}

@@ -4,10 +4,10 @@ import { trackSocialClick } from '../../services/achievementService';
 import styles from './Footer.module.css';
 
 const quickLinks = [
-  { label: 'Profile', href: '#home' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Profile', id: 'about' },
+  { label: 'Projects', id: 'projects' },
+  { label: 'Skills', id: 'skills' },
+  { label: 'Contact', id: 'contact' },
 ];
 
 const socialLinks = [
@@ -33,9 +33,13 @@ export default function Footer() {
           <ul className={styles.colList}>
             {quickLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} className={styles.colLink} data-cursor-hover>
+                <button
+                  className={styles.colLink}
+                  data-cursor-hover
+                  onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   {link.label}
-                </a>
+                </button>
               </li>
             ))}
           </ul>

@@ -86,6 +86,13 @@
     font-weight: 500;
   }
 
+  /* ── Avatar ── */
+  .avatarRow {
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: greetFade 0.8s 0.6s ease forwards;
+  }
+
   /* ── Top: Name, title, bio ── */
   .nameRow {
     display: flex;

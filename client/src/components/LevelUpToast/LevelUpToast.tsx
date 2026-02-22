@@ -1,6 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import { getLevelFromXP, getLevelStyle } from '../../utils/steamLevelColors';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { getLevelStyle } from '../../utils/steamLevelColors';
+import { calculateXPFromSources, calculateLevelFromXP } from '../../utils/steamXP';
 import { getAchievementStats } from '../../services/achievementService';
+import { fetchUserProfile, getRepoStats } from '../../services/github';
+import { YEARS_OF_EXPERIENCE } from '../../config/github.config';
 import styles from './LevelUpToast.module.css';
 
 const PARTICLE_SYMBOLS = ['⭐', '✨', '💫', '🌟', '⚡', '🔥', '💎', '🎯'];
@@ -34,44 +37,70 @@ function buildParticles(color: string): React.JSX.Element[] {
 
 export default function LevelUpToast() {
   const [toast, setToast] = useState<LevelUpInfo | null>(null);
-  const prevLevelRef = useRef(getLevelFromXP(getAchievementStats().totalXP));
+  const prevLevelRef = useRef<number | null>(null);
+  const ghRef = useRef({ repos: 0, followers: 0, stars: 0 });
   const dismissTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Fetch GitHub data once so we can calculate level on achievement unlock
   useEffect(() => {
-    const onUnlock = () => {
-      const newXP = getAchievementStats().totalXP;
-      const newLevel = getLevelFromXP(newXP);
-      const oldLevel = prevLevelRef.current;
-
-      if (newLevel > oldLevel) {
-        const oldStyle = getLevelStyle(oldLevel);
-        const newStyle = getLevelStyle(newLevel);
-        const tierChanged = oldStyle.name !== newStyle.name;
-
-        if (dismissTimer.current) clearTimeout(dismissTimer.current);
-
-        setToast({
-          oldLevel,
-          newLevel,
-          tierChanged,
-          tierName: newStyle.name,
-          borderColor: newStyle.borderColor,
-          glowColor: newStyle.glowColor,
-          particles: buildParticles(newStyle.borderColor),
-        });
-
-        dismissTimer.current = setTimeout(() => setToast(null), 4500);
+    async function load() {
+      const [profile, repoStats] = await Promise.all([fetchUserProfile(), getRepoStats()]);
+      if (profile) {
+        ghRef.current.repos = profile.public_repos;
+        ghRef.current.followers = profile.followers;
       }
+      if (repoStats) ghRef.current.stars = repoStats.totalStars;
 
-      prevLevelRef.current = newLevel;
-    };
+      // Set the initial level
+      const xp = calculateXPFromSources({
+        ...ghRef.current,
+        years: YEARS_OF_EXPERIENCE,
+        achievementsXP: getAchievementStats().totalXP,
+      });
+      prevLevelRef.current = calculateLevelFromXP(xp).level;
+    }
+    load();
+  }, []);
 
+  const onUnlock = useCallback(() => {
+    const xp = calculateXPFromSources({
+      ...ghRef.current,
+      years: YEARS_OF_EXPERIENCE,
+      achievementsXP: getAchievementStats().totalXP,
+    });
+    const newLevel = calculateLevelFromXP(xp).level;
+    const oldLevel = prevLevelRef.current ?? newLevel;
+
+    if (newLevel > oldLevel) {
+      const oldStyle = getLevelStyle(oldLevel);
+      const newStyle = getLevelStyle(newLevel);
+      const tierChanged = oldStyle.name !== newStyle.name;
+
+      if (dismissTimer.current) clearTimeout(dismissTimer.current);
+
+      setToast({
+        oldLevel,
+        newLevel,
+        tierChanged,
+        tierName: newStyle.name,
+        borderColor: newStyle.borderColor,
+        glowColor: newStyle.glowColor,
+        particles: buildParticles(newStyle.borderColor),
+      });
+
+      dismissTimer.current = setTimeout(() => setToast(null), 4500);
+    }
+
+    prevLevelRef.current = newLevel;
+  }, []);
+
+  useEffect(() => {
     window.addEventListener('achievement-unlocked', onUnlock);
     return () => {
       window.removeEventListener('achievement-unlocked', onUnlock);
       if (dismissTimer.current) clearTimeout(dismissTimer.current);
     };
-  }, []);
+  }, [onUnlock]);
 
   if (!toast) return null;
 

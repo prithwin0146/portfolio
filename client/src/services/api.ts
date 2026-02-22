@@ -1,4 +1,4 @@
-import type { Profile, Project, Skill, Experience, ContactMessage } from '../types';
+import type { Profile, Project, Skill, Experience, Service, ContactMessage } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
 
@@ -13,6 +13,7 @@ export const api = {
   getProjects: () => fetchJson<Project[]>(`${API_BASE}/projects`),
   getSkills: () => fetchJson<Skill[]>(`${API_BASE}/skills`),
   getExperience: () => fetchJson<Experience[]>(`${API_BASE}/experience`),
+  getServices: () => fetchJson<Service[]>(`${API_BASE}/services`),
 
   sendContact: async (message: ContactMessage) => {
     const res = await fetch(`${API_BASE}/contact`, {

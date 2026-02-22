@@ -18,9 +18,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   useEffect(() => {
     if (!project) return;
     document.body.style.overflow = 'hidden';
+    window.dispatchEvent(new Event('lenis:stop'));
     window.addEventListener('keydown', handleEsc);
     return () => {
       document.body.style.overflow = '';
+      window.dispatchEvent(new Event('lenis:start'));
       window.removeEventListener('keydown', handleEsc);
     };
   }, [project, handleEsc]);
@@ -28,7 +30,13 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   if (!project) return null;
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
+    <div
+      className={styles.overlay}
+      onClick={onClose}
+      data-lenis-prevent
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+    >
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button className={styles.close} onClick={onClose} data-cursor-hover aria-label="Close">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

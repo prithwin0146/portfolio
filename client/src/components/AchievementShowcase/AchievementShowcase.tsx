@@ -35,7 +35,7 @@ export default function AchievementShowcase() {
               </div>
               <div className={styles.issuer}>{cert.issuer}</div>
               <p className={styles.description}>{cert.description}</p>
-              <span className={styles.year}>Earned in {cert.year}</span>
+              <span className={styles.year}>Since {cert.year}</span>
             </div>
           </div>
         ))}

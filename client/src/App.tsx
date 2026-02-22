@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { useLenis } from './hooks/useLenis';
 import { useActiveSection } from './hooks/useActiveSection';
 import { useScrollSkew } from './hooks/useScrollSkew';
+import { initializeAchievementSystem, trackSectionVisit } from './services/achievementService';
 import Preloader from './components/Preloader/Preloader';
 import CustomCursor from './components/CustomCursor/CustomCursor';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
@@ -16,7 +18,6 @@ import SteamHeader from './components/SteamHeader/SteamHeader';
 import SteamNotifications from './components/SteamNotifications/SteamNotifications';
 import AchievementModal from './components/AchievementModal/AchievementModal';
 import InfoModal from './components/InfoModal/InfoModal';
-import Navbar from './components/Navbar/Navbar';
 import SidePanel from './components/SidePanel/SidePanel';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
@@ -33,6 +34,7 @@ import Hobbies from './components/Hobbies/Hobbies';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import SectionDivider from './components/SectionDivider/SectionDivider';
+import SignOut from './components/SignOut/SignOut';
 
 const SECTIONS = ['about', 'services', 'projects', 'skills', 'contact'];
 
@@ -43,7 +45,7 @@ function App() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const activeSection = useActiveSection(SECTIONS);
 
-  // Lenis smooth scroll
+  // Lenis smooth scroll (modals dispatch lenis:stop/start events themselves)
   useLenis();
 
   // Scroll velocity skew effect
@@ -63,6 +65,60 @@ function App() {
 
   return (
     <LanguageProvider>
+      <Routes>
+        <Route path="/signout" element={<SignOut />} />
+        <Route path="*" element={
+          <MainPortfolio
+            loaded={loaded}
+            setLoaded={setLoaded}
+            wrapperRef={wrapperRef}
+            activeSection={activeSection}
+            achievementModalOpen={achievementModalOpen}
+            setAchievementModalOpen={setAchievementModalOpen}
+            infoModalOpen={infoModalOpen}
+            setInfoModalOpen={setInfoModalOpen}
+          />
+        } />
+      </Routes>
+    </LanguageProvider>
+  );
+}
+
+interface MainPortfolioProps {
+  loaded: boolean;
+  setLoaded: (v: boolean) => void;
+  wrapperRef: React.RefObject<HTMLDivElement | null>;
+  activeSection: string;
+  achievementModalOpen: boolean;
+  setAchievementModalOpen: (v: boolean) => void;
+  infoModalOpen: boolean;
+  setInfoModalOpen: (v: boolean) => void;
+}
+
+function MainPortfolio({
+  loaded,
+  setLoaded,
+  wrapperRef,
+  activeSection,
+  achievementModalOpen,
+  setAchievementModalOpen,
+  infoModalOpen,
+  setInfoModalOpen,
+}: MainPortfolioProps) {
+  // Initialize achievement system once on mount
+  useEffect(() => {
+    initializeAchievementSystem();
+  }, []);
+
+  // Track section visits as user scrolls
+  useEffect(() => {
+    if (activeSection) {
+      trackSectionVisit(activeSection);
+    }
+  }, [activeSection]);
+
+  return (
+    <>
       {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
       <CustomCursor />
       <ScrollProgress />
@@ -75,18 +131,13 @@ function App() {
       <InfoModal open={infoModalOpen} onClose={() => setInfoModalOpen(false)} />
       <div className="appWrapper" ref={wrapperRef}>
         <ParticleBackground />
-        {/* Steam-style sticky header */}
         <SteamHeader
           username="Prithwin M"
           activeSection={activeSection}
           onOpenAchievements={() => setAchievementModalOpen(true)}
           onOpenInfo={() => setInfoModalOpen(true)}
         />
-        {/* Mobile-only top navbar */}
-        <Navbar />
-        {/* Mobile-only hero section */}
         <Hero />
-        {/* Two-column layout (desktop) / stacked (mobile) */}
         <div className="layout">
           <SidePanel activeSection={activeSection} visible={loaded} />
           <main className="mainContent">
@@ -117,7 +168,7 @@ function App() {
           </main>
         </div>
       </div>
-    </LanguageProvider>
+    </>
   );
 }
 

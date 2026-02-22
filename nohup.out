@@ -2,3 +2,4 @@ MSBUILD : error MSB1009: Project file does not exist.
 Switch: Portfolio.Api.csproj
 
 The build failed. Fix the build errors and run again.
+Couldn't find a project to run. Ensure a project exists in /Users/prithwin/Sprkey, or pass the path to the project using --project.

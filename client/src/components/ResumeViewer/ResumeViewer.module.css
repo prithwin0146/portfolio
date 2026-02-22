@@ -182,3 +182,48 @@
   width: 100%;
   border: none;
 }
+
+@media (max-width: 640px) {
+  .section {
+    padding: 1.5rem 0;
+  }
+
+  .previewWrap {
+    aspect-ratio: 8.5 / 6;
+    border-radius: 6px;
+  }
+
+  .header {
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .headerTitle {
+    font-size: 0.7rem;
+  }
+
+  .actions {
+    gap: 0.4rem;
+  }
+
+  .downloadBtn,
+  .expandBtn,
+  .fullScreenBtn {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.65rem;
+  }
+
+  .modal {
+    width: 96%;
+    height: 88vh;
+    border-radius: 8px;
+  }
+
+  .modalHeader {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .modalTitle {
+    font-size: 0.75rem;
+  }
+}

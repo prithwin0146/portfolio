@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { getLevelFromXP, getLevelStyle, getXPForNextLevel, getLevelBorderStyle } from '../../utils/steamLevelColors';
-import { getAchievementStats } from '../../services/achievementService';
+import { useState } from 'react';
+import { getLevelBorderStyle } from '../../utils/steamLevelColors';
+import { useGitHubXP } from '../../hooks/useGitHubXP';
 import styles from './LevelBadge.module.css';
 
 interface LevelBadgeProps {
@@ -8,40 +8,30 @@ interface LevelBadgeProps {
 }
 
 export default function LevelBadge({ size = 'small' }: LevelBadgeProps) {
-  const [xp, setXp] = useState(() => getAchievementStats().totalXP);
   const [showTooltip, setShowTooltip] = useState(false);
-
-  useEffect(() => {
-    const onUnlock = () => setXp(getAchievementStats().totalXP);
-    window.addEventListener('achievement-unlocked', onUnlock);
-    return () => window.removeEventListener('achievement-unlocked', onUnlock);
-  }, []);
-
-  const level = getLevelFromXP(xp);
-  const levelStyle = getLevelStyle(level);
-  const { current, required } = getXPForNextLevel(xp);
+  const { level, currentLevelXP, nextLevelXP, tierName, borderColor, loading } = useGitHubXP();
   const borderStyle = getLevelBorderStyle(level);
 
   return (
     <div
       className={`${styles.badge} ${styles[size]} ${level >= 50 ? styles.pulse : ''}`}
-      style={{ ...borderStyle, backgroundColor: levelStyle.backgroundColor }}
+      style={{ ...borderStyle, backgroundColor: `${borderColor}15` }}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
-      aria-label={`Level ${level} — ${levelStyle.name}`}
+      aria-label={`Level ${level} — ${tierName}`}
     >
-      <span className={styles.number} style={{ color: levelStyle.borderColor }}>
-        {level}
+      <span className={styles.number} style={{ color: borderColor }}>
+        {loading ? '...' : level}
       </span>
 
       {showTooltip && (
         <div className={styles.tooltip}>
-          <span className={styles.tooltipName} style={{ color: levelStyle.borderColor }}>
-            {levelStyle.name}
+          <span className={styles.tooltipName} style={{ color: borderColor }}>
+            {tierName}
           </span>
           <span className={styles.tooltipXP}>Level {level}</span>
           <span className={styles.tooltipProgress}>
-            {current} / {required} XP to next level
+            {currentLevelXP} / {nextLevelXP} XP to next level
           </span>
         </div>
       )}

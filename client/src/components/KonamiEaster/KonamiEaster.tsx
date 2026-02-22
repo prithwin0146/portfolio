@@ -41,7 +41,7 @@ export default function KonamiEaster() {
   }, [triggered]);
 
   const createParticles = useCallback(() => {
-    const particles: JSX.Element[] = [];
+    const particles: React.ReactNode[] = [];
     const emojis = ['🎉', '✨', '🚀', '⭐', '💜', '🔥', '🎊', '💫', '🎯', '⚡'];
     for (let i = 0; i < 50; i++) {
       const emoji = emojis[Math.floor(Math.random() * emojis.length)];

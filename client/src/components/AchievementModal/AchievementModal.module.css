@@ -1,6 +1,6 @@
 /* 
-   Achievement Modal — Steam-style exact replica
-    */
+   Achievement Modal â€” Zyon-style with rarity sections
+   */
 
 /* Overlay */
 .overlay {
@@ -14,6 +14,8 @@
   justify-content: center;
   opacity: 0;
   animation: overlayIn 0.25s ease forwards;
+  overscroll-behavior: contain;
+  touch-action: auto;
 }
 
 .overlayVisible {
@@ -29,7 +31,7 @@
 .modal {
   width: 94%;
   max-width: 680px;
-  max-height: 85vh;
+  height: 85vh;
   background: linear-gradient(180deg, #171a25 0%, #0e1019 100%);
   border: 1px solid rgba(102, 191, 60, 0.12);
   border-radius: 12px;
@@ -52,8 +54,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 1.15rem 1.4rem 0.9rem;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+  padding: 1.25rem 1.4rem 1rem;
 }
 
 .headerLeft {
@@ -62,14 +63,9 @@
   gap: 0.7rem;
 }
 
-.headerIcon {
-  font-size: 1.35rem;
-  margin-top: 0.1rem;
-}
-
 .headerTitle {
   font-family: 'Sora', sans-serif;
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #e2e8f0;
   letter-spacing: 0.02em;
@@ -78,9 +74,9 @@
 
 .headerSub {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   color: #64748b;
-  margin: 0.2rem 0 0;
+  margin: 0.3rem 0 0;
 }
 
 .closeBtn {
@@ -101,15 +97,53 @@
   background: rgba(239, 68, 68, 0.08);
 }
 
+/*  Tab filters â€” Zyon-style pill buttons  */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1.4rem 0.75rem;
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 0.45rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  color: #e2e8f0;
+  border-color: rgba(102, 191, 60, 0.25);
+  background: rgba(102, 191, 60, 0.06);
+}
+
+.tabActive {
+  color: #ffffff;
+  background: rgba(102, 191, 60, 0.2);
+  border-color: rgba(102, 191, 60, 0.45);
+}
+
+.tabCount {
+  font-weight: 400;
+}
+
 /*  Progress bar  */
 .progressWrap {
   padding: 0 1.4rem;
-  margin: 0.75rem 0 0.3rem;
+  margin: 0 0 0.5rem;
 }
 
 .progressBar {
   width: 100%;
-  height: 5px;
+  height: 6px;
   background: rgba(148, 163, 184, 0.08);
   border-radius: 3px;
   overflow: hidden;
@@ -117,95 +151,75 @@
 
 .progressFill {
   height: 100%;
-  background: linear-gradient(90deg, #4ade80, #22c55e, #66bf3c);
+  background: linear-gradient(90deg, #4ade80, #22c55e, #a3e635);
   border-radius: 3px;
   transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow: 0 0 12px rgba(74, 222, 128, 0.3);
 }
 
-/*  Satirical tab filters  */
-.tabs {
-  display: flex;
-  gap: 0.25rem;
-  padding: 0.7rem 1.4rem;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.06);
-  overflow-x: auto;
-}
-
-.tab {
-  padding: 0.35rem 0.7rem;
-  font-family: inherit;
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: #64748b;
-  background: rgba(148, 163, 184, 0.04);
-  border: 1px solid rgba(148, 163, 184, 0.08);
-  border-radius: 4px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.2s;
-}
-
-.tab:hover {
-  color: #94a3b8;
-  border-color: rgba(102, 191, 60, 0.2);
-}
-
-.tabActive {
-  color: #e2e8f0;
-  background: rgba(102, 191, 60, 0.1);
-  border-color: rgba(102, 191, 60, 0.3);
-}
-
-.tabHint {
-  color: #475569;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.tabActive .tabHint {
-  color: #94a3b8;
-}
-
-.tabCount {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.2rem;
-  height: 1.2rem;
-  padding: 0 0.3rem;
-  margin-left: 0.3rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  font-weight: 700;
-  color: #94a3b8;
-  background: rgba(148, 163, 184, 0.08);
-  border-radius: 3px;
-}
-
-.tabActive .tabCount {
-  color: #4ade80;
-  background: rgba(74, 222, 128, 0.12);
-}
-
-/*  2-column achievement grid  */
-.grid {
-  flex: 1;
+/*  Scrollable area  */
+.scrollArea {
+  flex: 1 1 0;
+  min-height: 0;
   overflow-y: auto;
-  padding: 0.75rem 1.2rem 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem;
-  align-content: start;
+  padding: 0 1.2rem 1rem;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
-.grid::-webkit-scrollbar {
+.scrollArea::-webkit-scrollbar {
   width: 4px;
 }
 
-.grid::-webkit-scrollbar-thumb {
+.scrollArea::-webkit-scrollbar-thumb {
   background: rgba(102, 191, 60, 0.2);
   border-radius: 2px;
+}
+
+/*  Rarity section header  */
+.rarityHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.rarityHeader::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.1);
+}
+
+.rarityLabel {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Rarity header colors */
+.rarity_common .rarityLabel { color: #94a3b8; }
+.rarity_uncommon .rarityLabel { color: #4ade80; }
+.rarity_rare .rarityLabel { color: #60a5fa; }
+.rarity_epic .rarityLabel { color: #c084fc; }
+.rarity_legendary .rarityLabel { color: #fbbf24; }
+
+.rarity_common::after { background: rgba(148, 163, 184, 0.15); }
+.rarity_uncommon::after { background: rgba(74, 222, 128, 0.15); }
+.rarity_rare::after { background: rgba(96, 165, 250, 0.15); }
+.rarity_epic::after { background: rgba(192, 132, 252, 0.15); }
+.rarity_legendary::after { background: rgba(251, 191, 36, 0.15); }
+
+/*  2-column achievement grid  */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  padding: 0.25rem 0 0.5rem;
 }
 
 /*  Achievement card  */
@@ -225,14 +239,12 @@
 }
 
 .cardUnlocked {
-  border-color: rgba(102, 191, 60, 0.12);
+  background: rgba(148, 163, 184, 0.04);
 }
 
 .cardUnlocked:hover {
-  border-color: rgba(102, 191, 60, 0.28);
-  background: rgba(102, 191, 60, 0.04);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(102, 191, 60, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .cardLocked {
@@ -243,7 +255,20 @@
   opacity: 0.55;
 }
 
-/* XP badge — top-right corner */
+/* Rarity-colored borders for unlocked cards */
+.cardUnlocked.border_common { border-color: rgba(148, 163, 184, 0.2); }
+.cardUnlocked.border_uncommon { border-color: rgba(74, 222, 128, 0.25); }
+.cardUnlocked.border_rare { border-color: rgba(96, 165, 250, 0.3); }
+.cardUnlocked.border_epic { border-color: rgba(192, 132, 252, 0.3); }
+.cardUnlocked.border_legendary { border-color: rgba(251, 191, 36, 0.35); }
+
+.cardUnlocked.border_common:hover { border-color: rgba(148, 163, 184, 0.35); background: rgba(148, 163, 184, 0.06); }
+.cardUnlocked.border_uncommon:hover { border-color: rgba(74, 222, 128, 0.4); background: rgba(74, 222, 128, 0.04); }
+.cardUnlocked.border_rare:hover { border-color: rgba(96, 165, 250, 0.45); background: rgba(96, 165, 250, 0.04); }
+.cardUnlocked.border_epic:hover { border-color: rgba(192, 132, 252, 0.45); background: rgba(192, 132, 252, 0.04); }
+.cardUnlocked.border_legendary:hover { border-color: rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.04); }
+
+/* XP badge â€” top-right corner, rarity-colored */
 .xpBadge {
   position: absolute;
   top: 0.55rem;
@@ -251,15 +276,32 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.6rem;
   font-weight: 700;
-  color: #475569;
-  background: rgba(148, 163, 184, 0.06);
   padding: 0.15rem 0.4rem;
   border-radius: 3px;
 }
 
-.xpBadgeUnlocked {
-  color: #4ade80;
-  background: rgba(74, 222, 128, 0.1);
+.xp_common { color: #94a3b8; background: rgba(148, 163, 184, 0.1); }
+.xp_uncommon { color: #4ade80; background: rgba(74, 222, 128, 0.1); }
+.xp_rare { color: #60a5fa; background: rgba(96, 165, 250, 0.1); }
+.xp_epic { color: #c084fc; background: rgba(192, 132, 252, 0.1); }
+.xp_legendary { color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+
+/* Checkmark badge */
+.checkmark {
+  position: absolute;
+  bottom: 0.45rem;
+  right: 0.55rem;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #22c55e;
+  border-radius: 50%;
+  line-height: 1;
 }
 
 /* Card inner layout */
@@ -327,7 +369,7 @@
 @media (max-width: 640px) {
   .modal {
     max-width: 96%;
-    max-height: 90vh;
+    height: 90vh;
   }
 
   .grid {
@@ -335,11 +377,7 @@
   }
 
   .tabs {
-    padding: 0.6rem 1rem;
-  }
-
-  .tabHint {
-    display: none;
+    padding: 0 1rem 0.6rem;
   }
 
   .header {

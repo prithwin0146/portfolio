@@ -37,6 +37,15 @@ export interface Experience {
   highlights: string[];
 }
 
+export interface Service {
+  id: number;
+  name: string;
+  tagline: string;
+  description: string;
+  icon: string;
+  deliverables: string[];
+}
+
 export interface ContactMessage {
   name: string;
   email: string;

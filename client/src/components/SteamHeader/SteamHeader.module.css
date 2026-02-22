@@ -2,28 +2,85 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1.5rem;
-  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
-  border-bottom: 1px solid rgba(108, 99, 255, 0.15);
+  padding: 0 0.75rem;
+  height: 44px;
+  background: linear-gradient(180deg, #1b2838 0%, #171a21 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  height: 100%;
 }
 
-.logo {
+.brandWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0 0.75rem 0 0;
+  margin-right: 0.25rem;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.brandWrap:hover {
+  opacity: 0.85;
+}
+
+.brandLogo {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.brand {
   font-family: 'Sora', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: #6c63ff;
+  color: #ffffff;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Avatar button — right side of navbar */
+.avatarBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+  display: flex;
+  align-items: center;
+}
+
+.avatarBtn:hover {
+  opacity: 0.85;
+}
+
+/* Override Avatar sizing inside the navbar */
+.navAvatar {
+  --avatar-size: 28px;
+  --ring-width: 1.5px;
+  --ring-gap: 2px;
+  --status-size: 7px;
+}
+
+@media (max-width: 768px) {
+  .navAvatar {
+    --avatar-size: 30px;
+    --status-size: 8px;
+  }
 }
 
 .divider {
@@ -34,69 +91,72 @@
 
 .navLinks {
   display: flex;
-  gap: 0.25rem;
+  gap: 0;
+  height: 100%;
 }
 
 .navLink {
-  padding: 0.35rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #94a3b8;
+  padding: 0 0.9rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #8f98a0;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border-radius: 4px;
+  letter-spacing: 0.05em;
+  border-radius: 0;
   transition: color 0.2s, background 0.2s;
   cursor: pointer;
   background: none;
   border: none;
+  border-bottom: 2px solid transparent;
   font-family: inherit;
+  position: relative;
+  white-space: nowrap;
 }
 
-.navLink:hover,
+.navLink:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
 .navLink.active {
-  color: #e2e8f0;
-  background: rgba(108, 99, 255, 0.1);
+  color: #ffffff;
+  border-bottom-color: #6c63ff;
+  background: rgba(108, 99, 255, 0.06);
 }
 
 .navSubtitle {
-  font-size: 0.55rem;
-  color: #475569;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  margin-left: 0.15rem;
-}
-
-.navLink:hover .navSubtitle,
-.navLink.active .navSubtitle {
-  color: #64748b;
+  display: none;
 }
 
 .right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+  height: 100%;
 }
 
 .achievement {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.75rem;
-  color: #94a3b8;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: #8f98a0;
   background: none;
-  border: 1px solid rgba(148, 163, 184, 0.1);
-  border-radius: 4px;
-  padding: 0.25rem 0.5rem;
+  border: none;
+  padding: 0.25rem 0.55rem;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  transition: color 0.15s, background 0.15s;
   font-family: inherit;
+  border-radius: 3px;
 }
 
 .achievement:hover {
-  border-color: rgba(108, 99, 255, 0.3);
-  background: rgba(108, 99, 255, 0.06);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .trophyIcon {
@@ -110,49 +170,191 @@
 }
 
 .infoBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
   padding: 0.25rem 0.6rem;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #94a3b8;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #8f98a0;
   background: none;
-  border: 1px solid rgba(148, 163, 184, 0.15);
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
   cursor: pointer;
   letter-spacing: 0.06em;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
 
 .infoBtn:hover {
-  color: #e2e8f0;
-  border-color: rgba(108, 99, 255, 0.35);
-  background: rgba(108, 99, 255, 0.06);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.infoCircle {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.usernameWrap {
+  position: relative;
 }
 
 .username {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #e2e8f0;
+  color: #8f98a0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.55rem;
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+
+.username:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 190px;
+  background: #171d25;
+  border: 1px solid rgba(108, 99, 255, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+  padding: 0.3rem 0;
+  z-index: 200;
+  animation: dropIn 0.15s ease-out;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.72rem;
+  color: #b8b6b4;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.dropdownItem:hover {
+  background: rgba(108, 99, 255, 0.15);
+  color: #ffffff;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0.25rem 0;
+}
+
+/* ── Language flyout submenu ── */
+.langTriggerWrap {
+  position: relative;
+}
+
+.langTrigger {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.langArrow {
+  font-size: 0.6rem;
+  color: #556772;
+  margin-left: 0.5rem;
+}
+
+.langSubmenu {
+  position: absolute;
+  left: calc(100% + 2px);
+  top: -0.3rem;
+  min-width: 175px;
+  background: #171d25;
+  border: 1px solid rgba(108, 99, 255, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+  padding: 0.3rem 0;
+  z-index: 210;
+  animation: dropIn 0.12s ease-out;
+}
+
+.langOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.72rem;
+  color: #b8b6b4;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.langOption:hover {
+  background: rgba(108, 99, 255, 0.12);
+  color: #ffffff;
+}
+
+.langActive {
+  color: #6c63ff;
+}
+
+.langCheck {
+  color: #6c63ff;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.langSubmenuDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0.25rem 0;
+}
+
+.langReport {
+  display: block;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.65rem;
+  color: #556772;
+  cursor: default;
 }
 
 .cmdHint {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 0.65rem;
-  color: #475569;
+  font-size: 0.6rem;
+  color: #556772;
   cursor: pointer;
-  padding: 0.2rem 0.5rem;
-  border: 1px solid rgba(71, 85, 105, 0.3);
-  border-radius: 4px;
-  transition: border-color 0.2s;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid rgba(86, 103, 114, 0.25);
+  border-radius: 3px;
+  transition: color 0.15s, border-color 0.15s;
   background: none;
-  font-family: inherit;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .cmdHint:hover {
   border-color: rgba(108, 99, 255, 0.4);
-  color: #94a3b8;
+  color: #b8b6b4;
 }
 
 /* ── Hamburger button (mobile only) ── */
@@ -173,9 +375,9 @@
   display: block;
   width: 100%;
   height: 2px;
-  background: #94a3b8;
+  background: #b8b6b4;
   border-radius: 2px;
-  transition: transform 0.3s, opacity 0.3s;
+  transition: transform 0.3s, opacity 0.3s, background 0.3s;
 }
 
 .hamburgerOpen span:nth-child(1) {
@@ -202,22 +404,36 @@
 
 @media (max-width: 768px) {
   .bar {
-    padding: 0.4rem 1rem;
+    padding: 0 0.75rem;
+    height: 44px;
+  }
+
+  .right {
+    gap: 0.6rem;
   }
 
   .navLinks {
     display: none;
   }
 
+  .brand {
+    display: none;
+  }
+
+  .brandLogo {
+    width: 26px;
+    height: 26px;
+  }
+
   .cmdHint {
     display: none;
   }
 
-  .divider {
+  .username {
     display: none;
   }
 
-  .username {
+  .infoBtn {
     display: none;
   }
 
@@ -252,57 +468,87 @@
     width: 280px;
     max-width: 80vw;
     height: 100vh;
-    background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
-    border-left: 1px solid rgba(108, 99, 255, 0.15);
+    background: linear-gradient(180deg, #171d25 0%, #0e141b 100%);
+    border-left: 1px solid rgba(108, 99, 255, 0.1);
     z-index: 200;
     transform: translateX(100%);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     padding: 1.5rem 1.25rem;
     gap: 0.25rem;
     overflow-y: auto;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
   }
 
   .drawerOpen {
     transform: translateX(0);
   }
 
-  .drawerHeader {
+  .drawerProfile {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-bottom: 1rem;
-    margin-bottom: 0.75rem;
+    gap: 0.85rem;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    margin-bottom: 0.5rem;
+  }
+
+  .drawerProfileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
   }
 
   .drawerUser {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: #e2e8f0;
+  }
+
+  .drawerStatus {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: #34d399;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+
+  .drawerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
   }
 
   .drawerLink {
     display: block;
     width: 100%;
     text-align: left;
-    padding: 0.75rem 0.75rem;
-    font-size: 0.85rem;
+    padding: 0.7rem 0.75rem;
+    font-size: 0.82rem;
     font-weight: 500;
-    color: #94a3b8;
+    color: #b8b6b4;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    border-radius: 6px;
-    transition: color 0.2s, background 0.2s;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
     cursor: pointer;
     background: none;
     border: none;
+    border-left: 2px solid transparent;
     font-family: inherit;
   }
 
-  .drawerLink:hover,
+  .drawerLink:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
   .drawerActive {
-    color: #e2e8f0;
-    background: rgba(108, 99, 255, 0.1);
+    color: #ffffff;
+    border-left-color: #6c63ff;
+    background: rgba(108, 99, 255, 0.08);
   }
 
   .drawerSubtitle {
@@ -339,5 +585,48 @@
   .drawerInfoBtn:hover {
     color: #e2e8f0;
     border-color: rgba(108, 99, 255, 0.35);
+  }
+
+  .drawerLangSection {
+    margin-top: 0.75rem;
+  }
+
+  .drawerLangLabel {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #556772;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .drawerLangGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .drawerLangBtn {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.7rem;
+    color: #b8b6b4;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    font-family: inherit;
+  }
+
+  .drawerLangBtn:hover {
+    color: #ffffff;
+    border-color: rgba(108, 99, 255, 0.3);
+  }
+
+  .drawerLangActive {
+    color: #6c63ff;
+    border-color: #6c63ff;
+    background: rgba(108, 99, 255, 0.08);
   }
 }
