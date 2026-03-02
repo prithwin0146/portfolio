@@ -1,21 +1,13 @@
-import { useEffect, useState } from 'react';
-import { api } from '../../services/api';
 import { useInView } from '../../hooks/useInView';
 import { useCountUp } from '../../hooks/useCountUp';
 import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import TextReveal from '../TextReveal/TextReveal';
-import type { Profile } from '../../types';
 import styles from './About.module.css';
 
 export default function About() {
-  const [profile, setProfile] = useState<Profile | null>(null);
   const { ref, isInView } = useInView({ threshold: 0.2 });
   const { t } = useLanguage();
-
-  useEffect(() => {
-    api.getProfile().then(setProfile).catch(console.error);
-  }, []);
 
   const projectCount = useCountUp(2, 1800, 0, isInView);
   const satisfactionCount = useCountUp(100, 2200, 0, isInView);
