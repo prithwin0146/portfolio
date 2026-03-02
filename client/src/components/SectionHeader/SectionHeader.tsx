@@ -21,7 +21,7 @@ export default function SectionHeader({ number, title, accent, subtitle, visible
         <ScrambleText trigger={visible} className={styles.accent}>{accent}</ScrambleText>
         {subtitle && (
           <span className={styles.subtitle}>
-            <ScrambleText trigger={visible}>({subtitle})</ScrambleText>
+            <ScrambleText trigger={visible}>{`(${subtitle})`}</ScrambleText>
           </span>
         )}
       </h2>
