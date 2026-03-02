@@ -9,7 +9,7 @@ import type { Profile } from '../../types';
 import styles from './About.module.css';
 
 export default function About() {
-  const [profile, setProfile] = useState<Profile | null>(null);
+  const [, setProfile] = useState<Profile | null>(null);
   const { ref, isInView } = useInView({ threshold: 0.2 });
   const { t } = useLanguage();
 
