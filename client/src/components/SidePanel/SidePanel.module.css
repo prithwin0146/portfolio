@@ -12,7 +12,7 @@
     width: 48%;
     max-width: 500px;
     flex-shrink: 0;
-    padding: 6rem 0 4rem;
+    padding: 7rem 0 4rem;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s,
@@ -29,7 +29,8 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding-right: 5rem;
+    padding-left: 2.5rem;
+    padding-right: 4rem;
   }
 
   .top {
@@ -38,18 +39,6 @@
 
   .bottom {
     flex-shrink: 0;
-  }
-
-  /* ── Greeting ── */
-  .greeting {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: #64748b;
-    letter-spacing: 0.3px;
-    margin-bottom: 1rem;
-    opacity: 0;
-    animation: greetFade 0.8s 1s ease forwards;
   }
 
   @keyframes greetFade {
@@ -86,9 +75,21 @@
     font-weight: 500;
   }
 
+  /* ── Avatar + Name block (avatar centered above name) ── */
+  .nameBlock {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    overflow: visible;
+  }
+
   /* ── Avatar ── */
   .avatarRow {
-    margin-bottom: 1.25rem;
+    margin-top: 3rem;
+    margin-bottom: 3.5rem; /* 56px − 38px frame-offset = 18px visual gap above name */
+    overflow: visible;
+    display: flex;
+    justify-content: center; /* centers 120px inner over the wider name text */
     opacity: 0;
     animation: greetFade 0.8s 0.6s ease forwards;
   }

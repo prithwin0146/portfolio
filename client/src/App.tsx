@@ -8,7 +8,6 @@ import { useScrollSkew } from './hooks/useScrollSkew';
 import { initializeAchievementSystem, trackSectionVisit } from './services/achievementService';
 import Preloader from './components/Preloader/Preloader';
 import CustomCursor from './components/CustomCursor/CustomCursor';
-import ScrollProgress from './components/ScrollProgress/ScrollProgress';
 import CommandPalette from './components/CommandPalette/CommandPalette';
 import KonamiEaster from './components/KonamiEaster/KonamiEaster';
 import LevelUpToast from './components/LevelUpToast/LevelUpToast';
@@ -25,11 +24,9 @@ import DeveloperLevel from './components/DeveloperLevel/DeveloperLevel';
 import Experience from './components/Experience/Experience';
 import AchievementShowcase from './components/AchievementShowcase/AchievementShowcase';
 import Projects from './components/Projects/Projects';
-import GitHubReplay from './components/GitHubReplay/GitHubReplay';
+import GitHubHub from './components/GitHubHub/GitHubHub';
 import Skills from './components/Skills/Skills';
 import ResumeViewer from './components/ResumeViewer/ResumeViewer';
-import GitHubStats from './components/GitHubStats/GitHubStats';
-import RecentActivity from './components/RecentActivity/RecentActivity';
 import Hobbies from './components/Hobbies/Hobbies';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
@@ -121,7 +118,6 @@ function MainPortfolio({
     <>
       {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
       <CustomCursor />
-      <ScrollProgress />
       <CommandPalette />
       <KonamiEaster />
       <LevelUpToast />
@@ -151,15 +147,11 @@ function MainPortfolio({
             <SectionDivider />
             <Projects />
             <SectionDivider />
-            <GitHubReplay />
-            <SectionDivider />
             <Skills />
             <SectionDivider />
             <ResumeViewer />
             <SectionDivider />
-            <GitHubStats />
-            <SectionDivider />
-            <RecentActivity />
+            <GitHubHub />
             <SectionDivider />
             <Hobbies />
             <SectionDivider />

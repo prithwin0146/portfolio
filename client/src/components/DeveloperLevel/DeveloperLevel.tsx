@@ -41,10 +41,6 @@ export default function DeveloperLevel() {
           <div className={styles.subtitle}>
             {gh.tierName} · {gh.loading ? '...' : `${gh.currentLevelXP} / ${gh.nextLevelXP} XP`} to next level
           </div>
-          <div className={styles.statusBadge}>
-            <span className={styles.statusDot} />
-            {t('devLevel.status')}
-          </div>
         </div>
       </div>
 

@@ -1,5 +1,6 @@
 .hero {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -246,7 +247,9 @@
 
 /* ── Avatar ── */
 .avatarWrap {
-  margin-bottom: 1.5rem;
+  padding: 20px;
+  margin-bottom: 0.5rem;
+  overflow: visible;
   opacity: 0;
   transform: translateY(30px) scale(0.9);
   transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
@@ -261,7 +264,8 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.25rem;
+    min-height: 100vh;
     min-height: 100svh;
   }
 
@@ -320,5 +324,9 @@
 
   .title {
     font-size: 0.95rem;
+  }
+
+  .avatarWrap {
+    padding: 14px;
   }
 }

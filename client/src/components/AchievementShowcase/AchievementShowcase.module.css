@@ -2,6 +2,202 @@
   padding: 2rem 0;
 }
 
+/* ── Rarity group ───────────────────────────────────── */
+.rarityGroup {
+  margin-bottom: 1.5rem;
+}
+
+.rarityHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0 0.5rem;
+}
+
+.rarityHeader::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.1);
+}
+
+.rarityLabel {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Rarity header colors */
+.rarity_COMMON .rarityLabel    { color: #94a3b8; }
+.rarity_RARE .rarityLabel      { color: #60a5fa; }
+.rarity_EPIC .rarityLabel      { color: #c084fc; }
+.rarity_LEGENDARY .rarityLabel { color: #fbbf24; }
+
+.rarity_COMMON::after    { background: rgba(148, 163, 184, 0.15); }
+.rarity_RARE::after      { background: rgba(96, 165, 250, 0.15); }
+.rarity_EPIC::after      { background: rgba(192, 132, 252, 0.15); }
+.rarity_LEGENDARY::after { background: rgba(251, 191, 36, 0.15); }
+
+/* ── Card grid ──────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+/* ── Card ───────────────────────────────────────────── */
+.card {
+  position: relative;
+  padding: 1rem;
+  background: rgba(148, 163, 184, 0.03);
+  border: 1px solid rgba(148, 163, 184, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s, background 0.25s;
+}
+
+/* Rarity borders */
+.border_common    { border-color: rgba(148, 163, 184, 0.18); }
+.border_rare      { border-color: rgba(96, 165, 250, 0.28); }
+.border_epic      { border-color: rgba(192, 132, 252, 0.28); }
+.border_legendary { border-color: rgba(251, 191, 36, 0.32); }
+
+/* Hover rarity glow */
+.border_common:hover    { transform: translateY(-2px); border-color: rgba(148, 163, 184, 0.35); background: rgba(148, 163, 184, 0.05); box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+.border_rare:hover      { transform: translateY(-2px); border-color: rgba(96, 165, 250, 0.45); background: rgba(96, 165, 250, 0.04); box-shadow: 0 6px 24px rgba(96, 165, 250, 0.1); }
+.border_epic:hover      { transform: translateY(-2px); border-color: rgba(192, 132, 252, 0.45); background: rgba(192, 132, 252, 0.04); box-shadow: 0 6px 24px rgba(192, 132, 252, 0.1); }
+.border_legendary:hover { transform: translateY(-2px); border-color: rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.04); box-shadow: 0 6px 28px rgba(251, 191, 36, 0.12); }
+
+/* ── Legendary shimmer ──────────────────────────────── */
+.shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    rgba(251, 191, 36, 0.06) 50%,
+    transparent 60%
+  );
+  animation: shimmer 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* ── Year badge (top-right) ─────────────────────────── */
+.yearBadge {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+.year_common    { color: #94a3b8; background: rgba(148, 163, 184, 0.1); }
+.year_rare      { color: #60a5fa; background: rgba(96, 165, 250, 0.1); }
+.year_epic      { color: #c084fc; background: rgba(192, 132, 252, 0.1); }
+.year_legendary { color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+
+/* ── Earned checkmark (bottom-right) ───────────────── */
+.checkmark {
+  position: absolute;
+  bottom: 0.55rem;
+  right: 0.6rem;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #fff;
+  background: #22c55e;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+/* ── Card inner layout ──────────────────────────────── */
+.cardInner {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+/* ── Icon circle ────────────────────────────────────── */
+.iconCircle {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(148, 163, 184, 0.06);
+  transition: box-shadow 0.3s;
+}
+
+.iconCircle_common    { background: rgba(148, 163, 184, 0.08); }
+.iconCircle_rare      { background: rgba(96, 165, 250, 0.1); box-shadow: 0 0 10px rgba(96, 165, 250, 0.1); }
+.iconCircle_epic      { background: rgba(192, 132, 252, 0.1); box-shadow: 0 0 10px rgba(192, 132, 252, 0.1); }
+.iconCircle_legendary { background: rgba(251, 191, 36, 0.1); box-shadow: 0 0 14px rgba(251, 191, 36, 0.15); }
+
+.icon {
+  font-size: 1.2rem;
+}
+
+/* ── Card text ──────────────────────────────────────── */
+.cardText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  padding-right: 2rem; /* avoid overlap with year badge */
+}
+
+.cardTitle {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  line-height: 1.25;
+}
+
+.cardIssuer {
+  font-size: 0.66rem;
+  color: #6c63ff;
+  font-weight: 500;
+}
+
+.cardDesc {
+  font-size: 0.68rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0.1rem 0 0;
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardText {
+    padding-right: 1.5rem;
+  }
+}
+
+
 .header {
   display: flex;
   align-items: center;

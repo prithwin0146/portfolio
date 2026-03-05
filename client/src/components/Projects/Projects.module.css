@@ -391,19 +391,38 @@
 
 @media (max-width: 600px) {
   .section {
-    padding: 4rem 1.5rem;
+    padding: 3rem 0;
   }
 
   .grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .featuredInner {
-    padding: 1.75rem;
+    padding: 1.25rem;
   }
 
   .featuredTitle {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  .featuredDesc {
+    font-size: 0.82rem;
+  }
+
+  .techPill {
+    font-size: 0.62rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .tabsWrap {
+    gap: 0.25rem;
+  }
+
+  .tabBtn {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
   }
 }
 

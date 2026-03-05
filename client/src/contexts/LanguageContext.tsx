@@ -1,6 +1,7 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
+import { getLanguage as getStoredLanguage, setLanguage as persistLanguage, onLanguageChange, type Language as ServiceLanguage } from '../services/languageService';
 
-export type Language = 'english' | 'sarcasm' | 'binary' | 'emoji' | 'lorem' | 'stunnah';
+export type Language = ServiceLanguage;
 
 interface LanguageContextType {
   language: Language;
@@ -313,7 +314,20 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('english');
+  const [language, setLanguageState] = useState<Language>(getStoredLanguage);
+
+  // Subscribe to external language changes (e.g. other tabs via service)
+  useEffect(() => {
+    const unsubscribe = onLanguageChange((newLang) => {
+      setLanguageState(newLang);
+    });
+    return unsubscribe;
+  }, []);
+
+  const setLanguage = useCallback((lang: Language) => {
+    persistLanguage(lang);       // persist to localStorage + notify listeners
+    setLanguageState(lang);      // update local React state immediately
+  }, []);
 
   const t = useCallback(
     (key: string): string => {
@@ -352,7 +366,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         return loremShort();
       }
 
-      if (language === 'stunnah') {
+      if (language === 'youngStunnah') {
         return STUNNAH_MAP[key] ?? english;
       }
 

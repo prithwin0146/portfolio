@@ -16,6 +16,8 @@ const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
 export interface GitHubProfile {
   public_repos: number;
   followers: number;
+  following: number;
+  createdAt: string;  // ISO date string
 }
 
 export interface RepoStats {
@@ -61,6 +63,8 @@ export async function fetchUserProfile(): Promise<GitHubProfile | null> {
     const profile: GitHubProfile = {
       public_repos: json.public_repos ?? 0,
       followers: json.followers ?? 0,
+      following: json.following ?? 0,
+      createdAt: json.created_at ?? '',
     };
     setCache(CACHE_KEY, profile);
     return profile;
@@ -113,6 +117,51 @@ export async function getRepoStats(): Promise<RepoStats | null> {
     return stats;
   } catch {
     return null;
+  }
+}
+
+// ── Live activity summary ──────────────────────────
+
+export interface LiveActivity {
+  lastPushAt: string;       // ISO timestamp of the most recent push
+  commitsLastMonth: number; // estimated commits in the last 30 days
+}
+
+const LIVE_CACHE_KEY = 'gh-live';
+
+/** Derive last-push time and recent commit count from public events. */
+export async function fetchLiveActivity(): Promise<LiveActivity> {
+  const cached = getCache<LiveActivity>(LIVE_CACHE_KEY);
+  if (cached) return cached;
+
+  try {
+    const res = await fetch(
+      `${API_BASE}/users/${GITHUB_USERNAME}/events/public?per_page=100`,
+    );
+    if (!res.ok) return { lastPushAt: '', commitsLastMonth: 0 };
+
+    const events = (await res.json()) as Array<Record<string, unknown>>;
+    const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+
+    let lastPushAt = '';
+    let commitsLastMonth = 0;
+
+    for (const event of events) {
+      const created = event.created_at as string;
+      if (event.type === 'PushEvent') {
+        if (!lastPushAt) lastPushAt = created; // events are newest-first
+        const commits = (event.payload as Record<string, unknown>).commits as unknown[];
+        if (new Date(created).getTime() > thirtyDaysAgo) {
+          commitsLastMonth += Array.isArray(commits) ? commits.length : 1;
+        }
+      }
+    }
+
+    const result: LiveActivity = { lastPushAt, commitsLastMonth };
+    setCache(LIVE_CACHE_KEY, result);
+    return result;
+  } catch {
+    return { lastPushAt: '', commitsLastMonth: 0 };
   }
 }
 

@@ -8,7 +8,7 @@ const LANGUAGES: { id: Language; label: string }[] = [
   { id: 'binary', label: 'Binary' },
   { id: 'emoji', label: 'Emoji Only' },
   { id: 'lorem', label: 'Lorem Ipsum' },
-  { id: 'stunnah', label: 'Young Stunnah' },
+  { id: 'youngStunnah', label: 'Young Stunnah' },
 ];
 
 export default function LanguageSwitcher() {

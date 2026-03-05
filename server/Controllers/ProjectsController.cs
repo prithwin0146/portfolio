@@ -14,7 +14,7 @@ public class ProjectsController : ControllerBase
             Id = 1,
             Title = "JobBuddy — Workforce Solutions Platform",
             Description = "Built a full-scale workforce solutions platform for a consultancy serving employers across Tamil Nadu. Features include SSR-powered Angular frontend for SEO, employer/candidate enquiry flows, blog with rich content, multi-page architecture (workforce solutions, about, contact, courses), and a .NET backend with structured hiring pipeline. Live in production serving real clients across manufacturing, logistics, BPO, and healthcare industries.",
-            ImageUrl = "/projects/jobbuddy.png",
+            ImageUrl = "/projects/yuji.png",
             LiveUrl = "https://www.thejobbuddy.in",
             GitHubUrl = "https://github.com/prithwin0146/jobbuddy",
             Tags = ["Angular", "TypeScript", "ASP.NET Core", "SSR", "SEO", "SQL Server"]
@@ -24,7 +24,7 @@ public class ProjectsController : ControllerBase
             Id = 2,
             Title = "Employee Management System",
             Description = "Internal workforce management dashboard with role-based access control across 3 user tiers (Admin, Manager, Employee). Features server-side pagination handling 500+ records, real-time search with CTE-optimized SQL queries, sorting/filtering across all columns, and a clean Angular Material UI. Built with a layered .NET architecture for maintainability.",
-            ImageUrl = "/projects/ems.png",
+            ImageUrl = "/projects/megumi.png",
             LiveUrl = "",
             GitHubUrl = "https://github.com/prithwin0146/Demo",
             Tags = ["Angular", "TypeScript", "ASP.NET Core", "SQL Server", "RBAC", "Angular Material"]
@@ -34,7 +34,7 @@ public class ProjectsController : ControllerBase
             Id = 3,
             Title = "JK Travels — Travel Agency Website",
             Description = "Designed and built a responsive travel agency website for a local Ooty-based business. Features travel package showcases with pricing, WhatsApp-integrated enquiry form that opens a pre-filled chat, testimonials section, smooth scroll animations, and a mobile-first design. Deployed on Vercel with 95+ Lighthouse performance score.",
-            ImageUrl = "/projects/jk-travels.png",
+            ImageUrl = "/projects/sukuna.png",
             LiveUrl = "https://jk-travels-website.vercel.app",
             GitHubUrl = "https://github.com/prithwin0146/JK-Travels-website",
             Tags = ["React", "JavaScript", "Vite", "CSS", "Vercel"]
@@ -44,7 +44,7 @@ public class ProjectsController : ControllerBase
             Id = 4,
             Title = "Steam Portfolio — Developer Portfolio",
             Description = "The site you're on right now! A Steam-inspired developer portfolio featuring an XP & leveling system, achievement showcase, Konami code easter egg, command palette (⌘K), real-time GitHub activity feed, smooth scroll animations, 6 language modes, and a .NET backend API. Built with performance and personality in mind.",
-            ImageUrl = "/projects/portfolio.png",
+            ImageUrl = "/projects/hakari.jpg",
             LiveUrl = "https://prithwin.dev",
             GitHubUrl = "https://github.com/prithwin0146/Sprkey",
             Tags = ["React", "TypeScript", "Vite", ".NET 8", "CSS Modules", "Vercel", "Railway"]

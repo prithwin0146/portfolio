@@ -29,9 +29,9 @@
 /* Stats summary cards */
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .statCard {
@@ -69,10 +69,81 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+/* Live activity strip */
+.liveStrip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  background: rgba(15, 15, 26, 0.5);
+  border: 1px solid rgba(108, 99, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  margin-bottom: 0.25rem;
+}
 
+.liveBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #22c55e;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-right: 1rem;
+  margin-right: 0.75rem;
+  border-right: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.liveDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+  animation: livePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #22c55e; }
+  50%       { opacity: 0.5; box-shadow: 0 0 12px #22c55e; }
+}
+
+.liveItem {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.9rem;
+  border-right: 1px solid rgba(148, 163, 184, 0.08);
+}
+
+.liveItem:last-child {
+  border-right: none;
+}
+
+.liveIcon {
+  font-size: 0.85rem;
+}
+
+.liveLabel {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.62rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.liveValue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a78bfa;
+}
 /* Top Languages */
 .langSection {
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
 }
 
 .langHeader {
@@ -140,12 +211,28 @@
 
 @media (max-width: 768px) {
   .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .liveStrip {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .liveItem {
+    padding: 0 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .statsGrid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .liveBadge {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    margin-right: 0;
+    padding-right: 0;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.4rem;
   }
 }

@@ -37,7 +37,8 @@
 .previewWrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 8.5 / 5;
+  min-height: 580px;
+  aspect-ratio: 8.5 / 11;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.08);
@@ -48,7 +49,60 @@
   width: 100%;
   height: 100%;
   border: none;
-  pointer-events: none;
+  display: block;
+}
+
+/* ── Placeholder (shown before user loads preview) ── */
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.015),
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 1px,
+    transparent 16px
+  );
+}
+
+.placeholderIcon {
+  width: 3rem;
+  height: 3rem;
+  color: #475569;
+  opacity: 0.7;
+}
+
+.placeholderText {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.loadBtn {
+  padding: 0.45rem 1.1rem;
+  background: rgba(108, 99, 255, 0.1);
+  border: 1px solid rgba(108, 99, 255, 0.25);
+  border-radius: 6px;
+  color: #a78bfa;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  margin-top: 0.25rem;
+}
+
+.loadBtn:hover {
+  background: rgba(108, 99, 255, 0.2);
+  border-color: #6c63ff;
 }
 
 .overlay {

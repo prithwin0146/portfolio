@@ -174,7 +174,7 @@
 
 @media (max-width: 600px) {
   .section {
-    padding: 4rem 1.5rem;
+    padding: 3rem 0;
   }
 
   .form {
@@ -191,12 +191,13 @@
 
   .socials {
     gap: 0.5rem;
+    flex-wrap: wrap;
   }
 
   .socialLink {
     font-size: 0.72rem;
     padding: 0.45rem 0.75rem;
-    flex: 1;
+    flex: 1 1 auto;
     text-align: center;
     min-width: 0;
   }
@@ -205,5 +206,9 @@
   .textarea {
     font-size: 1rem;
     padding: 0.95rem 1rem;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
   }
 }

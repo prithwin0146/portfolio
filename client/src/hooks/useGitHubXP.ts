@@ -7,7 +7,7 @@
  */
 
 import { useEffect, useState, useCallback } from 'react';
-import { fetchUserProfile, getRepoStats } from '../services/github';
+import { fetchUserProfile, getRepoStats, fetchLiveActivity } from '../services/github';
 import { getAchievementStats } from '../services/achievementService';
 import { calculateXPFromSources, calculateLevelFromXP } from '../utils/steamXP';
 import { getLevelStyle } from '../utils/steamLevelColors';
@@ -18,11 +18,17 @@ export interface GitHubXPState {
   /** Raw GitHub numbers */
   repos: number;
   followers: number;
+  following: number;
+  memberSince: number;    // year (e.g. 2021)
   stars: number;
   forks: number;
   activePercent: number;
   topLanguages: GitHubStatsData['topLanguages'];
   yearsOfExperience: number;
+
+  /** Live activity */
+  lastPushAt: string;        // ISO timestamp
+  commitsLastMonth: number;
 
   /** Achievement system */
   achievementsXP: number;
@@ -46,10 +52,14 @@ export interface GitHubXPState {
 export function useGitHubXP(): GitHubXPState {
   const [repos, setRepos] = useState(0);
   const [followers, setFollowers] = useState(0);
+  const [following, setFollowing] = useState(0);
+  const [memberSince, setMemberSince] = useState(0);
   const [stars, setStars] = useState(0);
   const [forks, setForks] = useState(0);
   const [activePercent, setActivePercent] = useState(0);
   const [topLanguages, setTopLanguages] = useState<GitHubStatsData['topLanguages']>([]);
+  const [lastPushAt, setLastPushAt] = useState('');
+  const [commitsLastMonth, setCommitsLastMonth] = useState(0);
   const [achievementsXP, setAchievementsXP] = useState(() => getAchievementStats().totalXP);
   const [achievementsUnlocked, setAchievementsUnlocked] = useState(() => getAchievementStats().unlockedCount);
   const [achievementsTotal] = useState(() => getAchievementStats().totalCount);
@@ -61,9 +71,10 @@ export function useGitHubXP(): GitHubXPState {
 
     async function load() {
       try {
-        const [profile, repoStats] = await Promise.all([
+        const [profile, repoStats, liveActivity] = await Promise.all([
           fetchUserProfile(),
           getRepoStats(),
+          fetchLiveActivity(),
         ]);
 
         if (cancelled) return;
@@ -71,6 +82,10 @@ export function useGitHubXP(): GitHubXPState {
         if (profile) {
           setRepos(profile.public_repos);
           setFollowers(profile.followers);
+          setFollowing(profile.following);
+          if (profile.createdAt) {
+            setMemberSince(new Date(profile.createdAt).getFullYear());
+          }
         }
         if (repoStats) {
           setStars(repoStats.totalStars);
@@ -78,6 +93,10 @@ export function useGitHubXP(): GitHubXPState {
           const totalRepos = profile?.public_repos ?? 0;
           setActivePercent(totalRepos > 0 ? Math.round((repoStats.activeRepos / totalRepos) * 100) : 0);
           setTopLanguages(deriveTopLanguages(repoStats.languages));
+        }
+        if (liveActivity) {
+          setLastPushAt(liveActivity.lastPushAt);
+          setCommitsLastMonth(liveActivity.commitsLastMonth);
         }
       } catch (err) {
         console.error('Failed to load GitHub stats:', err);
@@ -117,11 +136,16 @@ export function useGitHubXP(): GitHubXPState {
   return {
     repos,
     followers,
+    following,
+    memberSince,
     stars,
     forks,
     activePercent,
     topLanguages,
     yearsOfExperience: YEARS_OF_EXPERIENCE,
+
+    lastPushAt,
+    commitsLastMonth,
 
     achievementsXP,
     achievementsUnlocked,

@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useTypingEffect } from '../../hooks/useTypingEffect';
 import { useLanguage } from '../../contexts/LanguageContext';
 import Avatar from '../Avatar/Avatar';
@@ -15,15 +14,6 @@ const NAV_IDS = [
   { id: 'contact', tKey: 'nav.contact', subKey: 'nav.contact.sub' },
 ];
 
-function getGreeting(): string {
-  const h = new Date().getHours();
-  if (h < 5) return 'Late night, huh?';
-  if (h < 12) return 'Good morning';
-  if (h < 17) return 'Good afternoon';
-  if (h < 21) return 'Good evening';
-  return 'Good night';
-}
-
 interface SidePanelProps {
   activeSection: string;
   visible: boolean;
@@ -36,27 +26,22 @@ export default function SidePanel({ activeSection, visible }: SidePanelProps) {
     80, 40, 2000
   );
 
-  const greeting = useMemo(() => getGreeting(), []);
-
   return (
     <aside className={`${styles.panel} ${visible ? styles.visible : ''}`}>
       <div className={styles.inner}>
         <div className={styles.top}>
-          <span className={styles.greeting} data-mono>{greeting} 👋</span>
-          <div className={styles.statusBadge}>
-            <span className={styles.statusDot} />
-            <span className={styles.statusText}>{t('devLevel.status')}</span>
-          </div>
-          <div className={styles.avatarRow}>
-            <Avatar size="md" showRing showStatus />
-          </div>
-          <div className={styles.nameRow}>
-            <h1 className={styles.name}>
-              <a href="#home" className={styles.nameLink} data-cursor-hover>
-                Prithwin M
-              </a>
-            </h1>
-            <LevelBadge size="small" />
+          <div className={styles.nameBlock}>
+            <div className={styles.avatarRow}>
+              <Avatar size="lg" showRing speechBubble="DOMAIN EXPANSION" />
+            </div>
+            <div className={styles.nameRow}>
+              <h1 className={styles.name}>
+                <a href="#home" className={styles.nameLink} data-cursor-hover>
+                  Prithwin M
+                </a>
+              </h1>
+              <LevelBadge size="small" />
+            </div>
           </div>
           <div className={styles.titleWrap}>
             <span className={styles.titleLine} />

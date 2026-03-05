@@ -8,23 +8,11 @@ export interface Hobby {
 
 export const HOBBIES: Hobby[] = [
   {
-    id: 'coding',
-    icon: '💻',
-    title: 'Building Side Projects',
-    description: 'Always tinkering with new frameworks and shipping pet projects',
-    active: true,
-  },
-  {
     id: 'gaming',
     icon: '🎮',
     title: 'Gaming',
     description: 'Casual gamer — love story-driven games and indie titles',
-  },
-  {
-    id: 'design',
-    icon: '🎨',
-    title: 'UI/UX Design',
-    description: 'Exploring design trends and creating mockups for fun',
+    active: true,
   },
   {
     id: 'music',
@@ -33,16 +21,29 @@ export const HOBBIES: Hobby[] = [
     description: 'Always listening to something — lo-fi, hip-hop, or ambient',
   },
   {
-    id: 'learning',
-    icon: '📚',
-    title: 'Continuous Learning',
-    description: 'Online courses, docs, and tutorials — always levelling up',
-    active: true,
-  },
-  {
     id: 'coffee',
     icon: '☕',
     title: 'Coffee Enthusiast',
     description: 'Fuelled by filter coffee — the stronger, the better',
   },
+  {
+    id: 'horse-riding',
+    icon: '🐴',
+    title: 'Horse Riding',
+    description: 'Finding balance and freedom in the saddle — nothing clears the mind like a good ride',
+  },
+  {
+    id: 'travel',
+    icon: '🗺️',
+    title: 'Explorer',
+    description: 'Chasing new cities, cultures, and cuisines — every trip is a new level unlocked',
+    active: true,
+  },
+  {
+    id: 'astrophotography',
+    icon: '🔭',
+    title: 'Astrophotography',
+    description: 'Capturing deep-sky objects at night — where code meets cosmos',
+  },
 ];
+

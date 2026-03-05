@@ -1,10 +1,26 @@
 import { useEffect } from 'react';
+import type React from 'react';
 import { useInView } from '../../hooks/useInView';
 import { useGitHubXP } from '../../hooks/useGitHubXP';
 import { trackStatsView } from '../../services/achievementService';
 import { useLanguage } from '../../contexts/LanguageContext';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import styles from './GitHubStats.module.css';
+
+/** Converts an ISO timestamp to a short relative string like "2h ago". */
+function timeAgo(iso: string): string {
+  if (!iso) return '—';
+  const diff = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(diff / 60_000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  const days = Math.floor(hrs / 24);
+  if (days < 30) return `${days}d ago`;
+  const months = Math.floor(days / 30);
+  return `${months}mo ago`;
+}
 
 export default function GitHubStats() {
   const { t } = useLanguage();
@@ -16,16 +32,40 @@ export default function GitHubStats() {
   }, [visible]);
 
   const stats = [
-    { icon: '📁', value: gh.loading ? '...' : gh.repos, label: 'Total Projects' },
-    { icon: '⭐', value: gh.loading ? '...' : gh.stars, label: 'Total Stars' },
-    { icon: '🍴', value: gh.loading ? '...' : gh.forks, label: 'Total Forks' },
-    { icon: '🔥', value: gh.loading ? '...' : `${gh.activePercent}%`, label: 'Active Projects' },
+    { icon: '📁', value: gh.loading ? '...' : gh.repos,              label: 'Repositories' },
+    { icon: '⭐', value: gh.loading ? '...' : gh.stars,              label: 'Total Stars' },
+    { icon: '🍴', value: gh.loading ? '...' : gh.forks,              label: 'Total Forks' },
+    { icon: '👥', value: gh.loading ? '...' : gh.followers,          label: 'Followers' },
+    { icon: '👣', value: gh.loading ? '...' : gh.following,          label: 'Following' },
+    { icon: '🔥', value: gh.loading ? '...' : `${gh.activePercent}%`, label: 'Active Repos' },
+  ];
+
+  const liveStats = [
+    {
+      icon: '🟢',
+      label: 'Last Push',
+      value: gh.loading ? '...' : timeAgo(gh.lastPushAt),
+      pulse: true,
+    },
+    {
+      icon: '📦',
+      label: 'Commits (30d)',
+      value: gh.loading ? '...' : `${gh.commitsLastMonth}`,
+      pulse: false,
+    },
+    {
+      icon: '📅',
+      label: 'Member Since',
+      value: gh.loading ? '...' : (gh.memberSince ? `${gh.memberSince}` : '—'),
+      pulse: false,
+    },
   ];
 
   return (
     <section ref={ref as React.Ref<HTMLElement>} className={styles.section} id="github-stats">
       <SectionHeader number="09" title={t('section.githubStats.title')} accent={t('section.githubStats.accent')} subtitle={t('section.githubStats.sub') || undefined} visible={visible} />
 
+      {/* Main stats grid */}
       <div className={styles.statsGrid}>
         {stats.map((s, i) => (
           <div
@@ -34,7 +74,7 @@ export default function GitHubStats() {
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0)' : 'translateY(16px)',
-              transition: `opacity 0.4s ${i * 0.1}s, transform 0.4s ${i * 0.1}s`,
+              transition: `opacity 0.4s ${i * 0.08}s, transform 0.4s ${i * 0.08}s`,
             }}
           >
             <span className={styles.statIcon}>{s.icon}</span>
@@ -44,12 +84,31 @@ export default function GitHubStats() {
         ))}
       </div>
 
+      {/* Live activity strip */}
+      <div
+        className={styles.liveStrip}
+        style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.5s 0.5s' }}
+      >
+        <span className={styles.liveBadge}>
+          <span className={styles.liveDot} />
+          LIVE
+        </span>
+        {liveStats.map((ls) => (
+          <div key={ls.label} className={styles.liveItem}>
+            <span className={styles.liveIcon}>{ls.icon}</span>
+            <span className={styles.liveLabel}>{ls.label}</span>
+            <span className={styles.liveValue}>{ls.value}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Top languages */}
       {gh.topLanguages.length > 0 && (
         <div
           className={styles.langSection}
           style={{
             opacity: visible ? 1 : 0,
-            transition: 'opacity 0.5s 0.4s',
+            transition: 'opacity 0.5s 0.6s',
           }}
         >
           <div className={styles.langHeader}>
@@ -84,3 +143,4 @@ export default function GitHubStats() {
     </section>
   );
 }
+

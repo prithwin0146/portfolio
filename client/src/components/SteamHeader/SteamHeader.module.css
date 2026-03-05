@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 0.75rem;
+  padding-left: max(0.75rem, env(safe-area-inset-left));
+  padding-right: max(0.75rem, env(safe-area-inset-right));
   height: 44px;
   background: linear-gradient(180deg, #1b2838 0%, #171a21 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -277,20 +279,45 @@
   font-size: 0.6rem;
   color: #556772;
   margin-left: 0.5rem;
+  transition: color 0.15s;
+}
+
+.langTrigger:hover .langArrow {
+  color: #b8b6b4;
+}
+
+.langCurrentBadge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  font-size: 0.85em;
+  opacity: 0.8;
 }
 
 .langSubmenu {
   position: absolute;
-  left: calc(100% + 2px);
-  top: -0.3rem;
-  min-width: 175px;
-  background: #171d25;
-  border: 1px solid rgba(108, 99, 255, 0.15);
-  border-radius: 4px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
-  padding: 0.3rem 0;
+  right: calc(100% + 4px);
+  left: auto;
+  top: -0.5rem;
+  min-width: 220px;
+  background: linear-gradient(180deg, #1b2838 0%, #171d25 100%);
+  border: 1px solid rgba(108, 99, 255, 0.2);
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(108,99,255,0.05);
+  padding: 0.35rem 0;
   z-index: 210;
-  animation: dropIn 0.12s ease-out;
+  animation: dropIn 0.15s ease-out;
+}
+
+.langSubmenuHeader {
+  padding: 0.4rem 0.85rem 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #556772;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 0.2rem;
 }
 
 .langOption {
@@ -298,35 +325,78 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0.4rem 0.85rem;
-  font-size: 0.72rem;
-  color: #b8b6b4;
+  padding: 0.5rem 0.85rem;
   background: none;
   border: none;
   text-align: left;
   cursor: pointer;
   transition: background 0.1s, color 0.1s;
+  gap: 0.5rem;
 }
 
 .langOption:hover {
   background: rgba(108, 99, 255, 0.12);
+}
+
+.langOption:hover .langLabel {
   color: #ffffff;
 }
 
-.langActive {
+.langActive .langLabel {
   color: #6c63ff;
+}
+
+.langOptionLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.langFlag {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 1.4rem;
+  text-align: center;
+}
+
+.langInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.langLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #b8b6b4;
+  line-height: 1.2;
+  transition: color 0.1s;
+}
+
+.langPreview {
+  font-size: 0.6rem;
+  color: #556772;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
 }
 
 .langCheck {
   color: #6c63ff;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
+  flex-shrink: 0;
 }
 
 .langSubmenuDivider {
   height: 1px;
   background: rgba(255, 255, 255, 0.06);
-  margin: 0.25rem 0;
+  margin: 0.35rem 0;
 }
 
 .langReport {
@@ -334,7 +404,13 @@
   padding: 0.4rem 0.85rem;
   font-size: 0.65rem;
   color: #556772;
-  cursor: default;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.langReport:hover {
+  color: #94a3b8;
 }
 
 .cmdHint {
@@ -608,25 +684,47 @@
   }
 
   .drawerLangBtn {
-    padding: 0.4rem 0.65rem;
-    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.72rem;
     color: #b8b6b4;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(148, 163, 184, 0.1);
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     transition: color 0.15s, border-color 0.15s, background 0.15s;
     font-family: inherit;
+    position: relative;
   }
 
   .drawerLangBtn:hover {
     color: #ffffff;
     border-color: rgba(108, 99, 255, 0.3);
+    background: rgba(108, 99, 255, 0.06);
   }
 
   .drawerLangActive {
+    color: #6c63ff !important;
+    border-color: rgba(108, 99, 255, 0.5) !important;
+    background: rgba(108, 99, 255, 0.1) !important;
+  }
+
+  .drawerLangFlag {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .drawerLangName {
+    font-size: 0.68rem;
+    font-weight: 500;
+  }
+
+  .drawerLangCheck {
+    font-size: 0.65rem;
     color: #6c63ff;
-    border-color: #6c63ff;
-    background: rgba(108, 99, 255, 0.08);
+    font-weight: 700;
+    margin-left: auto;
   }
 }

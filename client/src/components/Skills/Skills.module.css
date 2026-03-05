@@ -93,4 +93,17 @@
   .categoryGrid {
     grid-template-columns: 1fr;
   }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .categoryCard {
+    padding: 1.25rem;
+  }
+
+  .pill {
+    font-size: 0.68rem;
+    padding: 0.25rem 0.55rem;
+  }
 }

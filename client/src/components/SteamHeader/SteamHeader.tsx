@@ -5,13 +5,13 @@ import { useLanguage, type Language } from '../../contexts/LanguageContext';
 import Avatar from '../Avatar/Avatar';
 import styles from './SteamHeader.module.css';
 
-const LANGUAGES: { id: Language; label: string; flag: string }[] = [
-  { id: 'english', label: 'English', flag: '🇬🇧' },
-  { id: 'sarcasm', label: 'Sarcasm', flag: '😏' },
-  { id: 'binary', label: 'Binary', flag: '🤖' },
-  { id: 'emoji', label: 'Emoji Only', flag: '😀' },
-  { id: 'lorem', label: 'Lorem Ipsum', flag: '📜' },
-  { id: 'stunnah', label: 'Young Stunnah', flag: '🔥' },
+const LANGUAGES: { id: Language; label: string; flag: string; preview: string }[] = [
+  { id: 'english',      label: 'English',       flag: '🇬🇧', preview: 'Normal mode' },
+  { id: 'sarcasm',      label: 'Sarcasm',        flag: '😏', preview: 'Obviously genius' },
+  { id: 'binary',       label: 'Binary',         flag: '🤖', preview: '01001000 01101001' },
+  { id: 'emoji',        label: 'Emoji Only',     flag: '😀', preview: '📦 🚀 ⭐ 💻' },
+  { id: 'lorem',        label: 'Lorem Ipsum',    flag: '📜', preview: 'Lorem ipsum...' },
+  { id: 'youngStunnah', label: 'Young Stunnah',  flag: '🔥', preview: 'Petmalu, no cap!' },
 ];
 
 const NAV_ITEMS = [
@@ -73,10 +73,6 @@ export default function SteamHeader({ username, activeSection, onOpenAchievement
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const openCommandPalette = () => {
-    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }));
-  };
-
   return (
     <>
       <header className={styles.bar}>
@@ -130,23 +126,43 @@ export default function SteamHeader({ username, activeSection, onOpenAchievement
                     className={`${styles.dropdownItem} ${styles.langTrigger}`}
                     onClick={() => setLangSubmenu((o) => !o)}
                   >
-                    <span>🌐 Change language</span>
-                    <span className={styles.langArrow}>▸</span>
+                    <span>
+                      🌐 Change language
+                      <span className={styles.langCurrentBadge}>
+                        {LANGUAGES.find((l) => l.id === language)?.flag}
+                      </span>
+                    </span>
+                    <span className={styles.langArrow}>◂</span>
                   </button>
                   {langSubmenu && (
                     <div className={styles.langSubmenu}>
+                      <div className={styles.langSubmenuHeader}>Select Language</div>
                       {LANGUAGES.map((lang) => (
                         <button
                           key={lang.id}
                           className={`${styles.langOption} ${language === lang.id ? styles.langActive : ''}`}
                           onClick={() => { setLanguage(lang.id); setLangSubmenu(false); setDropdownOpen(false); }}
                         >
-                          <span>{lang.flag} {lang.label}</span>
+                          <span className={styles.langOptionLeft}>
+                            <span className={styles.langFlag}>{lang.flag}</span>
+                            <span className={styles.langInfo}>
+                              <span className={styles.langLabel}>{lang.label}</span>
+                              <span className={styles.langPreview}>{lang.preview}</span>
+                            </span>
+                          </span>
                           {language === lang.id && <span className={styles.langCheck}>✓</span>}
                         </button>
                       ))}
                       <div className={styles.langSubmenuDivider} />
-                      <span className={styles.langReport}>Report a translation problem</span>
+                      <a
+                        className={styles.langReport}
+                        href={`https://github.com/prithwin0146/portfolio/issues/new?title=Translation%20Issue&body=**Language:**%20${language}%0A%0A**Issue:**`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => { setLangSubmenu(false); setDropdownOpen(false); }}
+                      >
+                        🐛 Report a translation problem
+                      </a>
                     </div>
                   )}
                 </div>
@@ -159,9 +175,6 @@ export default function SteamHeader({ username, activeSection, onOpenAchievement
           </div>
           <button className={styles.avatarBtn} onClick={() => setDropdownOpen((o) => !o)}>
             <Avatar size="sm" showRing={false} showStatus className={styles.navAvatar} />
-          </button>
-          <button className={styles.cmdHint} onClick={openCommandPalette}>
-            ⌘K
           </button>
           <button
             className={`${styles.hamburger} ${mobileOpen ? styles.hamburgerOpen : ''}`}
@@ -219,7 +232,9 @@ export default function SteamHeader({ username, activeSection, onOpenAchievement
                   className={`${styles.drawerLangBtn} ${language === lang.id ? styles.drawerLangActive : ''}`}
                   onClick={() => { setLanguage(lang.id); }}
                 >
-                  {lang.flag} {lang.label}
+                  <span className={styles.drawerLangFlag}>{lang.flag}</span>
+                  <span className={styles.drawerLangName}>{lang.label}</span>
+                  {language === lang.id && <span className={styles.drawerLangCheck}>✓</span>}
                 </button>
               ))}
             </div>
