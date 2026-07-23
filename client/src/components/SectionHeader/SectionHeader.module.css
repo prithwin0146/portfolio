@@ -1,8 +1,10 @@
-  .header {
+.header {
   margin-bottom: 3rem;
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Contain the heading so scramble animation never shifts page layout */
+  contain: layout;
 }
 
 .visible {
@@ -38,6 +40,14 @@
   color: #e2e8f0;
   letter-spacing: -1px;
   line-height: 1.2;
+  /* Clamp heading height to the normal English text height — never expands for binary/lorem */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  /* Fixed min-height = 2 lines @ 1.2 line-height × 1.75rem ≈ 4.2rem */
+  min-height: 4.2rem;
+  max-height: 4.2rem;
 }
 
 .accent {
@@ -75,6 +85,8 @@
   .heading {
     font-size: 1.4rem;
     letter-spacing: -0.5px;
+    min-height: 3.4rem;
+    max-height: 3.4rem;
   }
 
   .subtitle {

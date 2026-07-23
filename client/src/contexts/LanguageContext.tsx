@@ -241,6 +241,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     'about.statProjects': 'Projects\nDelivered',
     'about.statSatisfaction': 'Client\nSatisfaction',
     'about.statResponse': 'Response\nTime',
+    'hero.greeting': "Hello, I'm",
+    'hero.title1': 'Freelance Web Designer',
+    'hero.title2': 'Full-Stack Developer',
+    'hero.title3': 'I Build Websites That Convert',
+    'hero.title4': 'Your Next Web Partner',
   },
   sarcasm: {
     'logo': "PRITHWIN'S HUMBLE\nPORTFOLIO",
@@ -310,6 +315,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     'about.statProjects': 'Projects\n"Delivered"',
     'about.statSatisfaction': "They're\n\"Happy\"",
     'about.statResponse': 'Response\n(Eventually)',
+    'hero.greeting': "Behold, it's",
+    'hero.title1': 'Self-Proclaimed Designer',
+    'hero.title2': 'Copy-Paste Developer',
+    'hero.title3': 'I Build Websites That Crash',
+    'hero.title4': 'Your Next Mistake',
   },
 };
 
@@ -333,46 +343,37 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     (key: string): string => {
       const english = TRANSLATIONS.english[key] ?? key;
 
-      // Only section headings get transformed — everything else stays English
-      const isSectionKey =
-        key.startsWith('section.') &&
-        (key.endsWith('.title') || key.endsWith('.accent') || key.endsWith('.sub'));
-
       if (language === 'english') return english;
 
-      // For non-heading keys, always return English so nav/logo/stats stay readable
-      if (!isSectionKey) {
-        // Sarcasm gets full translation for non-heading keys too (they're still readable)
-        if (language === 'sarcasm') {
-          const table = TRANSLATIONS.sarcasm;
-          return table[key] ?? english;
-        }
-        return english;
+      // Sarcasm: full table lookup, fallback to english
+      if (language === 'sarcasm') {
+        const table = TRANSLATIONS.sarcasm;
+        return table[key] ?? english;
       }
 
-      // — Section headings only below —
-
-      if (language === 'binary') {
-        if (key.endsWith('.sub')) return '';
-        return toBinary(english.replace(/\n/g, ' ').trim());
-      }
-
-      if (language === 'emoji') {
-        return EMOJI_MAP[key] ?? english;
-      }
-
-      if (language === 'lorem') {
-        if (key.endsWith('.sub')) return '';
-        return loremShort();
-      }
-
+      // Young Stunnah: full map lookup, fallback to english
       if (language === 'youngStunnah') {
         return STUNNAH_MAP[key] ?? english;
       }
 
-      if (language === 'sarcasm') {
-        const table = TRANSLATIONS.sarcasm;
-        return table[key] ?? english;
+      // Emoji: only section headings get emoji replacements, everything else stays English
+      if (language === 'emoji') {
+        const isSectionKey =
+          key.startsWith('section.') &&
+          (key.endsWith('.title') || key.endsWith('.accent') || key.endsWith('.sub'));
+        if (isSectionKey) return EMOJI_MAP[key] ?? english;
+        return english;
+      }
+
+      // Binary & Lorem: ONLY section headings transform — bio, nav, typing titles stay English
+      if (language === 'binary' || language === 'lorem') {
+        const isSectionKey =
+          key.startsWith('section.') &&
+          (key.endsWith('.title') || key.endsWith('.accent') || key.endsWith('.sub'));
+        if (!isSectionKey) return english;
+        if (key.endsWith('.sub')) return '';
+        if (language === 'binary') return toBinary(english.replace(/\n/g, ' ').trim());
+        if (language === 'lorem') return loremShort();
       }
 
       return english;

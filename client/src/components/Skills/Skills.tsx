@@ -30,7 +30,7 @@ export default function Skills() {
 
   return (
     <section ref={ref as React.Ref<HTMLElement>} className={styles.section} id="skills">
-      <SectionHeader number="04" title={t('section.skills.title')} accent={t('section.skills.accent')} subtitle={t('section.skills.sub') || undefined} visible={visible} />
+      <SectionHeader number="06" title={t('section.skills.title')} accent={t('section.skills.accent')} subtitle={t('section.skills.sub') || undefined} visible={visible} />
 
       <div className={styles.categoryGrid}>
         {Object.entries(grouped).map(([category, items], ci) => (

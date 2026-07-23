@@ -46,7 +46,7 @@ export default function Contact() {
       className={`${styles.section} ${isInView ? styles.visible : ''}`}
       id="contact"
     >
-      <SectionHeader number="06" title={t('section.contact.title')} accent={t('section.contact.accent')} subtitle={t('section.contact.sub') || undefined} visible={isInView} />
+      <SectionHeader number="12" title={t('section.contact.title')} accent={t('section.contact.accent')} subtitle={t('section.contact.sub') || undefined} visible={isInView} />
       <TextReveal className={styles.subtitle} delay={100} stagger={30}>
         Have a project in mind? I'd love to hear about it. Drop me a message and I'll get back to you within 24 hours.
       </TextReveal>

@@ -10,16 +10,28 @@ interface Props {
 
 export default function ScrambleText({ children: text, trigger, className }: Props) {
   const [output, setOutput] = useState(text);
-  const played = useRef(false);
+  // Track the last text we scrambled so re-running on language change works
+  const lastText = useRef('');
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    if (!trigger || played.current) return;
-    played.current = true;
+    // Always keep output in sync if not mid-scramble
+    if (!trigger) {
+      setOutput(text);
+      return;
+    }
+
+    // Debounce: if text changes (language switch) or trigger fires fresh, scramble again
+    if (text === lastText.current) return;
+    lastText.current = text;
+
+    // Clear any previous animation
+    if (intervalRef.current) clearInterval(intervalRef.current);
 
     const len = text.length;
     let progress = 0;
 
-    const id = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setOutput(
         text
           .split('')
@@ -32,12 +44,14 @@ export default function ScrambleText({ children: text, trigger, className }: Pro
       );
       progress += 0.35;
       if (progress >= len) {
-        clearInterval(id);
+        clearInterval(intervalRef.current!);
         setOutput(text);
       }
     }, 30);
 
-    return () => clearInterval(id);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [trigger, text]);
 
   return <span className={className}>{output}</span>;

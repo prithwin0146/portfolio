@@ -48,17 +48,6 @@ function App() {
   // Scroll velocity skew effect
   useScrollSkew();
 
-  // Track mouse for spotlight effect via CSS custom properties (perf-friendly)
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      if (wrapperRef.current) {
-        wrapperRef.current.style.setProperty('--mx', `${e.clientX}px`);
-        wrapperRef.current.style.setProperty('--my', `${e.clientY}px`);
-      }
-    };
-    window.addEventListener('mousemove', onMove, { passive: true });
-    return () => window.removeEventListener('mousemove', onMove);
-  }, []);
 
   return (
     <LanguageProvider>

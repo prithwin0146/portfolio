@@ -98,7 +98,7 @@ export default function GitHubReplay() {
       ref={ref as React.Ref<HTMLElement>}
       className={`${styles.section} ${visible ? styles.visible : ''}`}
     >
-      <SectionHeader number="10" title={t('section.githubReplay.title')} accent={t('section.githubReplay.accent')} subtitle={t('section.githubReplay.sub') || undefined} visible={visible} />
+      <SectionHeader number="09" title={t('section.githubReplay.title')} accent={t('section.githubReplay.accent')} subtitle={t('section.githubReplay.sub') || undefined} visible={visible} />
 
       <div className={styles.player}>
         {!playing && !completed && (

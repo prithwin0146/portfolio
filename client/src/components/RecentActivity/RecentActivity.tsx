@@ -37,7 +37,7 @@ export default function RecentActivity() {
       ref={ref as React.Ref<HTMLElement>}
       className={`${styles.section} ${visible ? styles.visible : ''}`}
     >
-      <SectionHeader number="11" title={t('section.recentActivity.title')} accent={t('section.recentActivity.accent')} subtitle={t('section.recentActivity.sub') || undefined} visible={visible} />
+      <SectionHeader number="10" title={t('section.recentActivity.title')} accent={t('section.recentActivity.accent')} subtitle={t('section.recentActivity.sub') || undefined} visible={visible} />
 
       <div className={styles.timeline}>
         {loading && (

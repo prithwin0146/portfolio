@@ -23,7 +23,7 @@ export default function AchievementShowcase() {
   return (
     <section ref={ref as React.Ref<HTMLElement>} className={styles.section} id="achievements">
       <SectionHeader
-        number="08"
+        number="04"
         title={t('section.achievements.title')}
         accent={t('section.achievements.accent')}
         subtitle={t('section.achievements.sub') || undefined}

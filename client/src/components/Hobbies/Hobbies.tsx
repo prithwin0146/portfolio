@@ -16,7 +16,7 @@ export default function Hobbies() {
 
   return (
     <section ref={ref as React.Ref<HTMLElement>} className={styles.section} id="hobbies">
-      <SectionHeader number="13" title={t('section.hobbies.title')} accent={t('section.hobbies.accent')} subtitle={t('section.hobbies.sub') || undefined} visible={visible} />
+      <SectionHeader number="11" title={t('section.hobbies.title')} accent={t('section.hobbies.accent')} subtitle={t('section.hobbies.sub') || undefined} visible={visible} />
       <div className={styles.grid}>
         {HOBBIES.map((hobby, i) => (
           <div

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { getAchievementStats } from '../../services/achievementService';
 import { useLanguage, type Language } from '../../contexts/LanguageContext';
 import Avatar from '../Avatar/Avatar';
-import styles from './SteamHeader.module.css';
 
 const LANGUAGES: { id: Language; label: string; flag: string; preview: string }[] = [
   { id: 'english',      label: 'English',       flag: '🇬🇧', preview: 'Normal mode' },
@@ -15,11 +14,11 @@ const LANGUAGES: { id: Language; label: string; flag: string; preview: string }[
 ];
 
 const NAV_ITEMS = [
-  { id: 'about', tKey: 'nav.profile', subKey: 'nav.profile.sub' },
-  { id: 'services', tKey: 'nav.services', subKey: 'nav.services.sub' },
-  { id: 'projects', tKey: 'nav.projects', subKey: 'nav.projects.sub' },
-  { id: 'skills', tKey: 'nav.skills', subKey: 'nav.skills.sub' },
-  { id: 'contact', tKey: 'nav.contact', subKey: 'nav.contact.sub' },
+  { id: 'about', tKey: 'nav.profile' },
+  { id: 'services', tKey: 'nav.services' },
+  { id: 'projects', tKey: 'nav.projects' },
+  { id: 'skills', tKey: 'nav.skills' },
+  { id: 'contact', tKey: 'nav.contact' },
 ];
 
 interface SteamHeaderProps {
@@ -44,14 +43,12 @@ export default function SteamHeader({ username, activeSection, onOpenAchievement
     return () => window.removeEventListener('achievement-unlocked', onUnlock);
   }, []);
 
-  // Close drawer on resize to desktop
   useEffect(() => {
     const onResize = () => { if (window.innerWidth > 768) setMobileOpen(false); };
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  // Close dropdown on click outside
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -62,7 +59,6 @@ export default function SteamHeader({ username, activeSection, onOpenAchievement
     return () => document.removeEventListener('mousedown', onClick);
   }, []);
 
-  // Lock body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -75,169 +71,189 @@ export default function SteamHeader({ username, activeSection, onOpenAchievement
 
   return (
     <>
-      <header className={styles.bar}>
-        <div className={styles.left}>
-          <nav className={styles.navLinks}>
+      <header className="sticky top-0 z-[100] flex h-12 w-full items-center justify-between border-b border-white/5 bg-[#09090b] px-3 lg:px-6 shadow-sm">
+        <div className="flex h-full items-center">
+          <nav className="hidden h-full md:flex">
             {NAV_ITEMS.map((item) => (
-                <button
-                  key={item.id}
-                  className={`${styles.navLink} ${activeSection === item.id ? styles.active : ''}`}
-                  onClick={() => scrollTo(item.id)}
-                >
-                  {t(item.tKey)}
-                </button>
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className={`flex h-full items-center border-b-2 px-4 text-xs font-semibold tracking-wider uppercase transition-colors ${
+                  activeSection === item.id
+                    ? 'border-steam-blue bg-white/5 text-white'
+                    : 'border-transparent text-zinc-400 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                {t(item.tKey)}
+              </button>
             ))}
           </nav>
         </div>
-        <div className={styles.right}>
+
+        <div className="flex h-full items-center gap-2">
           {onOpenInfo && (
-            <button className={styles.infoBtn} onClick={onOpenInfo}>
-              <span className={styles.infoCircle}>⊙</span> {t('header.info')}
+            <button
+              onClick={onOpenInfo}
+              className="hidden items-center gap-1.5 rounded px-2 py-1 text-[11px] font-semibold tracking-wider text-zinc-400 transition-colors hover:bg-white/5 hover:text-white md:flex"
+            >
+              <span className="font-mono opacity-70">⊙</span> {t('header.info')}
             </button>
           )}
-          <button className={styles.achievement} onClick={onOpenAchievements}>
-            <span className={styles.trophyIcon}>🏆</span>
-            <span className={styles.achievementCount}>
+
+          <button
+            onClick={onOpenAchievements}
+            className="flex items-center gap-1.5 rounded px-2 py-1 text-xs text-zinc-400 transition-colors hover:bg-white/5 hover:text-white"
+          >
+            <span>🏆</span>
+            <span className="font-mono font-semibold text-zinc-200">
               {stats.unlockedCount}/{stats.totalCount}
             </span>
           </button>
-          <div className={styles.usernameWrap} ref={dropdownRef}>
+
+          <div className="relative hidden md:block" ref={dropdownRef}>
             <button
-              className={styles.username}
               onClick={() => setDropdownOpen((o) => !o)}
+              className="flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-zinc-400 transition-colors hover:bg-white/5 hover:text-white"
             >
-              {username} ▾
+              {username} <span className="text-[10px]">▾</span>
             </button>
+
             {dropdownOpen && (
-              <div className={styles.dropdown}>
-                <button className={styles.dropdownItem} onClick={() => { setDropdownOpen(false); scrollTo('about'); }}>
+              <div className="absolute right-0 top-full mt-1 min-w-[200px] animate-in fade-in slide-in-from-top-2 rounded border border-white/10 bg-zinc-900 py-1 shadow-xl">
+                <button
+                  onClick={() => { setDropdownOpen(false); scrollTo('about'); }}
+                  className="flex w-full items-center px-3 py-2 text-xs text-zinc-300 hover:bg-white/10 hover:text-white"
+                >
                   Account details
                 </button>
-                <button className={styles.dropdownItem} onClick={() => { setDropdownOpen(false); onOpenInfo?.(); }}>
+                <button
+                  onClick={() => { setDropdownOpen(false); onOpenInfo?.(); }}
+                  className="flex w-full items-center px-3 py-2 text-xs text-zinc-300 hover:bg-white/10 hover:text-white"
+                >
                   View portfolio info
                 </button>
-                <div className={styles.dropdownDivider} />
+                <div className="my-1 h-px w-full bg-white/5" />
+                
                 <div
-                  className={styles.langTriggerWrap}
+                  className="relative"
                   onMouseEnter={() => setLangSubmenu(true)}
                   onMouseLeave={() => setLangSubmenu(false)}
                 >
                   <button
-                    className={`${styles.dropdownItem} ${styles.langTrigger}`}
                     onClick={() => setLangSubmenu((o) => !o)}
+                    className="flex w-full items-center justify-between px-3 py-2 text-xs text-zinc-300 hover:bg-white/10 hover:text-white"
                   >
-                    <span>
-                      🌐 Change language
-                      <span className={styles.langCurrentBadge}>
-                        {LANGUAGES.find((l) => l.id === language)?.flag}
-                      </span>
-                    </span>
-                    <span className={styles.langArrow}>◂</span>
+                    <span>🌐 Change language</span>
+                    <span className="text-[10px] text-zinc-500">▶</span>
                   </button>
+
                   {langSubmenu && (
-                    <div className={styles.langSubmenu}>
-                      <div className={styles.langSubmenuHeader}>Select Language</div>
+                    <div className="absolute right-full top-0 mr-1 min-w-[220px] pt-0">
+                      <div className="rounded border border-white/10 bg-zinc-900 py-1 shadow-xl relative after:content-[''] after:absolute after:-right-2 after:top-0 after:h-full after:w-4">
+                        <div className="border-b border-white/5 px-3 py-1.5 text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
+                          Select Language
+                        </div>
                       {LANGUAGES.map((lang) => (
                         <button
                           key={lang.id}
-                          className={`${styles.langOption} ${language === lang.id ? styles.langActive : ''}`}
                           onClick={() => { setLanguage(lang.id); setLangSubmenu(false); setDropdownOpen(false); }}
+                          className={`flex w-full items-center justify-between px-3 py-2 text-left hover:bg-white/10 ${
+                            language === lang.id ? 'text-steam-blue' : 'text-zinc-300'
+                          }`}
                         >
-                          <span className={styles.langOptionLeft}>
-                            <span className={styles.langFlag}>{lang.flag}</span>
-                            <span className={styles.langInfo}>
-                              <span className={styles.langLabel}>{lang.label}</span>
-                              <span className={styles.langPreview}>{lang.preview}</span>
-                            </span>
-                          </span>
-                          {language === lang.id && <span className={styles.langCheck}>✓</span>}
+                          <div className="flex items-center gap-2">
+                            <span className="text-base">{lang.flag}</span>
+                            <div className="flex flex-col">
+                              <span className="text-xs font-semibold">{lang.label}</span>
+                              <span className="text-[10px] text-zinc-500">{lang.preview}</span>
+                            </div>
+                          </div>
+                          {language === lang.id && <span>✓</span>}
                         </button>
                       ))}
-                      <div className={styles.langSubmenuDivider} />
-                      <a
-                        className={styles.langReport}
-                        href={`https://github.com/prithwin0146/portfolio/issues/new?title=Translation%20Issue&body=**Language:**%20${language}%0A%0A**Issue:**`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => { setLangSubmenu(false); setDropdownOpen(false); }}
-                      >
-                        🐛 Report a translation problem
-                      </a>
+                      </div>
                     </div>
                   )}
                 </div>
-                <div className={styles.dropdownDivider} />
-                <button className={styles.dropdownItem} onClick={() => { setDropdownOpen(false); navigate('/signout'); }}>
+                
+                <div className="my-1 h-px w-full bg-white/5" />
+                <button
+                  onClick={() => { setDropdownOpen(false); navigate('/signout'); }}
+                  className="flex w-full items-center px-3 py-2 text-xs text-zinc-300 hover:bg-white/10 hover:text-white"
+                >
                   Sign out of account…
                 </button>
               </div>
             )}
           </div>
-          <button className={styles.avatarBtn} onClick={() => setDropdownOpen((o) => !o)}>
-            <Avatar size="sm" showRing={false} showStatus className={styles.navAvatar} />
+
+          <button onClick={() => setDropdownOpen((o) => !o)} className="hidden md:flex">
+            <Avatar size="sm" showRing={false} className="h-7 w-7" />
           </button>
+
           <button
-            className={`${styles.hamburger} ${mobileOpen ? styles.hamburgerOpen : ''}`}
+            className="flex flex-col justify-center gap-1 p-1 md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle navigation menu"
-            aria-expanded={mobileOpen}
           >
-            <span />
-            <span />
-            <span />
+            <span className={`block h-[2px] w-6 rounded-full bg-zinc-400 transition-transform ${mobileOpen ? 'translate-y-[6px] rotate-45 bg-white' : ''}`} />
+            <span className={`block h-[2px] w-6 rounded-full bg-zinc-400 transition-opacity ${mobileOpen ? 'opacity-0' : ''}`} />
+            <span className={`block h-[2px] w-6 rounded-full bg-zinc-400 transition-transform ${mobileOpen ? '-translate-y-[6px] -rotate-45 bg-white' : ''}`} />
           </button>
         </div>
       </header>
 
-      {/* Mobile drawer overlay */}
+      {/* Mobile Drawer */}
       <div
-        className={`${styles.overlay} ${mobileOpen ? styles.overlayVisible : ''}`}
+        className={`fixed inset-0 z-[199] bg-black/60 transition-opacity md:hidden ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         onClick={() => setMobileOpen(false)}
       />
-      <nav className={`${styles.drawer} ${mobileOpen ? styles.drawerOpen : ''}`}>
-        <div className={styles.drawerProfile}>
+      <nav
+        className={`fixed right-0 top-0 z-[200] flex h-full w-[280px] max-w-[80vw] flex-col border-l border-white/5 bg-zinc-950 px-5 py-6 transition-transform duration-300 md:hidden ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      >
+        <div className="mb-4 flex items-center gap-3 border-b border-white/5 pb-4">
           <Avatar size="sm" showRing showStatus />
-          <div className={styles.drawerProfileInfo}>
-            <span className={styles.drawerUser}>{username}</span>
-            <span className={styles.drawerStatus}>Available for hire</span>
+          <div className="flex flex-col">
+            <span className="text-sm font-semibold text-white">{username}</span>
+            <span className="font-mono text-[10px] font-semibold tracking-wide text-emerald-400">Available for hire</span>
           </div>
         </div>
-        <div className={styles.drawerHeader}>
-          <button className={styles.achievement} onClick={() => { setMobileOpen(false); onOpenAchievements?.(); }}>
-            <span className={styles.trophyIcon}>🏆</span>
-            <span className={styles.achievementCount}>{stats.unlockedCount}/{stats.totalCount}</span>
-          </button>
-        </div>
-        {NAV_ITEMS.map((item) => (
+
+        <div className="flex flex-col gap-1">
+          {NAV_ITEMS.map((item) => (
             <button
               key={item.id}
-              className={`${styles.drawerLink} ${activeSection === item.id ? styles.drawerActive : ''}`}
               onClick={() => scrollTo(item.id)}
+              className={`block w-full border-l-2 py-2.5 pl-3 text-left text-[13px] font-semibold tracking-wider uppercase transition-colors ${
+                activeSection === item.id
+                  ? 'border-steam-blue bg-white/5 text-white'
+                  : 'border-transparent text-zinc-400 hover:bg-white/5 hover:text-white'
+              }`}
             >
               {t(item.tKey)}
             </button>
-        ))}
-        <div className={styles.drawerActions}>
-          {onOpenInfo && (
-            <button className={styles.drawerInfoBtn} onClick={() => { setMobileOpen(false); onOpenInfo(); }}>
-              {t('header.info')}
-            </button>
-          )}
-          <div className={styles.drawerLangSection}>
-            <span className={styles.drawerLangLabel}>🌐 Language</span>
-            <div className={styles.drawerLangGrid}>
-              {LANGUAGES.map((lang) => (
-                <button
-                  key={lang.id}
-                  className={`${styles.drawerLangBtn} ${language === lang.id ? styles.drawerLangActive : ''}`}
-                  onClick={() => { setLanguage(lang.id); }}
-                >
-                  <span className={styles.drawerLangFlag}>{lang.flag}</span>
-                  <span className={styles.drawerLangName}>{lang.label}</span>
-                  {language === lang.id && <span className={styles.drawerLangCheck}>✓</span>}
-                </button>
-              ))}
-            </div>
+          ))}
+        </div>
+
+        <div className="mt-auto border-t border-white/5 pt-4">
+          <div className="mb-2 text-[11px] font-semibold tracking-wider text-zinc-500 uppercase">
+            🌐 Language
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {LANGUAGES.map((lang) => (
+              <button
+                key={lang.id}
+                onClick={() => setLanguage(lang.id)}
+                className={`flex items-center gap-2 rounded border px-3 py-2 text-xs transition-colors ${
+                  language === lang.id
+                    ? 'border-steam-blue/50 bg-steam-blue/10 text-steam-blue'
+                    : 'border-white/10 bg-white/5 text-zinc-400 hover:bg-white/10 hover:text-white'
+                }`}
+              >
+                <span>{lang.flag}</span>
+                <span className="font-medium">{lang.label}</span>
+              </button>
+            ))}
           </div>
         </div>
       </nav>

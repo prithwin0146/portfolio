@@ -27,7 +27,7 @@ export default function ResumeViewer() {
         className={`${styles.section} ${visible ? styles.visible : ''}`}
         id="resume"
       >
-        <SectionHeader number="12" title={t('section.resume.title')} accent={t('section.resume.accent')} subtitle={t('section.resume.sub') || undefined} visible={visible} />
+        <SectionHeader number="07" title={t('section.resume.title')} accent={t('section.resume.accent')} subtitle={t('section.resume.sub') || undefined} visible={visible} />
 
         <div className={styles.previewWrap}>
           {previewLoaded ? (
