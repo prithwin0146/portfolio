@@ -13,7 +13,8 @@ builder.Services.AddSingleton<Portfolio.Api.Services.ContactStore>();
 var allowedOrigins = new List<string>
 {
     "http://localhost:5173",
-    "http://localhost:5174"
+    "http://localhost:5174",
+    "https://prithwin.vercel.app"
 };
 
 var productionOrigin = Environment.GetEnvironmentVariable("ALLOWED_ORIGIN");
