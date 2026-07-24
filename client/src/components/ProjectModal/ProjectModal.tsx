@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import type { Project } from '../../types';
 import styles from './ProjectModal.module.css';
 
@@ -29,7 +30,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   if (!project) return null;
 
-  return (
+  return createPortal(
     <div
       className={styles.overlay}
       onClick={onClose}
@@ -98,6 +99,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

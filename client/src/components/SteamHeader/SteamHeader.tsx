@@ -255,6 +255,16 @@ export default function SteamHeader({ username, activeSection, onOpenAchievement
               </button>
             ))}
           </div>
+
+          <div className="my-4 h-px w-full bg-white/5" />
+          
+          <button
+            onClick={() => { setMobileOpen(false); navigate('/signout'); }}
+            className="flex w-full items-center justify-between rounded border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm font-semibold text-red-400 hover:bg-red-500/20 transition-colors"
+          >
+            <span>Sign out of account…</span>
+            <span className="opacity-70">⎋</span>
+          </button>
         </div>
       </nav>
     </>
