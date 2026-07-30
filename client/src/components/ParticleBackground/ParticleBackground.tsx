@@ -23,7 +23,7 @@ function Embers({ count = 2000 }) {
     return [pos, vel];
   }, [count]);
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     if (!points.current) return;
     const posArray = points.current.geometry.attributes.position.array as Float32Array;
     
