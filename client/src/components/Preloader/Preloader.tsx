@@ -5,21 +5,52 @@ interface PreloaderProps {
   onComplete: () => void;
 }
 
+const BOOT_SEQUENCE = [
+  'INITIALIZING SYSTEM_CORE v9.4.1...',
+  'MOUNTING FILE_SYSTEM... [OK]',
+  'LOADING ASSETS... [OK]',
+  'ESTABLISHING CONNECTION... [OK]',
+  'AUTHENTICATING USER... [OK]',
+  'VERIFYING CACHE INTEGRITY... [100%]',
+  'STARTING UI SERVER...',
+];
+
 export default function Preloader({ onComplete }: PreloaderProps) {
   const [count, setCount] = useState(0);
   const [exit, setExit] = useState(false);
+  const [logs, setLogs] = useState<string[]>([]);
+  const [showLogo, setShowLogo] = useState(false);
 
   const finish = useCallback(() => {
-    setTimeout(() => setExit(true), 300);
-    setTimeout(() => onComplete(), 1200);
+    setTimeout(() => setExit(true), 600);
+    setTimeout(() => onComplete(), 1500);
   }, [onComplete]);
 
   useEffect(() => {
+    // 1. Terminal Boot Sequence
+    let logIndex = 0;
+    const logInterval = setInterval(() => {
+      if (logIndex < BOOT_SEQUENCE.length) {
+        setLogs((prev) => [...prev, BOOT_SEQUENCE[logIndex]]);
+        logIndex++;
+      } else {
+        clearInterval(logInterval);
+        setTimeout(() => setShowLogo(true), 300);
+      }
+    }, 150);
+
+    return () => clearInterval(logInterval);
+  }, []);
+
+  useEffect(() => {
+    // 2. Download Progress Bar (only starts after logo shows)
+    if (!showLogo) return;
+
     let frame: number;
     let current = 0;
 
     const tick = () => {
-      current += Math.random() * 6 + 2;
+      current += Math.random() * 4 + 1.5;
       if (current >= 100) {
         current = 100;
         setCount(100);
@@ -30,42 +61,52 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       frame = requestAnimationFrame(tick);
     };
 
-    // Small delay before starting
-    const timer = setTimeout(() => {
-      frame = requestAnimationFrame(tick);
-    }, 600);
-
-    return () => {
-      clearTimeout(timer);
-      cancelAnimationFrame(frame);
-    };
-  }, [finish]);
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [showLogo, finish]);
 
   return (
     <div className={`${styles.preloader} ${exit ? styles.exit : ''}`}>
-      <div className={styles.content}>
-        <div className={styles.nameRow}>
-          {'Prithwin'.split('').map((char, i) => (
-            <span
-              key={i}
-              className={styles.letter}
-              style={{ animationDelay: `${i * 0.07}s` }}
-            >
-              {char}
-            </span>
+      
+      {/* Terminal Phase */}
+      {!showLogo && (
+        <div className={styles.terminal}>
+          {logs.map((log, i) => (
+            <div key={i} className={styles.logLine}>
+              <span className={styles.prompt}>&gt;</span> {log}
+            </div>
           ))}
+          <div className={styles.cursor} />
         </div>
-        <div className={styles.tagline}>Freelance Web Designer</div>
-        <div className={styles.progressWrap}>
-          <div className={styles.progressBar}>
-            <div
-              className={styles.progressFill}
-              style={{ width: `${Math.min(count, 100)}%` }}
-            />
+      )}
+
+      {/* Steam Deck Phase */}
+      {showLogo && (
+        <div className={styles.steamPhase}>
+          <div className={styles.logoWrap}>
+            <div className={styles.spinner} />
+            <div className={styles.brandText}>Prithwin</div>
           </div>
-          <span className={styles.counter}>{Math.min(count, 100)}</span>
+          
+          <div className={styles.downloadSection}>
+            <div className={styles.downloadHeader}>
+              <span className={styles.downloadLabel}>DOWNLOADING...</span>
+              <span className={styles.downloadRate}>{Math.floor(Math.random() * 50 + 10)} MB/s</span>
+            </div>
+            <div className={styles.steamBarContainer}>
+              <div
+                className={styles.steamBarFill}
+                style={{ width: `${Math.min(count, 100)}%` }}
+              />
+              <div className={styles.steamBarGlow} style={{ width: `${Math.min(count, 100)}%` }} />
+            </div>
+            <div className={styles.downloadFooter}>
+              <span>{count}%</span>
+              <span>10.2 GB / 10.2 GB</span>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

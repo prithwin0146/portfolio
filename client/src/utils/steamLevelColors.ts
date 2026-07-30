@@ -26,36 +26,28 @@ const levelTiers: Array<{
   rainbow?: boolean;
   gradient?: string;
 }> = [
-  // 1-4   Gray — Novice
-  { min: 0,   max: 4,   name: 'Novice',       borderColor: '#8B8B8B', glowColor: 'rgba(139,139,139,0.3)',  backgroundColor: 'rgba(139,139,139,0.08)' },
-  // 5-9   Blue — Apprentice
-  { min: 5,   max: 9,   name: 'Apprentice',   borderColor: '#4A90E2', glowColor: 'rgba(74,144,226,0.3)',   backgroundColor: 'rgba(74,144,226,0.08)',  gradient: 'linear-gradient(135deg,#4A90E2,#357ABD)' },
-  // 10-14 Teal — Intermediate
-  { min: 10,  max: 14,  name: 'Intermediate', borderColor: '#5BC0DE', glowColor: 'rgba(91,192,222,0.3)',   backgroundColor: 'rgba(91,192,222,0.08)',  gradient: 'linear-gradient(135deg,#5BC0DE,#31B0D5)' },
-  // 15-19 Green — Experienced
-  { min: 15,  max: 19,  name: 'Experienced',  borderColor: '#5CB85C', glowColor: 'rgba(92,184,92,0.3)',    backgroundColor: 'rgba(92,184,92,0.08)',   gradient: 'linear-gradient(135deg,#5CB85C,#4CAE4C)' },
-  // 20-24 Lime — Proficient
-  { min: 20,  max: 24,  name: 'Proficient',   borderColor: '#A4D007', glowColor: 'rgba(164,208,7,0.3)',    backgroundColor: 'rgba(164,208,7,0.08)',   gradient: 'linear-gradient(135deg,#A4D007,#8AB904)' },
-  // 25-29 Orange — Advanced (glow)
-  { min: 25,  max: 29,  name: 'Advanced',     borderColor: '#F39C12', glowColor: 'rgba(243,156,18,0.5)',   backgroundColor: 'rgba(243,156,18,0.1)',   gradient: 'linear-gradient(135deg,#F39C12,#E67E22)' },
-  // 30-34 Red — Expert (glow)
-  { min: 30,  max: 34,  name: 'Expert',       borderColor: '#E74C3C', glowColor: 'rgba(231,76,60,0.6)',    backgroundColor: 'rgba(231,76,60,0.1)',    gradient: 'linear-gradient(135deg,#E74C3C,#C0392B)' },
-  // 35-39 Purple — Elite (glow)
-  { min: 35,  max: 39,  name: 'Elite',        borderColor: '#9B59B6', glowColor: 'rgba(155,89,182,0.5)',   backgroundColor: 'rgba(155,89,182,0.1)',   gradient: 'linear-gradient(135deg,#9B59B6,#8E44AD)' },
-  // 40-44 Pink — Master (glow)
-  { min: 40,  max: 44,  name: 'Master',       borderColor: '#E91E63', glowColor: 'rgba(233,30,99,0.6)',    backgroundColor: 'rgba(233,30,99,0.1)',    gradient: 'linear-gradient(135deg,#E91E63,#C2185B)' },
-  // 45-49 Gold — Grandmaster (glow)
-  { min: 45,  max: 49,  name: 'Grandmaster',  borderColor: '#FFD700', glowColor: 'rgba(255,215,0,0.6)',    backgroundColor: 'rgba(255,215,0,0.1)',    gradient: 'linear-gradient(135deg,#FFD700,#FFA500)' },
-  // 50-74 Platinum (shimmer)
-  { min: 50,  max: 74,  name: 'Platinum',     borderColor: '#E5E4E2', glowColor: 'rgba(229,228,226,0.6)',  backgroundColor: 'rgba(229,228,226,0.1)',  gradient: 'linear-gradient(135deg,#E5E4E2,#BCC6CC,#E5E4E2)', shimmer: true },
-  // 75-99 Diamond (shimmer)
-  { min: 75,  max: 99,  name: 'Diamond',      borderColor: '#00D4FF', glowColor: 'rgba(0,212,255,0.7)',    backgroundColor: 'rgba(0,212,255,0.1)',    gradient: 'linear-gradient(135deg,#00D4FF,#0099CC)', shimmer: true },
-  // 100-124 Emerald (shimmer)
-  { min: 100, max: 124, name: 'Emerald',      borderColor: '#00FF88', glowColor: 'rgba(0,255,136,0.7)',    backgroundColor: 'rgba(0,255,136,0.1)',    gradient: 'linear-gradient(135deg,#00FF88,#00CC6A)', shimmer: true },
-  // 125-149 Inferno (shimmer)
-  { min: 125, max: 149, name: 'Inferno',      borderColor: '#FF8C00', glowColor: 'rgba(255,140,0,0.8)',    backgroundColor: 'rgba(255,140,0,0.12)',   gradient: 'linear-gradient(135deg,#FF8C00,#FF6347)', shimmer: true },
-  // 150+ Legendary (rainbow)
-  { min: 150, max: Infinity, name: 'Legendary', borderColor: '#ffd700', glowColor: 'rgba(255,215,0,0.8)', backgroundColor: 'rgba(255,215,0,0.15)', rainbow: true },
+  // 0-9   Grey
+  { min: 0,   max: 9,   name: 'Novice',       borderColor: '#9b9b9b', glowColor: 'rgba(155,155,155,0.3)',  backgroundColor: 'rgba(155,155,155,0.08)' },
+  // 10-19 Red
+  { min: 10,  max: 19,  name: 'Apprentice',   borderColor: '#c02942', glowColor: 'rgba(192,41,66,0.3)',    backgroundColor: 'rgba(192,41,66,0.08)' },
+  // 20-29 Orange
+  { min: 20,  max: 29,  name: 'Intermediate', borderColor: '#d95b43', glowColor: 'rgba(217,91,67,0.3)',    backgroundColor: 'rgba(217,91,67,0.08)' },
+  // 30-39 Yellow
+  { min: 30,  max: 39,  name: 'Experienced',  borderColor: '#ecd078', glowColor: 'rgba(236,208,120,0.3)',  backgroundColor: 'rgba(236,208,120,0.08)' },
+  // 40-49 Green
+  { min: 40,  max: 49,  name: 'Proficient',   borderColor: '#54a54b', glowColor: 'rgba(84,165,75,0.3)',    backgroundColor: 'rgba(84,165,75,0.08)' },
+  // 50-59 Blue
+  { min: 50,  max: 59,  name: 'Advanced',     borderColor: '#3381a5', glowColor: 'rgba(51,129,165,0.4)',   backgroundColor: 'rgba(51,129,165,0.1)' },
+  // 60-69 Purple
+  { min: 60,  max: 69,  name: 'Expert',       borderColor: '#824ca0', glowColor: 'rgba(130,76,160,0.4)',   backgroundColor: 'rgba(130,76,160,0.1)' },
+  // 70-79 Pink
+  { min: 70,  max: 79,  name: 'Elite',        borderColor: '#c4538d', glowColor: 'rgba(196,83,141,0.4)',   backgroundColor: 'rgba(196,83,141,0.1)' },
+  // 80-89 Maroon
+  { min: 80,  max: 89,  name: 'Master',       borderColor: '#8e3544', glowColor: 'rgba(142,53,68,0.5)',    backgroundColor: 'rgba(142,53,68,0.1)' },
+  // 90-99 Bronze
+  { min: 90,  max: 99,  name: 'Grandmaster',  borderColor: '#987556', glowColor: 'rgba(152,117,86,0.5)',   backgroundColor: 'rgba(152,117,86,0.1)' },
+  // 100+ Legendary (shimmer)
+  { min: 100, max: Infinity, name: 'Legendary', borderColor: '#e1e1e1', glowColor: 'rgba(225,225,225,0.7)', backgroundColor: 'rgba(225,225,225,0.15)', shimmer: true, gradient: 'linear-gradient(135deg,#e1e1e1,#b0b0b0,#e1e1e1)' },
 ];
 
 /** Use the Steam bracket system (from steamXP) to derive level from XP. */

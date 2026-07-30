@@ -27,10 +27,10 @@ export const HOBBIES: Hobby[] = [
     description: 'Fuelled by filter coffee — the stronger, the better',
   },
   {
-    id: 'horse-riding',
-    icon: '🐴',
-    title: 'Horse Riding',
-    description: 'Finding balance and freedom in the saddle — nothing clears the mind like a good ride',
+    id: 'bike-riding',
+    icon: '🏍️',
+    title: 'Bike Riding',
+    description: 'Finding balance and freedom on two wheels — nothing clears the mind like a good ride',
   },
   {
     id: 'travel',
@@ -40,10 +40,10 @@ export const HOBBIES: Hobby[] = [
     active: true,
   },
   {
-    id: 'astrophotography',
-    icon: '🔭',
-    title: 'Astrophotography',
-    description: 'Capturing deep-sky objects at night — where code meets cosmos',
+    id: 'cooking',
+    icon: '🍳',
+    title: 'Cooking',
+    description: 'Experimenting with new recipes and flavors — where code meets the kitchen',
   },
 ];
 

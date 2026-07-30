@@ -5,10 +5,8 @@ import styles from './LanguageSwitcher.module.css';
 const LANGUAGES: { id: Language; label: string }[] = [
   { id: 'english', label: 'English' },
   { id: 'sarcasm', label: 'Sarcasm' },
-  { id: 'binary', label: 'Binary' },
-  { id: 'emoji', label: 'Emoji Only' },
-  { id: 'lorem', label: 'Lorem Ipsum' },
-  { id: 'youngStunnah', label: 'Young Stunnah' },
+  { id: 'brainrot', label: 'Brainrot' },
+  { id: 'corpo', label: 'Corporate' },
 ];
 
 export default function LanguageSwitcher() {

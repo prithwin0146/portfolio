@@ -7,10 +7,8 @@ import Avatar from '../Avatar/Avatar';
 const LANGUAGES: { id: Language; label: string; flag: string; preview: string }[] = [
   { id: 'english',      label: 'English',       flag: '🇬🇧', preview: 'Normal mode' },
   { id: 'sarcasm',      label: 'Sarcasm',        flag: '😏', preview: 'Obviously genius' },
-  { id: 'binary',       label: 'Binary',         flag: '🤖', preview: '01001000 01101001' },
-  { id: 'emoji',        label: 'Emoji Only',     flag: '😀', preview: '📦 🚀 ⭐ 💻' },
-  { id: 'lorem',        label: 'Lorem Ipsum',    flag: '📜', preview: 'Lorem ipsum...' },
-  { id: 'youngStunnah', label: 'Young Stunnah',  flag: '🔥', preview: 'Petmalu, no cap!' },
+  { id: 'brainrot',     label: 'Brainrot',       flag: '🧠', preview: 'W Rizz' },
+  { id: 'corpo',        label: 'Corporate',      flag: '👔', preview: 'Let\'s circle back' },
 ];
 
 const NAV_ITEMS = [

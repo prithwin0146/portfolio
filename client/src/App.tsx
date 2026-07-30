@@ -4,7 +4,6 @@ import './App.css';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { useLenis } from './hooks/useLenis';
 import { useActiveSection } from './hooks/useActiveSection';
-import { useScrollSkew } from './hooks/useScrollSkew';
 import { initializeAchievementSystem, trackSectionVisit } from './services/achievementService';
 import Preloader from './components/Preloader/Preloader';
 import CustomCursor from './components/CustomCursor/CustomCursor';
@@ -18,13 +17,13 @@ import SteamNotifications from './components/SteamNotifications/SteamNotificatio
 import AchievementModal from './components/AchievementModal/AchievementModal';
 import InfoModal from './components/InfoModal/InfoModal';
 import SidePanel from './components/SidePanel/SidePanel';
+import MobileTabBar from './components/MobileTabBar/MobileTabBar';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import DeveloperLevel from './components/DeveloperLevel/DeveloperLevel';
 import Experience from './components/Experience/Experience';
 import AchievementShowcase from './components/AchievementShowcase/AchievementShowcase';
 import Projects from './components/Projects/Projects';
-import GitHubHub from './components/GitHubHub/GitHubHub';
 import Skills from './components/Skills/Skills';
 import ResumeViewer from './components/ResumeViewer/ResumeViewer';
 import Hobbies from './components/Hobbies/Hobbies';
@@ -44,10 +43,6 @@ function App() {
 
   // Lenis smooth scroll (modals dispatch lenis:stop/start events themselves)
   useLenis();
-
-  // Scroll velocity skew effect
-  useScrollSkew();
-
 
   return (
     <LanguageProvider>
@@ -140,14 +135,13 @@ function MainPortfolio({
             <SectionDivider />
             <ResumeViewer />
             <SectionDivider />
-            <GitHubHub />
-            <SectionDivider />
             <Hobbies />
             <SectionDivider />
             <Contact />
             <Footer />
           </main>
         </div>
+        <MobileTabBar activeSection={activeSection} />
       </div>
     </>
   );

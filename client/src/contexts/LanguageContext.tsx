@@ -11,166 +11,6 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
-// ── Binary encoder ──
-function toBinary(text: string): string {
-  return text
-    .split('')
-    .map((c) => c.charCodeAt(0).toString(2).padStart(8, '0'))
-    .join(' ');
-}
-
-// ── Emoji map ──
-const EMOJI_MAP: Record<string, string> = {
-  // Nav & sections
-  'nav.profile': '👤 Profile',
-  'nav.projects': '📦 Projects',
-  'nav.contact': '📧 Contact',
-  'nav.skills': '🧠 Skills',
-  'nav.services': '⚙️ Services',
-  'nav.profile.sub': '',
-  'nav.projects.sub': '',
-  'nav.contact.sub': '',
-  'nav.skills.sub': '',
-  'nav.services.sub': '',
-  // Logo
-  'logo': '🎮 PRITHWIN',
-  // Section headers
-  'section.about.title': '👤 About ',
-  'section.about.accent': 'Me',
-  'section.about.sub': '🔎 The human behind the pixels',
-  'section.services.title': '⚙️ What I ',
-  'section.services.accent': 'Build',
-  'section.services.sub': '🛠️ Turning ☕ into 💻',
-  'section.projects.title': '📦 My ',
-  'section.projects.accent': 'Work',
-  'section.projects.sub': '⭐ Ship it!',
-  'section.skills.title': '🧠 Tech ',
-  'section.skills.accent': 'Stack',
-  'section.skills.sub': '💪 Tools of the trade',
-  'section.testimonials.title': '💬 What People ',
-  'section.testimonials.accent': 'Say',
-  'section.testimonials.sub': '🗣️ Word on the street',
-  'section.contact.title': '📧 Say ',
-  'section.contact.accent': 'Hello',
-  'section.contact.sub': '🤝 Let\'s connect!',
-  'section.devLevel.title': '🎮 Developer ',
-  'section.devLevel.accent': 'Level',
-  'section.devLevel.sub': '📊 XP grinding since 2024',
-  'section.achievements.title': '🏆 Achievement ',
-  'section.achievements.accent': 'Showcase',
-  'section.achievements.sub': '🎖️ Badges unlocked',
-  'section.githubStats.title': '📊 GitHub ',
-  'section.githubStats.accent': 'Stats',
-  'section.githubStats.sub': '📈 Commit = Life',
-  'section.githubReplay.title': '🎬 GitHub ',
-  'section.githubReplay.accent': 'Replay',
-  'section.githubReplay.sub': '📈 Rewind the code',
-  'section.recentActivity.title': '⏱️ Recent ',
-  'section.recentActivity.accent': 'Activity',
-  'section.recentActivity.sub': '📋 Latest moves',
-  'section.resume.title': '📄 ',
-  'section.resume.accent': 'Resume',
-  'section.resume.sub': '📝 The receipts',
-  'section.hobbies.title': '✨ Hobbies & ',
-  'section.hobbies.accent': 'Interests',
-  'section.hobbies.sub': '🎯 Off-duty mode',
-  // Stats
-  'stats.repos': '📁 REPOS',
-  'stats.followers': '👥 SQUAD',
-  'stats.stars': '⭐ STARS',
-  'stats.experience': '⏰ YEARS',
-  'stats.achievements': '🏆 BADGES',
-  // Dev level
-  'devLevel.title': '🎮 Level {level} Developer',
-  'devLevel.status': '🟢 Ready to 🤝',
-  // Info
-  'header.info': 'ℹ️',
-  // Bio
-  'about.bio': '👨‍💻 Building 🌐 with ☕ and ✨ — from landing pages 📄 to full-stack apps 🚀. Let\'s make something amazing 💫 together!',
-  'about.location': '📍 India 🇮🇳 · 🌍 Working everywhere',
-  'about.statProjects': '📦\nShipped',
-  'about.statSatisfaction': '😊\nHappy',
-  'about.statResponse': '⚡\nFast',
-};
-
-// ── Lorem Ipsum pool ──
-const LOREM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.';
-
-function loremShort(): string {
-  return LOREM.slice(0, 30 + Math.floor(Math.random() * 20)) + '...';
-}
-
-// ── Young Stunnah slang ──
-const STUNNAH_MAP: Record<string, string> = {
-  'logo': "PRITHWIN'S CRIB",
-  'nav.profile': 'Who Dis',
-  'nav.projects': 'My Drops',
-  'nav.contact': 'Holla At Me',
-  'nav.skills': 'The Sauce',
-  'nav.services': 'The Grind',
-  'nav.profile.sub': '',
-  'nav.projects.sub': '',
-  'nav.contact.sub': '',
-  'nav.skills.sub': '',
-  'nav.services.sub': '',
-  'header.info': 'THE TEA',
-  // Section headers
-  'section.about.title': "Who's ",
-  'section.about.accent': 'This Guy',
-  'section.about.sub': 'The origin story, no cap',
-  'section.services.title': 'The ',
-  'section.services.accent': 'Grind',
-  'section.services.sub': 'What I bring to the table frfr',
-  'section.projects.title': 'The ',
-  'section.projects.accent': 'Drops',
-  'section.projects.sub': 'Certified bangers only',
-  'section.skills.title': "What's the ",
-  'section.skills.accent': 'Sauce',
-  'section.skills.sub': 'The full toolkit, bussin',
-  'section.testimonials.title': 'Real Ones ',
-  'section.testimonials.accent': 'Speaking',
-  'section.testimonials.sub': 'Straight fax no printer',
-  'section.contact.title': 'Holla ',
-  'section.contact.accent': 'At Me',
-  'section.contact.sub': "Slide into my inbox, let's cook",
-  'section.devLevel.title': 'Gamer ',
-  'section.devLevel.accent': 'Stats',
-  'section.devLevel.sub': 'XP grind never stops',
-  'section.achievements.title': 'The ',
-  'section.achievements.accent': 'Flex',
-  'section.achievements.sub': 'Trophies go brrrr',
-  'section.githubStats.title': 'Git ',
-  'section.githubStats.accent': 'Clout',
-  'section.githubStats.sub': 'The numbers speak, fam',
-  'section.githubReplay.title': 'The ',
-  'section.githubReplay.accent': 'Highlights',
-  'section.githubReplay.sub': 'Season recap, sheesh',
-  'section.recentActivity.title': 'Recent ',
-  'section.recentActivity.accent': 'Moves',
-  'section.recentActivity.sub': "Peep what I've been up to",
-  'section.resume.title': 'The ',
-  'section.resume.accent': 'Receipt',
-  'section.resume.sub': 'Proof of the grind',
-  'section.hobbies.title': 'Off the ',
-  'section.hobbies.accent': 'Clock',
-  'section.hobbies.sub': 'Touch grass mode activated',
-  // Stats
-  'stats.repos': 'CODE DROPS',
-  'stats.followers': 'THE SQUAD',
-  'stats.stars': 'CLOUT POINTS',
-  'stats.experience': 'TIME IN THE GAME',
-  'stats.achievements': 'TROPHIES',
-  // Dev level
-  'devLevel.title': 'Lvl {level} Goat',
-  'devLevel.status': 'Ready to collab frfr',
-  // Bio
-  'about.bio': "Yo, I build fire websites that make businesses pop off online — landing pages, full-stack apps, the whole nine. Clean code, sick designs, deployed and bussin. Let's cook something crazy together, no cap.",
-  'about.location': 'Based in India · shipping worldwide no cap',
-  'about.statProjects': 'Projects\nShipped',
-  'about.statSatisfaction': "They're\nVibing",
-  'about.statResponse': 'Reply\nSpeed',
-};
-
 // ── Translation tables ──
 const TRANSLATIONS: Record<string, Record<string, string>> = {
   english: {
@@ -186,46 +26,46 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     'nav.skills.sub': '',
     'nav.services.sub': '',
     'header.info': 'INFO',
-    // Section headers — title, accent, subtitle
+    // Section headers
     'section.about.title': 'About ',
     'section.about.accent': 'Me',
-    'section.about.sub': '',
+    'section.about.sub': 'The human behind the pixels',
     'section.services.title': 'My ',
     'section.services.accent': 'Services',
-    'section.services.sub': '',
+    'section.services.sub': 'What I can do for you',
     'section.projects.title': 'Featured ',
     'section.projects.accent': 'Projects',
-    'section.projects.sub': '',
+    'section.projects.sub': 'Selected works',
     'section.skills.title': 'Technical ',
     'section.skills.accent': 'Skills',
-    'section.skills.sub': '',
+    'section.skills.sub': 'Tools of the trade',
     'section.testimonials.title': 'What People ',
     'section.testimonials.accent': 'Say',
-    'section.testimonials.sub': '',
+    'section.testimonials.sub': 'Client feedback',
     'section.contact.title': "Let's ",
     'section.contact.accent': 'Work Together',
-    'section.contact.sub': '',
+    'section.contact.sub': 'Get in touch',
     'section.devLevel.title': 'Developer ',
     'section.devLevel.accent': 'Level',
-    'section.devLevel.sub': '',
+    'section.devLevel.sub': 'Current progression',
     'section.achievements.title': 'Achievement ',
     'section.achievements.accent': 'Showcase',
-    'section.achievements.sub': '',
+    'section.achievements.sub': 'Unlocked badges',
     'section.githubStats.title': 'GitHub ',
     'section.githubStats.accent': 'Stats',
-    'section.githubStats.sub': '',
+    'section.githubStats.sub': 'Code analytics',
     'section.githubReplay.title': 'GitHub ',
     'section.githubReplay.accent': 'Replay',
-    'section.githubReplay.sub': '',
+    'section.githubReplay.sub': 'Code history visualization',
     'section.recentActivity.title': 'Recent ',
     'section.recentActivity.accent': 'Activity',
-    'section.recentActivity.sub': '',
+    'section.recentActivity.sub': 'Latest events',
     'section.resume.title': '',
     'section.resume.accent': 'Resume',
-    'section.resume.sub': '',
+    'section.resume.sub': 'Professional experience',
     'section.hobbies.title': 'Hobbies & ',
     'section.hobbies.accent': 'Interests',
-    'section.hobbies.sub': '',
+    'section.hobbies.sub': 'Beyond the screen',
     // Stats sidebar
     'stats.repos': 'REPOSITORIES',
     'stats.followers': 'FOLLOWERS',
@@ -248,85 +88,232 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     'hero.title4': 'Your Next Web Partner',
   },
   sarcasm: {
-    'logo': "PRITHWIN'S HUMBLE\nPORTFOLIO",
-    'nav.profile': 'Profile',
-    'nav.projects': 'Projects',
-    'nav.contact': 'Contact',
-    'nav.skills': 'Skills',
-    'nav.services': 'Services',
-    'nav.profile.sub': '(Totally Unique)',
-    'nav.projects.sub': '(Revolutionary)',
-    'nav.contact.sub': "(I'll Respond... Promise)",
-    'nav.skills.sub': '(Allegedly)',
-    'nav.services.sub': '(Groundbreaking)',
-    'header.info': 'INFO (SPOILERS)',
+    'logo': "PRITHWIN'S EGO",
+    'nav.profile': 'Narcissism',
+    'nav.projects': 'Shiny Things',
+    'nav.contact': 'Spam Me',
+    'nav.skills': 'Buzzwords',
+    'nav.services': 'Overpriced Gigs',
+    'nav.profile.sub': '(Who cares)',
+    'nav.projects.sub': '(Copy-pasted)',
+    'nav.contact.sub': "(I won't read it)",
+    'nav.skills.sub': '(I googled these)',
+    'nav.services.sub': '(Money please)',
+    'header.info': 'TOS (IGNORED)',
     // Section headers
-    'section.about.title': 'About ',
+    'section.about.title': 'Behold ',
     'section.about.accent': 'Me',
-    'section.about.sub': 'Totally Unique',
-    'section.services.title': 'My ',
-    'section.services.accent': 'Services',
-    'section.services.sub': 'Groundbreaking',
-    'section.projects.title': 'Featured ',
-    'section.projects.accent': 'Experiments',
-    'section.projects.sub': 'Revolutionary',
-    'section.skills.title': 'Technical ',
-    'section.skills.accent': 'Skills',
-    'section.skills.sub': 'Allegedly',
-    'section.testimonials.title': 'What People ',
-    'section.testimonials.accent': 'Say',
-    'section.testimonials.sub': 'Definitely Not Fake',
-    'section.contact.title': "Let's ",
-    'section.contact.accent': 'Work Together',
-    'section.contact.sub': "I'll Respond... Promise",
-    'section.devLevel.title': 'Developer ',
-    'section.devLevel.accent': 'Level',
-    'section.devLevel.sub': 'Self-Proclaimed',
-    'section.achievements.title': 'Achievement ',
-    'section.achievements.accent': 'Showcase',
-    'section.achievements.sub': 'Participation Trophies',
-    'section.githubStats.title': 'GitHub ',
-    'section.githubStats.accent': 'Stats',
-    'section.githubStats.sub': 'Inflated',
-    'section.githubReplay.title': 'GitHub ',
-    'section.githubReplay.accent': 'Replay',
-    'section.githubReplay.sub': 'Reliving The Glory',
-    'section.recentActivity.title': 'Recent ',
-    'section.recentActivity.accent': 'Activity',
-    'section.recentActivity.sub': "Proof I'm Alive",
-    'section.resume.title': '',
-    'section.resume.accent': 'Resume',
-    'section.resume.sub': 'Exaggerated',
-    'section.hobbies.title': 'Hobbies & ',
-    'section.hobbies.accent': 'Interests',
-    'section.hobbies.sub': 'Procrastination Methods',
+    'section.about.sub': 'The main character',
+    'section.services.title': 'Ways to ',
+    'section.services.accent': 'Pay Me',
+    'section.services.sub': 'Empty promises included',
+    'section.projects.title': 'Glorified ',
+    'section.projects.accent': 'Tutorials',
+    'section.projects.sub': 'I barely understand the code',
+    'section.skills.title': 'Acronym ',
+    'section.skills.accent': 'Soup',
+    'section.skills.sub': 'I read the docs once',
+    'section.testimonials.title': 'Paid ',
+    'section.testimonials.accent': 'Actors',
+    'section.testimonials.sub': 'My mom thinks I\'m great',
+    'section.contact.title': "Please ",
+    'section.contact.accent': 'Hire Me',
+    'section.contact.sub': 'I have bills to pay',
+    'section.devLevel.title': 'Imaginary ',
+    'section.devLevel.accent': 'Status',
+    'section.devLevel.sub': 'Meaningless numbers',
+    'section.achievements.title': 'Participation ',
+    'section.achievements.accent': 'Trophies',
+    'section.achievements.sub': 'For doing the bare minimum',
+    'section.githubStats.title': 'Green Square ',
+    'section.githubStats.accent': 'Farming',
+    'section.githubStats.sub': 'Changing typos in READMEs',
+    'section.githubReplay.title': 'Commit ',
+    'section.githubReplay.accent': 'Forgery',
+    'section.githubReplay.sub': 'Pushing to main on Fridays',
+    'section.recentActivity.title': 'Desperate ',
+    'section.recentActivity.accent': 'Moves',
+    'section.recentActivity.sub': 'Trying to stay relevant',
+    'section.resume.title': 'Exaggerated ',
+    'section.resume.accent': 'History',
+    'section.resume.sub': 'ChatGPT wrote this',
+    'section.hobbies.title': 'Touching ',
+    'section.hobbies.accent': 'Grass',
+    'section.hobbies.sub': 'A foreign concept',
     // Stats sidebar
-    'stats.repos': 'CODE DUMPS',
-    'stats.followers': 'STALKERS',
-    'stats.stars': 'PITY STARS',
-    'stats.experience': 'YEARS OF PRETENDING',
-    'stats.achievements': 'PARTICIPATION TROPHIES',
+    'stats.repos': 'ABANDONED APPS',
+    'stats.followers': 'BOTS',
+    'stats.stars': 'SYMPATHY VOTES',
+    'stats.experience': 'YEARS OF STRESS',
+    'stats.achievements': 'PIXELS',
     // Dev level
-    'devLevel.title': 'Imaginary Level {level} Code Monkey',
-    'devLevel.status': 'Definitely not desperate for opportunities',
+    'devLevel.title': 'Level {level} Imposter',
+    'devLevel.status': 'Googling how to center a div',
     // About bio
-    'about.bio': "Just another genius from India (humble brag) — allegedly building websites while mostly Googling errors. Got some certificates once, got some PDFs to prove it.",
-    'about.location': 'Based in India · "Working" globally',
-    'about.statProjects': 'Projects\n"Delivered"',
-    'about.statSatisfaction': "They're\n\"Happy\"",
-    'about.statResponse': 'Response\n(Eventually)',
-    'hero.greeting': "Behold, it's",
-    'hero.title1': 'Self-Proclaimed Designer',
-    'hero.title2': 'Copy-Paste Developer',
-    'hero.title3': 'I Build Websites That Crash',
-    'hero.title4': 'Your Next Mistake',
+    'about.bio': "Just another self-proclaimed 'Full-Stack Developer' who spends 90% of the time fixing npm dependency errors and 10% actually coding. Hire me before AI takes my job.",
+    'about.location': 'Earth · Probably inside',
+    'about.statProjects': 'Projects\n"Finished"',
+    'about.statSatisfaction': 'Clients\nFooled',
+    'about.statResponse': 'Anxiety\nSpikes',
+    'hero.greeting': "Brace yourself, I'm",
+    'hero.title1': 'Div Centerer',
+    'hero.title2': 'StackOverflow Copier',
+    'hero.title3': 'I Break Production',
+    'hero.title4': 'Your Next Headache',
   },
+  brainrot: {
+    'logo': "PRITHWIN.W",
+    'nav.profile': 'The Lore',
+    'nav.projects': 'Cook Session',
+    'nav.contact': 'Slide In',
+    'nav.skills': 'The Sauce',
+    'nav.services': 'The Hustle',
+    'nav.profile.sub': '(No cap)',
+    'nav.projects.sub': '(Let him cook)',
+    'nav.contact.sub': '(DMs open)',
+    'nav.skills.sub': '(Built different)',
+    'nav.services.sub': '(W Rizz)',
+    'header.info': 'THE TEA',
+    // Section headers
+    'section.about.title': 'Main Character ',
+    'section.about.accent': 'Energy',
+    'section.about.sub': 'Aura level: over 9000',
+    'section.services.title': 'Catching ',
+    'section.services.accent': 'Dubs',
+    'section.services.sub': 'Securing the bag',
+    'section.projects.title': 'Certified ',
+    'section.projects.accent': 'Bangers',
+    'section.projects.sub': 'Cooked these up',
+    'section.skills.title': 'Gigachad ',
+    'section.skills.accent': 'Stack',
+    'section.skills.sub': 'Valid tools only',
+    'section.testimonials.title': 'Vibe ',
+    'section.testimonials.accent': 'Check',
+    'section.testimonials.sub': 'Passed with flying colors',
+    'section.contact.title': "Drop A ",
+    'section.contact.accent': 'Ping',
+    'section.contact.sub': 'Don\'t leave me on read',
+    'section.devLevel.title': 'Sigma ',
+    'section.devLevel.accent': 'Grindset',
+    'section.devLevel.sub': 'Maxing out stats',
+    'section.achievements.title': 'Massive ',
+    'section.achievements.accent': 'W\'s',
+    'section.achievements.sub': 'Collecting Ws like Pokemon',
+    'section.githubStats.title': 'Git ',
+    'section.githubStats.accent': 'Rizz',
+    'section.githubStats.sub': 'Green squares hitting different',
+    'section.githubReplay.title': 'Code ',
+    'section.githubReplay.accent': 'Rewind',
+    'section.githubReplay.sub': 'Core memories unlocked',
+    'section.recentActivity.title': 'Current ',
+    'section.recentActivity.accent': 'Era',
+    'section.recentActivity.sub': 'What\'s the move',
+    'section.resume.title': 'The ',
+    'section.resume.accent': 'Receipts',
+    'section.resume.sub': 'Proof of the grind',
+    'section.hobbies.title': 'Side ',
+    'section.hobbies.accent': 'Quests',
+    'section.hobbies.sub': 'NPC activities',
+    // Stats sidebar
+    'stats.repos': 'REPO DUBS',
+    'stats.followers': 'THE SQUAD',
+    'stats.stars': 'GLAZE POINTS',
+    'stats.experience': 'YEARS LOCKED IN',
+    'stats.achievements': 'FLEXES',
+    // Dev level
+    'devLevel.title': 'Level {level} Sigma',
+    'devLevel.status': 'Locked in 🔒',
+    // About bio
+    'about.bio': "Yo, I'm literally just out here building sites that have insane aura. If your current website is giving NPC energy, hit me up and we'll hit it with that W rizz. No cap, strictly vibes.",
+    'about.location': 'India · Living in your walls',
+    'about.statProjects': 'Cooks\nDelivered',
+    'about.statSatisfaction': 'Vibes\nChecked',
+    'about.statResponse': 'Speedrun\nTime',
+    'hero.greeting': "What's good, I'm",
+    'hero.title1': 'Aesthetic Architect',
+    'hero.title2': 'Code Alchemist',
+    'hero.title3': 'I Build Sites With Aura',
+    'hero.title4': 'Your Next W',
+  },
+  corpo: {
+    'logo': "PRITHWIN ENTERPRISES",
+    'nav.profile': 'Executive Summary',
+    'nav.projects': 'Deliverables',
+    'nav.contact': 'Touch Base',
+    'nav.skills': 'Core Competencies',
+    'nav.services': 'Value Add',
+    'nav.profile.sub': '(Synergy)',
+    'nav.projects.sub': '(KPIs met)',
+    'nav.contact.sub': '(Circle back)',
+    'nav.skills.sub': '(Leveraged)',
+    'nav.services.sub': '(Paradigm shift)',
+    'header.info': 'MEMO',
+    // Section headers
+    'section.about.title': 'Strategic ',
+    'section.about.accent': 'Overview',
+    'section.about.sub': 'Holistic perspective',
+    'section.services.title': 'Value ',
+    'section.services.accent': 'Proposition',
+    'section.services.sub': 'Synergistic solutions',
+    'section.projects.title': 'Actionable ',
+    'section.projects.accent': 'Deliverables',
+    'section.projects.sub': 'Optimized workflows',
+    'section.skills.title': 'Core ',
+    'section.skills.accent': 'Competencies',
+    'section.skills.sub': 'Leveraging technology',
+    'section.testimonials.title': 'Stakeholder ',
+    'section.testimonials.accent': 'Feedback',
+    'section.testimonials.sub': 'Q3 Performance Review',
+    'section.contact.title': "Let's ",
+    'section.contact.accent': 'Circle Back',
+    'section.contact.sub': 'Take this offline',
+    'section.devLevel.title': 'Corporate ',
+    'section.devLevel.accent': 'Ladder',
+    'section.devLevel.sub': 'Quarterly growth',
+    'section.achievements.title': 'Performance ',
+    'section.achievements.accent': 'Metrics',
+    'section.achievements.sub': 'OKRs achieved',
+    'section.githubStats.title': 'Version Control ',
+    'section.githubStats.accent': 'Analytics',
+    'section.githubStats.sub': 'ROI on commits',
+    'section.githubReplay.title': 'Sprint ',
+    'section.githubReplay.accent': 'Retrospective',
+    'section.githubReplay.sub': 'Agile methodologies',
+    'section.recentActivity.title': 'Bandwidth ',
+    'section.recentActivity.accent': 'Allocation',
+    'section.recentActivity.sub': 'Current action items',
+    'section.resume.title': 'Curriculum ',
+    'section.resume.accent': 'Vitae',
+    'section.resume.sub': 'Career trajectory',
+    'section.hobbies.title': 'Work-Life ',
+    'section.hobbies.accent': 'Balance',
+    'section.hobbies.sub': 'Mandatory wellness',
+    // Stats sidebar
+    'stats.repos': 'ASSETS DEPLOYED',
+    'stats.followers': 'NETWORK CONNECTIONS',
+    'stats.stars': 'ENDORSEMENTS',
+    'stats.experience': 'FISCAL YEARS',
+    'stats.achievements': 'KPIs HIT',
+    // Dev level
+    'devLevel.title': 'Tier {level} Resource',
+    'devLevel.status': 'Aligning paradigms',
+    // About bio
+    'about.bio': "As a proactive, solutions-oriented professional, I leverage cross-functional paradigms to deliver robust, scalable web assets that drive ROI and synergize with enterprise-level objectives. Let's touch base and drill down on your KPIs.",
+    'about.location': 'India · Remote hybrid model',
+    'about.statProjects': 'Assets\nDeployed',
+    'about.statSatisfaction': 'Stakeholder\nBuy-in',
+    'about.statResponse': 'Turnaround\nTime',
+    'hero.greeting': "Greetings, I am",
+    'hero.title1': 'Digital Solutions Architect',
+    'hero.title2': 'Full-Stack Synergist',
+    'hero.title3': 'I Maximize Digital ROI',
+    'hero.title4': 'Your Next Asset',
+  }
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(getStoredLanguage);
 
-  // Subscribe to external language changes (e.g. other tabs via service)
   useEffect(() => {
     const unsubscribe = onLanguageChange((newLang) => {
       setLanguageState(newLang);
@@ -335,47 +322,19 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setLanguage = useCallback((lang: Language) => {
-    persistLanguage(lang);       // persist to localStorage + notify listeners
-    setLanguageState(lang);      // update local React state immediately
+    // If the language selected from the UI isn't in our new dict, fallback to english
+    const safeLang = TRANSLATIONS[lang] ? lang : 'english';
+    persistLanguage(safeLang as Language);
+    setLanguageState(safeLang as Language);
   }, []);
 
   const t = useCallback(
     (key: string): string => {
       const english = TRANSLATIONS.english[key] ?? key;
-
-      if (language === 'english') return english;
-
-      // Sarcasm: full table lookup, fallback to english
-      if (language === 'sarcasm') {
-        const table = TRANSLATIONS.sarcasm;
-        return table[key] ?? english;
+      const dict = TRANSLATIONS[language];
+      if (dict && dict[key]) {
+        return dict[key];
       }
-
-      // Young Stunnah: full map lookup, fallback to english
-      if (language === 'youngStunnah') {
-        return STUNNAH_MAP[key] ?? english;
-      }
-
-      // Emoji: only section headings get emoji replacements, everything else stays English
-      if (language === 'emoji') {
-        const isSectionKey =
-          key.startsWith('section.') &&
-          (key.endsWith('.title') || key.endsWith('.accent') || key.endsWith('.sub'));
-        if (isSectionKey) return EMOJI_MAP[key] ?? english;
-        return english;
-      }
-
-      // Binary & Lorem: ONLY section headings transform — bio, nav, typing titles stay English
-      if (language === 'binary' || language === 'lorem') {
-        const isSectionKey =
-          key.startsWith('section.') &&
-          (key.endsWith('.title') || key.endsWith('.accent') || key.endsWith('.sub'));
-        if (!isSectionKey) return english;
-        if (key.endsWith('.sub')) return '';
-        if (language === 'binary') return toBinary(english.replace(/\n/g, ' ').trim());
-        if (language === 'lorem') return loremShort();
-      }
-
       return english;
     },
     [language],

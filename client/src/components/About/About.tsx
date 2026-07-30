@@ -61,32 +61,32 @@ export default function About() {
       <div className="mt-16 space-y-20">
 
         {/* ── ROW 1: Large quote + Stats ── */}
-        <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto] gap-12 xl:gap-20 items-start">
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto] gap-12 xl:gap-0 items-start">
 
           {/* Quote block */}
-          <motion.div {...anim(0)} className="relative">
-            <div className="absolute -top-2 -left-1 font-display text-[7rem] leading-none text-steam-blue/10 select-none pointer-events-none">"</div>
-            <h2 className="relative font-display text-3xl md:text-[2.6rem] lg:text-5xl font-bold tracking-tight text-white leading-[1.1] pl-4 border-l-[3px] border-steam-blue">
+          <motion.div {...anim(0)} className="relative z-10 xl:pr-12">
+            <div className="absolute -top-10 -left-6 font-display text-[12rem] leading-none text-steam-blue/5 select-none pointer-events-none">"</div>
+            <h2 className="relative font-display text-4xl md:text-[3.5rem] lg:text-[4.5rem] font-black tracking-tighter text-white leading-[0.95] pl-6 border-l-[4px] border-steam-blue">
               I turn concepts into{' '}
               <em className="not-italic text-steam-blue">polished,{' '}
               production-ready</em>{' '}software.
             </h2>
-            <div className="mt-8 pl-4 border-l border-white/10">
-              <p className="text-base md:text-lg text-zinc-400 leading-relaxed max-w-2xl">
+            <div className="mt-12 pl-6 border-l-2 border-white/10">
+              <p className="text-lg md:text-xl text-zinc-400 leading-relaxed max-w-2xl font-medium tracking-tight">
                 {t('about.bio')}
               </p>
-              <div className="mt-6 flex items-center gap-4 flex-wrap">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-[0.2em]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="mt-10 flex items-center gap-6 flex-wrap">
+                <span className="inline-flex items-center gap-3 px-5 py-2.5 hud-card neon-border text-emerald-400 font-mono text-[11px] font-black uppercase tracking-[0.25em] shadow-[0_0_20px_rgba(52,211,153,0.15)] bg-emerald-500/5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_12px_rgba(52,211,153,0.8)]" />
                   Available for work
                 </span>
-                <span className="font-mono text-xs text-zinc-500">📍 {t('about.location')}</span>
+                <span className="font-mono text-xs text-zinc-500 font-bold tracking-[0.2em] uppercase">📍 {t('about.location')}</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Stat stack */}
-          <div className="flex flex-row xl:flex-col gap-4 shrink-0">
+          {/* Stat stack - Breaking the grid with negative margin on XL */}
+          <div className="flex flex-row xl:flex-col gap-6 shrink-0 xl:-ml-12 z-20 mt-8 xl:mt-0">
             {[
               { formatted: `${projectCount}+`,      label: t('about.statProjects'),     accent: '#a78bfa' },
               { formatted: `${satisfactionCount}%`,  label: t('about.statSatisfaction'), accent: '#34d399' },
@@ -95,13 +95,13 @@ export default function About() {
               <motion.div
                 key={i}
                 {...anim(i + 1)}
-                className="flex flex-col gap-1 px-5 py-4 border border-white/5 min-w-[130px] xl:min-w-[160px]"
-                style={{ borderTopColor: stat.accent, borderTopWidth: 2 }}
+                className="flex flex-col gap-2 px-6 py-5 min-w-[140px] xl:min-w-[200px] hud-card backdrop-blur-xl bg-[#09090b]/90 border border-white/5 transition-transform hover:-translate-y-1 hover:border-white/20"
+                style={{ borderTopColor: stat.accent, borderTopWidth: 3 }}
               >
-                <span className="font-display text-3xl xl:text-4xl font-black tracking-tight" style={{ color: stat.accent }}>
+                <span className="font-display text-4xl xl:text-5xl font-black tracking-tighter" style={{ color: stat.accent, textShadow: `0 0 24px ${stat.accent}50` }}>
                   {stat.formatted}
                 </span>
-                <span className="font-mono text-[9px] font-semibold tracking-widest text-zinc-500 uppercase whitespace-pre-line leading-tight">
+                <span className="font-mono text-[10px] font-bold tracking-[0.2em] text-zinc-400 uppercase whitespace-pre-line leading-relaxed">
                   {stat.label}
                 </span>
               </motion.div>
@@ -110,27 +110,27 @@ export default function About() {
         </div>
 
         {/* ── ROW 2: What I Build — 2x2 service grid ── */}
-        <motion.div {...anim(4)} className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5">
+        <motion.div {...anim(4)} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {SERVICES_PREVIEW.map((svc, i) => (
             <div
               key={i}
-              className="group flex flex-col gap-3 p-6 bg-zinc-950 transition-colors hover:bg-zinc-900/80 cursor-default"
+              className="group flex flex-col gap-3 p-6 hud-card transition-all duration-300 hover:border-steam-blue/30 steam-glow cursor-default relative overflow-hidden"
             >
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-steam-blue to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase group-hover:text-steam-blue transition-colors">
+                <span className="font-mono text-[11px] font-bold tracking-widest text-zinc-400 uppercase group-hover:text-steam-blue transition-colors">
                   {svc.label}
                 </span>
-                <span className="text-steam-blue/30 text-base leading-none group-hover:text-steam-blue/60 transition-colors">⬡</span>
+                <span className="text-steam-blue/20 text-base leading-none group-hover:text-steam-blue/60 transition-colors">⬡</span>
               </div>
               <p className="text-sm text-zinc-400 leading-relaxed group-hover:text-zinc-300 transition-colors">{svc.detail}</p>
               <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
                 {svc.tags.map(tag => (
-                  <span key={tag} className="font-mono text-[9px] tracking-wider px-2 py-0.5 border border-white/[0.06] text-zinc-600 group-hover:border-steam-blue/20 group-hover:text-zinc-500 transition-colors">
+                  <span key={tag} className="font-mono text-[9px] font-bold tracking-wider px-2 py-0.5 rounded-sm bg-white/5 border border-white/10 text-zinc-500 group-hover:border-steam-blue/30 group-hover:bg-steam-blue/10 group-hover:text-steam-blue transition-colors">
                     {tag}
                   </span>
                 ))}
               </div>
-              <div className="h-px w-0 bg-steam-blue transition-all duration-500 group-hover:w-full" />
             </div>
           ))}
         </motion.div>
@@ -138,22 +138,22 @@ export default function About() {
         {/* ── ROW 3: CTA strip ── */}
         <motion.div
           {...anim(5)}
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-4 border-t border-white/5"
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-6 border-t border-white/5"
         >
-          <p className="text-zinc-500 text-sm max-w-xs">
+          <p className="text-zinc-500 text-sm max-w-xs font-medium">
             Interested in working together? Let's talk about your next project.
           </p>
           <div className="flex gap-3 sm:ml-auto">
             <a
               href="https://github.com/prithwin0146"
               target="_blank" rel="noreferrer"
-              className="px-5 py-2.5 border border-white/10 text-zinc-400 font-mono text-xs hover:border-white/30 hover:text-white transition-all"
+              className="px-5 py-2.5 hud-card text-zinc-400 font-mono text-xs font-bold tracking-widest uppercase hover:text-white hover:border-white/20 transition-all"
             >
               GitHub ↗
             </a>
             <a
               href="#contact"
-              className="px-5 py-2.5 bg-steam-blue text-zinc-950 font-mono text-xs font-bold hover:brightness-110 transition-all"
+              className="px-6 py-2.5 bg-steam-blue text-zinc-950 font-mono text-xs font-black tracking-widest uppercase hover:brightness-110 hover:shadow-[0_0_15px_rgba(102,192,244,0.4)] transition-all"
             >
               Hire Me →
             </a>

@@ -4,10 +4,8 @@
 export type Language =
   | 'english'
   | 'sarcasm'
-  | 'binary'
-  | 'emoji'
-  | 'lorem'
-  | 'youngStunnah';
+  | 'brainrot'
+  | 'corpo';
 
 const LANGUAGE_KEY = 'portfolio_language';
 const listeners: Array<(language: Language) => void> = [];

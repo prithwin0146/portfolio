@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import type { AchievementWithStatus } from '../../types/achievements';
+import { audioService } from '../../services/audioService';
 import styles from './AchievementToast.module.css';
 
 interface ToastItem {
@@ -24,6 +25,7 @@ export default function AchievementToast() {
       showingRef.current = true;
       const next = queueRef.current.shift()!;
       setToasts((prev) => [...prev, next]);
+      audioService.playSuccess();
 
       // Auto-dismiss after 4s
       setTimeout(() => {

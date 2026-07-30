@@ -22,7 +22,8 @@
     padding: 1rem 1.25rem 2rem;
     padding-left: max(1.25rem, env(safe-area-inset-left));
     padding-right: max(1.25rem, env(safe-area-inset-right));
-    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    /* Add padding at the bottom to prevent content hiding behind MobileTabBar (70px height) */
+    padding-bottom: calc(max(2rem, env(safe-area-inset-bottom)) + 80px);
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
@@ -31,7 +32,7 @@
 
 @media (max-width: 480px) {
   .mainContent {
-    padding: 0.75rem 1rem 2rem;
+    padding: 0.75rem 1rem calc(2rem + 80px);
   }
 }
 

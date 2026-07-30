@@ -77,6 +77,9 @@ export default function CustomCursor() {
     };
     raf = requestAnimationFrame(animate);
 
+    // Add class to hide native cursor
+    document.body.classList.add('has-custom-cursor');
+
     return () => {
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseenter', onEnter);
@@ -84,6 +87,7 @@ export default function CustomCursor() {
       observer.disconnect();
       clearTimeout(mutationTimeout);
       cancelAnimationFrame(raf);
+      document.body.classList.remove('has-custom-cursor');
     };
   }, []);
 

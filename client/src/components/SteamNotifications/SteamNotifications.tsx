@@ -21,35 +21,31 @@ interface NotifTemplate {
 }
 
 const NOTIFICATIONS: NotifTemplate[] = [
-  // Real Friends (Satire)
-  { type: 'playing',      name: 'Dwight',           message: 'is now playing',          action: 'Beet Farm Simulator 2025',         avatar: 'https://avatars.akamai.steamstatic.com/348bfcc2f5e138027a503aabe6fcc456920c2ffc_full.jpg' },
-  { type: 'invite',       name: 'Jomar',            message: 'has invited you to',      action: 'the parlor (no escape)',           avatar: 'https://avatars.akamai.steamstatic.com/292cd01bfcde8d57f15f0c5916ccd6c01a324d99_full.jpg' },
-  { type: 'achievement',  name: 'Banjo',            message: 'unlocked achievement:',   action: 'Actually Touched Grass',           avatar: 'https://avatars.akamai.steamstatic.com/84445a5904b524abdc0ba160401d7b125ec649eb_full.jpg' },
   // Friend Online
-  { type: 'friend-online', name: 'Bill Gates',       message: 'is now online',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=BillGates' },
-  { type: 'friend-online', name: 'Elon Musk',        message: 'is now online',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ElonMusk' },
-  { type: 'friend-online', name: 'Mark Zuckerberg',  message: 'is now online in the Metaverse', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Zuckerberg' },
-  { type: 'friend-online', name: 'Steve Jobs',       message: 'is now online',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=SteveJobs' },
+  { type: 'friend-online', name: 'Gabe Newell',      message: 'is now online',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gaben' },
+  { type: 'friend-online', name: 'Todd Howard',      message: 'is now online',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Todd' },
+  { type: 'friend-online', name: 'Junior Dev',       message: 'is now online',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Junior' },
+  
   // Playing Games
-  { type: 'playing',      name: 'Elon Musk',        message: 'is now playing',          action: 'Twitter Takeover Simulator',       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ElonMusk' },
-  { type: 'playing',      name: 'Mark Zuckerberg',  message: 'is now playing',          action: 'Metaverse: Population 1',          avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Zuckerberg' },
-  { type: 'playing',      name: 'Jeff Bezos',       message: 'is now playing',          action: 'Rocket League (literally)',        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Bezos' },
-  { type: 'playing',      name: 'Bill Gates',       message: 'is now playing',          action: 'Minesweeper (Classic)',            avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=BillGates' },
-  { type: 'playing',      name: 'Satoshi Nakamoto', message: 'is now playing',          action: 'Hide and Seek',                    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Satoshi' },
+  { type: 'playing',      name: 'Todd Howard',       message: 'is now playing',          action: 'Skyrim: Refrigerator Edition',     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Todd' },
+  { type: 'playing',      name: 'Junior Dev',        message: 'is now playing',          action: 'npm install Simulator 2025',       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Junior' },
+  { type: 'playing',      name: 'Senior Dev',        message: 'is now playing',          action: 'Fixing Production (Survival Horror)', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Senior' },
+  { type: 'playing',      name: 'Hideo Kojima',      message: 'is now playing',          action: 'Walking Simulator (A Hideo Kojima Game)', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kojima' },
+  
   // Invites
-  { type: 'invite',       name: 'Roaring Kitty',   message: 'has invited you to trade', action: 'GameStop shares',                 avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=RoaringKitty' },
-  { type: 'invite',       name: 'Warren Buffett',  message: 'has invited you to play',  action: 'The Long Game',                   avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=WarrenBuffett' },
-  { type: 'invite',       name: 'Vitalik Buterin', message: 'has invited you to',       action: 'merge the mainnet',               avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Vitalik' },
+  { type: 'invite',       name: 'Gabe Newell',       message: 'has invited you to play', action: 'Half-Life 3 (Closed Beta)',        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gaben' },
+  { type: 'invite',       name: 'Scrum Master',      message: 'has invited you to',      action: '10 AM Standup (Ranked Match)',     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Scrum' },
+  
   // Achievements
-  { type: 'achievement',  name: 'Linus Torvalds',  message: 'unlocked achievement:',    action: 'Built Different',                 avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Linus' },
-  { type: 'achievement',  name: 'Ada Lovelace',    message: 'unlocked achievement:',    action: 'First Programmer',                avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ada' },
+  { type: 'achievement',  name: 'Junior Dev',        message: 'unlocked achievement:',   action: 'Pushed to Main without breaking it', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Junior' },
+  { type: 'achievement',  name: 'Senior Dev',        message: 'unlocked achievement:',   action: 'It Compiles!',                     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Senior' },
+  
   // Messages
-  { type: 'message',      name: 'Tim Cook',        message: 'sent you a message:',      action: '"Sent from my iPhone"',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=TimCook' },
-  { type: 'message',      name: 'John Carmack',    message: 'sent you a message:',      action: '"Need more FPS"',                 avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Carmack' },
-  { type: 'message',      name: 'Gabe Newell',     message: 'sent you a message:',      action: '"Half-Life 3 confirmed?"',        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gaben' },
+  { type: 'message',      name: 'Project Manager',   message: 'sent you a message:',     action: '"Can we add blockchain?"',         avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=PM' },
+  { type: 'message',      name: 'StackOverflow',     message: 'sent you a message:',     action: '"Marked as duplicate."',            avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Stack' },
+  
   // Trade Offers
-  { type: 'trade',        name: 'Steve Wozniak',   message: 'wants to trade',           action: 'vintage Apple I for your code',   avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Wozniak' },
-  { type: 'trade',        name: 'Jack Dorsey',     message: 'wants to trade',           action: 'first tweet NFT',                 avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dorsey' },
+  { type: 'trade',        name: 'Client',            message: 'wants to trade',          action: '"Exposure" for your "Time"',       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Client' },
 ];
 
 const TYPE_CLASS: Record<NotifType, string> = {
@@ -92,14 +88,15 @@ export default function SteamNotifications() {
       spawnNotification();
 
       const scheduleNext = () => {
-        const delay = 5000 + Math.random() * 7000;
+        // Notification every 25-45 seconds
+        const delay = 25000 + Math.random() * 20000;
         intervalRef.current = setTimeout(() => {
           spawnNotification();
           scheduleNext();
         }, delay);
       };
       scheduleNext();
-    }, 5000);
+    }, 15000); // Wait 15s before first one
 
     return () => {
       clearTimeout(initialTimer);
