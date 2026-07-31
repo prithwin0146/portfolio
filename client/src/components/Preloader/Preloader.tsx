@@ -6,13 +6,14 @@ interface PreloaderProps {
 }
 
 const BOOT_SEQUENCE = [
-  'INITIALIZING SYSTEM_CORE v9.4.1...',
-  'MOUNTING FILE_SYSTEM... [OK]',
-  'LOADING ASSETS... [OK]',
-  'ESTABLISHING CONNECTION... [OK]',
-  'AUTHENTICATING USER... [OK]',
-  'VERIFYING CACHE INTEGRITY... [100%]',
-  'STARTING UI SERVER...',
+  'maxplayers set to 1',
+  'Steam config directory: /Users/prithwin/Library/Application Support/Steam',
+  'ConVarRef r_renderoverlayfragment doesn\'t point to an existing ConVar',
+  'Mounting VPK: /portfolio/materials.vpk... [OK]',
+  'Mounting VPK: /portfolio/models.vpk... [OK]',
+  'Mounting VPK: /portfolio/sounds.vpk... [OK]',
+  'Connecting to local server...',
+  'Welcome to PrithwinOS v1.0.0',
 ];
 
 export default function Preloader({ onComplete }: PreloaderProps) {

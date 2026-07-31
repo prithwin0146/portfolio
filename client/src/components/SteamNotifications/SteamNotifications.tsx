@@ -22,30 +22,31 @@ interface NotifTemplate {
 
 const NOTIFICATIONS: NotifTemplate[] = [
   // Friend Online
-  { type: 'friend-online', name: 'Gabe Newell',      message: 'is now online',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gaben' },
-  { type: 'friend-online', name: 'Todd Howard',      message: 'is now online',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Todd' },
-  { type: 'friend-online', name: 'Junior Dev',       message: 'is now online',           avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Junior' },
+  { type: 'friend-online', name: 'xX_Sniper_Dev_Xx', message: 'is now online', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sniper' },
+  { type: 'friend-online', name: 'StackOverflow Rep', message: 'is now online', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Stack' },
+  { type: 'friend-online', name: 'Gabe Newell', message: 'is now online', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gaben' },
   
   // Playing Games
-  { type: 'playing',      name: 'Todd Howard',       message: 'is now playing',          action: 'Skyrim: Refrigerator Edition',     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Todd' },
-  { type: 'playing',      name: 'Junior Dev',        message: 'is now playing',          action: 'npm install Simulator 2025',       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Junior' },
-  { type: 'playing',      name: 'Senior Dev',        message: 'is now playing',          action: 'Fixing Production (Survival Horror)', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Senior' },
-  { type: 'playing',      name: 'Hideo Kojima',      message: 'is now playing',          action: 'Walking Simulator (A Hideo Kojima Game)', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kojima' },
+  { type: 'playing', name: 'Senior Dev', message: 'is now playing', action: 'Fixing Production: Survival Horror', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Senior' },
+  { type: 'playing', name: 'Junior Dev', message: 'is now playing', action: 'npm install Simulator 2026', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Junior' },
+  { type: 'playing', name: 'Todd Howard', message: 'is now playing', action: 'Skyrim: Vercel Edition', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Todd' },
+  { type: 'playing', name: 'The Intern', message: 'is now playing', action: 'git rebase --hard (Permadeath)', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Intern' },
   
   // Invites
-  { type: 'invite',       name: 'Gabe Newell',       message: 'has invited you to play', action: 'Half-Life 3 (Closed Beta)',        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gaben' },
-  { type: 'invite',       name: 'Scrum Master',      message: 'has invited you to',      action: '10 AM Standup (Ranked Match)',     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Scrum' },
+  { type: 'invite', name: 'Project Manager', message: 'has invited you to play', action: '10 AM Standup (Ranked Match)', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=PM' },
+  { type: 'invite', name: 'Gabe Newell', message: 'has invited you to play', action: 'Half-Life 3 (Closed Beta)', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gaben2' },
   
   // Achievements
-  { type: 'achievement',  name: 'Junior Dev',        message: 'unlocked achievement:',   action: 'Pushed to Main without breaking it', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Junior' },
-  { type: 'achievement',  name: 'Senior Dev',        message: 'unlocked achievement:',   action: 'It Compiles!',                     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Senior' },
+  { type: 'achievement', name: 'Junior Dev', message: 'unlocked achievement:', action: 'Pushed to Main without breaking it', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Junior' },
+  { type: 'achievement', name: 'Senior Dev', message: 'unlocked achievement:', action: 'It Compiles on the First Try!', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Senior2' },
+  { type: 'achievement', name: 'You', message: 'unlocked achievement:', action: 'Found a missing semicolon after 3 hours', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=You' },
   
   // Messages
-  { type: 'message',      name: 'Project Manager',   message: 'sent you a message:',     action: '"Can we add blockchain?"',         avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=PM' },
-  { type: 'message',      name: 'StackOverflow',     message: 'sent you a message:',     action: '"Marked as duplicate."',            avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Stack' },
+  { type: 'message', name: 'Client', message: 'sent you a message:', action: '"Can we add blockchain to the CSS?"', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Client' },
+  { type: 'message', name: 'Code Reviewer', message: 'sent you a message:', action: '"What does this regex even do?"', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Reviewer' },
   
   // Trade Offers
-  { type: 'trade',        name: 'Client',            message: 'wants to trade',          action: '"Exposure" for your "Time"',       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Client' },
+  { type: 'trade', name: 'Startup CEO', message: 'wants to trade', action: '"Exposure & Equity" for your "Time"', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=CEO' },
 ];
 
 const TYPE_CLASS: Record<NotifType, string> = {
@@ -88,8 +89,8 @@ export default function SteamNotifications() {
       spawnNotification();
 
       const scheduleNext = () => {
-        // Notification every 25-45 seconds
-        const delay = 25000 + Math.random() * 20000;
+        // Notification every 30-45 seconds
+        const delay = 30000 + Math.random() * 15000;
         intervalRef.current = setTimeout(() => {
           spawnNotification();
           scheduleNext();
