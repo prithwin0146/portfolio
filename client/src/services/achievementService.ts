@@ -136,6 +136,7 @@ export function trackLogoClick(): void {
   // Reserved for future click-based achievements
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function trackAchievementHover(_achievementId: string): void {
   // Reserved for future hover-based achievements
 }

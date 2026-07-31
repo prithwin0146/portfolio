@@ -62,6 +62,7 @@ export default function GitHubReplay() {
 
   useEffect(() => {
     if (visible && !completed && !playing) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPlaying(true);
     }
   }, [visible, completed, playing]);

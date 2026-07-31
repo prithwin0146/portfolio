@@ -17,6 +17,7 @@ export default function ScrambleText({ children: text, trigger, className }: Pro
   useEffect(() => {
     // Always keep output in sync if not mid-scramble
     if (!trigger) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOutput(text);
       return;
     }

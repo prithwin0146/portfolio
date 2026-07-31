@@ -3,7 +3,9 @@ import { useEffect, useState, useRef } from 'react';
 export function useActiveSection(sectionIds: string[]): string {
   const [active, setActive] = useState('');
   const idsRef = useRef(sectionIds);
-  idsRef.current = sectionIds;
+  useEffect(() => {
+    idsRef.current = sectionIds;
+  }, [sectionIds]);
 
   useEffect(() => {
     const handle = () => {

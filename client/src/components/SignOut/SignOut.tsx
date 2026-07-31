@@ -27,16 +27,14 @@ export default function SignOut() {
   );
 
   // Floating particles
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 12 }, (_, i) => ({
-        id: i,
-        left: `${Math.random() * 100}%`,
-        size: 2 + Math.random() * 4,
-        duration: 4 + Math.random() * 6,
-        delay: Math.random() * 5,
-      })),
-    [],
+  const [particles] = useState(() =>
+    Array.from({ length: 12 }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      size: 2 + Math.random() * 4,
+      duration: 4 + Math.random() * 6,
+      delay: Math.random() * 5,
+    }))
   );
 
   return (

@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
@@ -8,7 +8,7 @@ function Embers({ count = 2000 }) {
   const points = useRef<THREE.Points>(null);
   
   // Generate random positions and velocities
-  const [positions, velocities] = useMemo(() => {
+  const [[positions, velocities]] = useState(() => {
     const pos = new Float32Array(count * 3);
     const vel = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
@@ -20,8 +20,8 @@ function Embers({ count = 2000 }) {
       vel[i * 3 + 1] = Math.random() * 0.02 + 0.005; // Flow upwards
       vel[i * 3 + 2] = (Math.random() - 0.5) * 0.01;
     }
-    return [pos, vel];
-  }, [count]);
+    return [pos, vel] as const;
+  });
 
   useFrame((state) => {
     if (!points.current) return;
