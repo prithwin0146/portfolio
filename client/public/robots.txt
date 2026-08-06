@@ -1,6 +1,12 @@
-# Allow all crawlers
+# Prithwin M — Portfolio
+# Allow all crawlers full access
+
 User-agent: *
 Allow: /
+Disallow: /api/
 
-# Sitemap
-Sitemap: https://prithwin.dev/sitemap.xml
+# Sitemaps
+Sitemap: https://prithwin.vercel.app/sitemap.xml
+
+# Crawl-delay (polite crawling)
+Crawl-delay: 1

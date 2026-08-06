@@ -15,8 +15,8 @@
     I like your curiosity — that's what great devs do.
 
     Built with: React 19 · TypeScript · Vite · .NET 8
-    Fonts: Inter + Sora + JetBrains Mono
-    Animations: Pure CSS + vanilla JS (no GSAP, no Framer Motion)
+    Fonts: Sora + JetBrains Mono
+    Theme: Steam-inspired dark UI with achievements & XP
 
     Try pressing ⌘K for a surprise.
     And if you know the Konami Code... try it 🎮
@@ -26,38 +26,130 @@
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO -->
-    <title>Prithwin M — Freelance Web Designer & Full-Stack Developer</title>
-    <meta name="description" content="I design and build modern, high-performance websites — from landing pages to full-stack web apps. Let's bring your vision to life." />
-    <meta name="keywords" content="freelance web designer, web developer, React, Angular, .NET, full-stack developer, portfolio, Prithwin" />
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SEO: Primary Meta Tags                                     -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <title>Prithwin M — Freelance Web Designer & Full-Stack Developer | React, Angular, .NET</title>
+    <meta name="description" content="Prithwin M is a freelance web designer and full-stack developer specializing in React, Angular, .NET, and TypeScript. I build modern, high-performance websites — from landing pages to full-stack web apps. Based in India, working globally." />
+    <meta name="keywords" content="Prithwin M, freelance web designer, web developer, React developer, Angular developer, .NET developer, full-stack developer, TypeScript, portfolio, web design India, freelance developer hire, SeeThePrep, UI/UX designer" />
     <meta name="author" content="Prithwin M" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="theme-color" content="#171a21" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://prithwin.vercel.app/" />
 
-    <!-- Open Graph -->
+    <!-- Geo targeting -->
+    <meta name="geo.region" content="IN" />
+    <meta name="geo.placename" content="India" />
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- Open Graph (Facebook, LinkedIn, Discord, Slack, etc.)      -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Prithwin M — Freelance Web Designer & Developer" />
-    <meta property="og:description" content="Modern, high-performance websites — from concept to launch. Let's build something great together." />
-    <meta property="og:url" content="https://prithwin.dev" />
-    <meta property="og:image" content="/og-image.svg" />
-    <meta property="og:site_name" content="Prithwin M" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Prithwin M — Freelance Web Designer & Full-Stack Developer" />
+    <meta property="og:description" content="I build modern, high-performance websites — from landing pages to full-stack web apps. React, Angular, .NET, TypeScript. Let's build something great together." />
+    <meta property="og:url" content="https://prithwin.vercel.app/" />
+    <meta property="og:site_name" content="Prithwin M — Portfolio" />
+    <meta property="og:image" content="https://prithwin.vercel.app/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Prithwin M — Freelance Web Designer & Full-Stack Developer portfolio" />
 
-    <!-- Twitter -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- Twitter Card                                               -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Prithwin M — Freelance Web Designer & Developer" />
-    <meta name="twitter:description" content="Modern, high-performance websites — from concept to launch." />
-    <meta name="twitter:image" content="/og-image.svg" />
+    <meta name="twitter:title" content="Prithwin M — Freelance Web Designer & Full-Stack Developer" />
+    <meta name="twitter:description" content="Modern, high-performance websites — from concept to launch. React, Angular, .NET, TypeScript." />
+    <meta name="twitter:image" content="https://prithwin.vercel.app/og-image.png" />
+    <meta name="twitter:image:alt" content="Prithwin M — Portfolio" />
 
-    <!-- Favicon -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- Favicon                                                    -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
 
-    <!-- Fonts — Sora 300-900 for all typography, JetBrains Mono for code/mono elements -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- JSON-LD Structured Data (Google Rich Results)              -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Prithwin M",
+      "url": "https://prithwin.vercel.app",
+      "image": "https://prithwin.vercel.app/og-image.png",
+      "jobTitle": "Freelance Web Designer & Full-Stack Developer",
+      "description": "I design and build modern websites that help businesses stand out online — from landing pages to full-stack web apps.",
+      "email": "mailto:Prithwin0146@gmail.com",
+      "sameAs": [
+        "https://github.com/prithwin0146",
+        "https://www.linkedin.com/in/prithwin-m"
+      ],
+      "knowsAbout": ["React", "Angular", "TypeScript", ".NET", "Next.js", "Tailwind CSS", "Node.js", "SQL Server", "Figma", "UI/UX Design"],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Prithwin M — Portfolio",
+      "url": "https://prithwin.vercel.app",
+      "description": "Freelance web designer and full-stack developer portfolio showcasing modern web projects.",
+      "author": {
+        "@type": "Person",
+        "name": "Prithwin M"
+      }
+    }
+    </script>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- Fonts — Sora + JetBrains Mono (preconnect + preload)       -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- SEO: noscript fallback for crawlers that don't execute JS -->
+    <noscript>
+      <div style="max-width:800px;margin:80px auto;padding:24px;font-family:system-ui,sans-serif;color:#c7d5e0;background:#171a21;">
+        <h1>Prithwin M — Freelance Web Designer & Full-Stack Developer</h1>
+        <p>I design and build modern, high-performance websites — from landing pages to full-stack web apps. Specializing in React, Angular, .NET, and TypeScript.</p>
+        <h2>Services</h2>
+        <ul>
+          <li>Frontend Engineering — React, Next.js, Angular, TypeScript, Tailwind CSS</li>
+          <li>Backend & APIs — ASP.NET Core, Node.js, SQL Server</li>
+          <li>UI/UX Design — Figma, Design Systems, Prototyping</li>
+          <li>Full-Stack Delivery — End-to-end product ownership</li>
+        </ul>
+        <h2>Featured Projects</h2>
+        <ul>
+          <li><a href="https://seetheprep.com/">SeeThePrep</a> — The UK's first food delivery platform with live kitchen transparency</li>
+          <li><a href="https://www.thejobbuddy.in">JobBuddy</a> — Workforce solutions platform serving employers across Tamil Nadu</li>
+        </ul>
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:Prithwin0146@gmail.com">Prithwin0146@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/prithwin-m">linkedin.com/in/prithwin-m</a></p>
+        <p>GitHub: <a href="https://github.com/prithwin0146">github.com/prithwin0146</a></p>
+      </div>
+    </noscript>
   </body>
 </html>
+
