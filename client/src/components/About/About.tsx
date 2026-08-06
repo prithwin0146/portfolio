@@ -85,8 +85,8 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Stat stack - Breaking the grid with negative margin on XL */}
-          <div className="flex flex-row xl:flex-col gap-6 shrink-0 xl:-ml-12 z-20 mt-8 xl:mt-0">
+          {/* Stat stack - responsive grid on mobile, vertical stack on XL */}
+          <div className="grid grid-cols-3 gap-3 xl:flex xl:flex-col xl:gap-6 xl:shrink-0 xl:-ml-12 z-20 mt-8 xl:mt-0">
             {[
               { formatted: `${projectCount}+`,      label: t('about.statProjects'),     accent: '#a78bfa' },
               { formatted: `${satisfactionCount}%`,  label: t('about.statSatisfaction'), accent: '#34d399' },
@@ -95,13 +95,13 @@ export default function About() {
               <motion.div
                 key={i}
                 {...anim(i + 1)}
-                className="flex flex-col gap-2 px-6 py-5 min-w-[140px] xl:min-w-[200px] hud-card backdrop-blur-xl bg-[#09090b]/90 border border-white/5 transition-transform hover:-translate-y-1 hover:border-white/20"
+                className="flex flex-col gap-1.5 px-3 py-3 sm:px-6 sm:py-5 xl:min-w-[200px] hud-card backdrop-blur-xl bg-[#09090b]/90 border border-white/5 transition-transform hover:-translate-y-1 hover:border-white/20"
                 style={{ borderTopColor: stat.accent, borderTopWidth: 3 }}
               >
-                <span className="font-display text-4xl xl:text-5xl font-black tracking-tighter" style={{ color: stat.accent, textShadow: `0 0 24px ${stat.accent}50` }}>
+                <span className="font-display text-2xl sm:text-4xl xl:text-5xl font-black tracking-tighter" style={{ color: stat.accent, textShadow: `0 0 24px ${stat.accent}50` }}>
                   {stat.formatted}
                 </span>
-                <span className="font-mono text-[10px] font-bold tracking-[0.2em] text-zinc-400 uppercase whitespace-pre-line leading-relaxed">
+                <span className="font-mono text-[8px] sm:text-[10px] font-bold tracking-[0.15em] sm:tracking-[0.2em] text-zinc-400 uppercase whitespace-pre-line leading-relaxed">
                   {stat.label}
                 </span>
               </motion.div>

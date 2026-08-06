@@ -16,7 +16,7 @@ export const api = {
   getServices: () => fetchJson<Service[]>(`${API_BASE}/services`),
 
   sendContact: async (message: ContactMessage) => {
-    const res = await fetch(`${API_BASE}/contact`, {
+    const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(message),
